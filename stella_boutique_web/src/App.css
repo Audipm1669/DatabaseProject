@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Exo+2&family=Lobster&display=swap');.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.brand-bar {
+  background-color: antiquewhite;
+  font-size: x-large;
+  font-family: 'Lobster', cursive;
+  display: flex;         
+  align-items: center;  
+}
+
+.menu-bar {
+  font-family: 'Exo 2', sans-serif;
+  height: 50px;
+}
