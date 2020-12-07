@@ -11,7 +11,7 @@
 	<groupId>com.project</groupId>
 	<artifactId>stella_boutique</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>stella_boutique_server</name>
+	<name>stella_boutique</name>
 	<description>project for Spring Boot</description>
 
 	<properties>
@@ -21,7 +21,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
 		<dependency>

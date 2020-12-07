@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StellaBoutiqueServerApplication {
+public class StellaBoutiqueApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StellaBoutiqueServerApplication.class, args);
+		SpringApplication.run(StellaBoutiqueApplication.class, args);
 	}
 
 }
