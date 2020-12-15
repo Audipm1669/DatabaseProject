@@ -1,9 +1,7 @@
 import React,{Component} from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Popover from '@material-ui/core/Popover';
 import { Nav,Navbar,NavDropdown,Form,FormControl,Button } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
-
+import './App.css';
 
 import {
     BrowserRouter,
@@ -11,8 +9,6 @@ import {
     Switch,
     Link
 } from 'react-router-dom';
-
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,8 +29,11 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(8, 0, 6),
       backgroundColor: '#f7ebea',
     },
-    heroButtons: {
-      marginTop: theme.spacing(4),
+    navButtons: {
+      fontFamily: 'Bebas Neue',
+      '&:hover': {
+        color:'#c26d5c'
+     },
     },
     cardGrid: {
       paddingTop: theme.spacing(8),
@@ -84,43 +83,18 @@ const useStyles = makeStyles((theme) => ({
   
   
     return (
-      
-      
       <React.Fragment>
        
         <Navbar className="brand-bar" style={{justifyContent:'space-between'}}>
           <Navbar.Brand href="/">Stella Boutique</Navbar.Brand>
-            <Avatar className={classes.iconColor} src="/broken-image.jpg" onClick={handleProfileClick} id="profile-icon"/>
-            <Popover
-              open={Boolean(anchorProfile)}
-              margin='100px'
-              anchorEl={anchorProfile}
-              onClose={handleProfileClose}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              style={{
-                width: '150%',
-                height: '150%',
-              }}
-            >
-                <div>
-                    Hi,User
-                </div>
-              
-              <div>
-                <Link color="primary" href="/Newarrivals">會員中心</Link>
-              </div>
-              <div>
-                <Link color="primary" href="/Newarrivals">LOGOUT</Link>
-              </div>
-             
-            </Popover>
+            <div>
+            <Button href="/Login" className={classes.navButtons} variant="contained" color="primary">
+              login
+            </Button>
+            <Button href="/Register" className={classes.navButtons} variant="contained" color="primary">
+              register
+            </Button>
+            </div>
         </Navbar>
         <Navbar bg="dark" variant="dark" className="menu-bar" expand="lg">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

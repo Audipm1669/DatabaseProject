@@ -4,20 +4,41 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
-import { Button } from 'react-bootstrap';
+import Avatar from '@material-ui/core/Avatar';
+import Popover from '@material-ui/core/Popover';
+import { Nav,Navbar,NavDropdown,Form,FormControl,Button } from 'react-bootstrap';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Link from '@material-ui/core/Link';
 import MyNavbar from './MyNavbar';
 
+
 import './App.css';
+
+
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://material-ui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 
 function handleClick(event) {
   event.preventDefault();
   console.info('You clicked a breadcrumb.');
 }
+
+
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -74,6 +95,8 @@ export default function Newarrivals() {
     document.title = "home";
   };
   
+
+
   const [anchorProfile, setAnchorProfile] = React.useState(null);
 
   const handleProfileClick = (event) => {
@@ -86,6 +109,8 @@ export default function Newarrivals() {
 
 
   return (
+    
+    
     <React.Fragment>
       <MyNavbar />
       <main>
@@ -132,6 +157,7 @@ export default function Newarrivals() {
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
           Something here to give the footer a purpose!
         </Typography>
+        <Copyright />
       </footer>
       {/* End footer */}
     </React.Fragment>

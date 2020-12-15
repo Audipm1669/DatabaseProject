@@ -25,6 +25,8 @@ import Shorts from './clothes/Shorts';
 import Skirt from './clothes/Skirt';
 import Tanktop from './clothes/TankTop';
 import TShirt from './clothes/TShirt';
+import Login from './Login';
+import Register from './Register';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -62,6 +64,8 @@ export default function Album() {
           <Route path="/Skirt" component={Skirt} exact={true}></Route>
           <Route path="/Tanktop" component={Tanktop} exact={true}></Route>
           <Route path="/TShirt" component={TShirt} exact={true}></Route>
+          <Route path="/Login" component={Login} exact={true}></Route>
+          <Route path="/Register" component={Register} exact={true}></Route>
 
         </Switch>
       </BrowserRouter>

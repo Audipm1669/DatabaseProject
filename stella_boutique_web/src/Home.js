@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
   },
   heroButtons: {
     marginTop: theme.spacing(4),
+    color:'#f7ebea',
   },
   cardGrid: {
     paddingTop: theme.spacing(8),
@@ -87,13 +88,21 @@ const useStyles = makeStyles((theme) => ({
   },
   iconColor: {
     backgroundColor:'#9e7d7a',
-  }
+  },
+  GoButtons: {
+    borderColor:'#9e7d7a',
+    '&:hover': {
+      backgroundColor:'#9e7d7a',
+      borderColor:'#ffffff',
+      color:'#ffffff'
+   },
+  },
 }));
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 
-export default function Album() {
+export default function Home() {
   const classes = useStyles();
  
   const useEffect = () => {
@@ -128,7 +137,7 @@ export default function Album() {
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <Button variant="contained" color="primary">
+                  <Button className={classes.GoButtons} variant="contained" color="primary" href="/Newarrivals">
                     Shopping GOGO
                   </Button>
                 </Grid>
