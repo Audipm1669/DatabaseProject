@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import MyNavbar from './MyNavbar';
+import {  Row, Col, Jumbotron, CardImg, CardBlock, CardTitle, CardSubtitle, CardText, Badge} from 'reactstrap';
 
 
 import './App.css';
@@ -107,6 +108,17 @@ export default function Newarrivals() {
     setAnchorProfile(null);
   };
 
+  const addToCart = (product) => {
+    const cart = this.state.cart;
+    cart.push(product);
+ 
+    this.setState({
+        cart
+    });
+}
+  
+
+
 
   return (
     
@@ -121,7 +133,7 @@ export default function Newarrivals() {
           <Grid container spacing={4}>
             {cards.map((card) => (
               <Grid item key={card} xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
+                {/* <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
                     image="https://source.unsplash.com/random"
@@ -143,6 +155,17 @@ export default function Newarrivals() {
                       Edit
                     </Button>
                   </CardActions>
+                </Card> */}
+                <Card>
+                  <CardImg width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
+                  <CardContent>
+                      <CardTitle>商品名稱</CardTitle>
+                      <CardSubtitle>
+                          <h4><Badge color="success">售價：1000</Badge></h4>
+                      </CardSubtitle>
+                      <CardText>商品描述</CardText>
+                      <Button color="secondary" onClick={() =>addToCart(product)}>購買</Button>
+                  </CardContent>
                 </Card>
               </Grid>
             ))}

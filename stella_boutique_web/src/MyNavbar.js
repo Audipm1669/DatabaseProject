@@ -1,7 +1,8 @@
-import React,{Component} from 'react';
+import React,{Component,useState } from 'react';
 import { Nav,Navbar,NavDropdown,Form,FormControl,Button } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
 import './App.css';
+import {  Modal, ModalHeader, ModalBody, ModalFooter, Table} from 'reactstrap';
 
 import {
     BrowserRouter,
@@ -59,28 +60,31 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
   
-  const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const cart = [];
+  
   
   
   export default function MyNavbar() {
+    const [ state = {
+            modal: false,
+            album: AlbumJson,
+            },setState] = useState(0);
+
+    const toggle = () => {
+      setState({
+        modal: !state.modal,
+        
+      });
+    }
+
     const classes = useStyles();
+    
    
     const useEffect = () => {
       document.title = "home";
     };
-    
-  
-  
-    const [anchorProfile, setAnchorProfile] = React.useState(null);
-  
-    const handleProfileClick = (event) => {
-      setAnchorProfile(event.currentTarget);
-    };
-  
-    const handleProfileClose = () => {
-      setAnchorProfile(null);
-    };
-  
+
+
   
     return (
       <React.Fragment>
@@ -88,12 +92,13 @@ const useStyles = makeStyles((theme) => ({
         <Navbar className="brand-bar" style={{justifyContent:'space-between'}}>
           <Navbar.Brand href="/">Stella Boutique</Navbar.Brand>
             <div>
-            <Button href="/Login" className={classes.navButtons} variant="contained" color="primary">
-              login
-            </Button>
-            <Button href="/Register" className={classes.navButtons} variant="contained" color="primary">
-              register
-            </Button>
+              <Button color="secondary" onClick={toggle}>購物車({cart.length})</Button>
+              <Button href="/Login" className={classes.navButtons} variant="contained" color="primary">
+                login
+              </Button>
+              <Button href="/Register" className={classes.navButtons} variant="contained" color="primary">
+                register
+              </Button>
             </div>
         </Navbar>
         <Navbar bg="dark" variant="dark" className="menu-bar" expand="lg">
@@ -132,6 +137,42 @@ const useStyles = makeStyles((theme) => ({
             </Form>
           </Navbar.Collapse>
         </Navbar>
+
+        <Modal isOpen={state.modal} toggle={toggle}>
+          <ModalHeader toggle={toggle}>購物車</ModalHeader>
+          <ModalBody>
+            <Table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>品項</th>
+                        <th>價格</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>300</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>150</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>900</td>
+                    </tr>
+                </tbody>
+            </Table>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={toggle}>結帳</Button>{' '}
+            <Button color="secondary" onClick={toggle}>取消</Button>
+          </ModalFooter>
+        </Modal>
         
         
       </React.Fragment>
