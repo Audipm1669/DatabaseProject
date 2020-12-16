@@ -25,7 +25,7 @@ public class UserService {
         try(Connection connection = this.mysqlDriver.getConnection()){
             try (PreparedStatement stmt = connection.prepareStatement(
                 "INSERT IGNORE INTO `user` VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
-                stmt.setString(1, user.getUserID().toString());
+                stmt.setString(1, String.valueOf(user.getUserID()));
                 stmt.setString(2, user.getPassword());
                 stmt.setString(3, user.getFullName());
                 stmt.setString(4, user.getUsername());
@@ -37,10 +37,10 @@ public class UserService {
                 stmt.executeUpdate();
 
             }catch (SQLException e) {
-                e.printStackTrace()
+                e.printStackTrace();
             }
         }catch (SQLException e) {
-            e.printStackTrace()
+            e.printStackTrace();
         }
     }
 

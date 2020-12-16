@@ -9,9 +9,9 @@ import com.project.stella_boutique.service.GuestService;
 public class StellaBoutiqueApplication {
 
 	public static void main(String[] args) {
-		GuestService guestService = new GuestService();
+		// GuestService guestService = new GuestService();
 		SpringApplication.run(StellaBoutiqueApplication.class, args);
-		guestService.GetProduct();
+		// guestService.GetProduct();
 	}
 
 }

@@ -20,13 +20,13 @@ public class GuestService {
 
     private MysqlDriver mysqlDriver = new MysqlDriver();
 
-    public List<Item> GetProduct() {
-        //get product if quantity !=0
-    }
+    // public List<Item> GetProduct() {
+    //     //get product if quantity !=0
+    // }
 
-    public List<Discount> GetDiscount() {
-        //get discount if current date is between the start & end date
-    }
+    // public List<Discount> GetDiscount() {
+    //     //get discount if current date is between the start & end date
+    // }
 
     public List<Rate> GetRate() {
         List<Rate> rateList = new ArrayList<>();   
@@ -41,17 +41,17 @@ public class GuestService {
                         String comment = rs.getString("Comment");
                         int rate = rs.getInt("Rate");
 
-                        Rate rate = new Rate(rateID, itemID, userID, comment, rate); 
-                        rateList.add(rate);
+                        Rate rating = new Rate(rateID, itemID, userID, comment, rate); 
+                        rateList.add(rating);
                     }
                 }catch (SQLException e) {
-                    e.printStackTrace()
+                    e.printStackTrace();
                 }
             }catch (SQLException e) {
-                e.printStackTrace()
+                e.printStackTrace();
             }
         }catch (SQLException e) {
-            e.printStackTrace()
+            e.printStackTrace();
         }
         return rateList;
     }

@@ -1,5 +1,7 @@
 package com.project.stella_boutique.model.user;
 
+import java.util.Random;
+
 public class User {
     private int userID;
     private String password;
@@ -22,7 +24,8 @@ public class User {
 	}
 
 	public User(String password, String fullName, String username, String birthday, String address, String phoneNumber, String email) {
-		this.userID = Random().nextInt(999999);
+		Random rand = new Random();
+		this.userID = rand.nextInt(999999);
 		this.password = password;
 		this.fullName = fullName;
 		this.username = username;

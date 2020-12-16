@@ -6,7 +6,7 @@ public class ItemList {
     private int orderID;
     private int amount;
 
-    public Rate(int itemID, int userID, int amount) {
+    public ItemList(int itemID, int userID, int amount) {
         this.itemID = itemID;
         this.orderID = orderID;
         this.amount = amount;
