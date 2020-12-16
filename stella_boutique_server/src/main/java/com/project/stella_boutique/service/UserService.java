@@ -76,6 +76,12 @@ public class UserService {
     public void getOrderHistory(User user) {
         get all the user order from order join itemlist(amount) join item(name) join disc(disc name)
     }
+    public void GetLikeItem(User user) {
+
+    }
+    public void RemoveLikeItem(User user) {
+
+    }
     */
 
 }
