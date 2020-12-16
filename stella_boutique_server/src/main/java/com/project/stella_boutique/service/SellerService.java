@@ -41,14 +41,14 @@ public class SellerService {
                         productList.add(item);
                     }
                 }catch (SQLException e) {
-                    e.printStackTrace()
+                    e.printStackTrace();
                 }
 
             }catch (SQLException e) {
-                e.printStackTrace()
+                e.printStackTrace();
             }
         }catch (SQLException e) {
-            e.printStackTrace()
+            e.printStackTrace();
         }
         return productList;
     }
@@ -61,7 +61,7 @@ public class SellerService {
                 try (ResultSet rs = stmt.executeQuery()) { 
                     while(rs.next()) {
                         int id = Integer.parseInt(rs.getString("ItemID"));
-                        Float value = Integer.parseInt(rs.getString("Value"));
+                        Float value = rs.getFloat("Value");
                         String discountName = rs.getString("DiscountName");
                         String startDate = rs.getString("StartDate");
                         String endDate = rs.getString("EndDate");
@@ -71,14 +71,14 @@ public class SellerService {
                         discountList.add(disc);
                     }
                 }catch (SQLException e) {
-                    e.printStackTrace()
+                    e.printStackTrace();
                 }
 
             }catch (SQLException e) {
-                e.printStackTrace()
+                e.printStackTrace();
             }
         }catch (SQLException e) {
-            e.printStackTrace()
+            e.printStackTrace();
         }
         return discountList;
     }

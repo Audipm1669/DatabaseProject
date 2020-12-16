@@ -15,7 +15,7 @@ public class Discount {
 		this.discountName = discountName;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		this.code = code
+		this.code = code;
 	}
 
 	public int getDiscountID() {
