@@ -27,22 +27,13 @@ import Tanktop from './clothes/TankTop';
 import TShirt from './clothes/TShirt';
 import Login from './Login';
 import Register from './Register';
+import ProductManage from './Seller/ProductManage';
+import OrderManage from './Seller/OrderManage';
+import MemberManage from './Seller/MemberManage';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 export default function Album() {
   return (
@@ -66,6 +57,9 @@ export default function Album() {
           <Route path="/TShirt" component={TShirt} exact={true}></Route>
           <Route path="/Login" component={Login} exact={true}></Route>
           <Route path="/Register" component={Register} exact={true}></Route>
+          <Route path="/ProductManage" component={ProductManage} exact={true}></Route>
+          <Route path="/OrderManage" component={OrderManage} exact={true}></Route>
+          <Route path="/MemberManage" component={MemberManage} exact={true}></Route>
 
         </Switch>
       </BrowserRouter>

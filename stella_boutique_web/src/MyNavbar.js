@@ -6,9 +6,6 @@ import {  Modal, ModalHeader, ModalBody, ModalFooter, Table} from 'reactstrap';
 
 import {
     BrowserRouter,
-    Route,
-    Switch,
-    Link
 } from 'react-router-dom';
 
 
