@@ -30,7 +30,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      Stella Boutique
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -150,10 +150,10 @@ export default function Home() {
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
-          Footer
+          Be confident!
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
+          We are just wearing what we like.
         </Typography>
         <Copyright />
       </footer>

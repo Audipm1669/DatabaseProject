@@ -34,12 +34,6 @@ function Copyright() {
   );
 }
 
-function handleClick(event) {
-  event.preventDefault();
-  console.info('You clicked a breadcrumb.');
-}
-
-
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -91,31 +85,15 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Newarrivals() {
   const classes = useStyles();
+
+//   const addToCart = (product) => {
+//     const cart = this.state.cart;
+//     cart.push(product);
  
-  const useEffect = () => {
-    document.title = "home";
-  };
-  
-
-
-  const [anchorProfile, setAnchorProfile] = React.useState(null);
-
-  const handleProfileClick = (event) => {
-    setAnchorProfile(event.currentTarget);
-  };
-
-  const handleProfileClose = () => {
-    setAnchorProfile(null);
-  };
-
-  const addToCart = (product) => {
-    const cart = this.state.cart;
-    cart.push(product);
- 
-    this.setState({
-        cart
-    });
-}
+//     this.setState({
+//         cart
+//     });
+// }
   
 
 
@@ -164,7 +142,7 @@ export default function Newarrivals() {
                           <h4><Badge color="success">售價：1000</Badge></h4>
                       </CardSubtitle>
                       <CardText>商品描述</CardText>
-                      <Button color="secondary" onClick={() =>addToCart(product)}>購買</Button>
+                      <Button color="secondary" >購買</Button>
                   </CardContent>
                 </Card>
               </Grid>

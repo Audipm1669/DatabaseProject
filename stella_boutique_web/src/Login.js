@@ -30,7 +30,22 @@ export default function Login() {
     event.preventDefault();
   }
 
+  function admin() {
+    return email == "admin" && password == "admin";
+  }
+  let button = null;
+  if (admin()) {
+    button = <Button href="/ProductManage" className="LoginBtn" block size="lg" variant="outline-secondary" disabled={!validateForm()}>
+    Login
+  </Button>
+  } else {
+    button = <Button href="/" className="LoginBtn" block size="lg" variant="outline-secondary" disabled={!validateForm()}>
+    Login
+  </Button>
+  }
+
   return (
+    
       
     <div className="Login">
       <Navbar className="brand-bar" style={{justifyContent:'space-between'}}>
@@ -62,9 +77,8 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button className="LoginBtn" block size="lg" variant="outline-secondary" disabled={!validateForm()}>
-          Login
-        </Button>
+        {button}
+        
       </Form>
     </div>
     
