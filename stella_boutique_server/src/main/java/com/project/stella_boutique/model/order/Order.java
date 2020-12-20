@@ -7,6 +7,7 @@ public class Order {
     private String orderDate;
     private int discountID;
 	private int userID;
+	List<Item> itemlist;
 	
 	public Order(int orderID, int status, String orderDate, int discountID, int userID){
 		this.orderID = orderID;
