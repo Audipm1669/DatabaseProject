@@ -1,7 +1,7 @@
 package com.project.stella_boutique.service.guest.rate;
 
 import com.project.stella_boutique.adapter.database.MysqlDriver;
-import com.project.stella_boutique.model.item.Rate;
+import com.project.stella_boutique.model.rate.Rate;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,6 @@ public class GetRateUseCase {
     }
 
     public void execute(GetRateUseCaseOutput output){
-        
+        //code
     }
 }

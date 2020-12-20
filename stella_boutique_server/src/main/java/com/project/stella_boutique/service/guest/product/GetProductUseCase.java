@@ -17,6 +17,6 @@ public class GetProductUseCase {
     }
 
     public void execute(GetProductUseCaseOutput output) throws GetProductErrorException{
-        
+        //code
     }
 }

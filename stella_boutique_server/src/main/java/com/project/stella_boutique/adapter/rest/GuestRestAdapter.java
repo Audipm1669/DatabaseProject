@@ -43,7 +43,25 @@ public class GuestRestAdapter {
         }
         return ResponseEntity.status(HttpStatus.OK).body(output);
     }
-    // @PostMapping(value= "/discount")
+    @GetMapping(value= "/discount")
+    public ResponseEntity<GetDiscountUseCaseOutput> getAllDiscount() {
+        GetDiscountUseCaseOutput output = new GetDiscountUseCaseOutput();
+        try {
+            this.getDiscountUseCase.execute(output);
+        } catch (GetDiscountErrorException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(output);
+    }
 
-    // @PostMapping(value= "/rate")
+    @GetMapping(value= "/rate")
+    public ResponseEntity<GetRateUseCaseOutput> getAllRate(){
+        GetRateUseCaseOutput output = new GetRateUseCaseOutput();
+        try {
+            this.getRateUseCase.execute(output);
+        } catch (GetRateErrorException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(output);
+    }
 }
