@@ -1,15 +1,18 @@
 package com.project.stella_boutique.rest;
 
 import com.project.stella_boutique.service.guest.rate.GetRateUseCase;
+import com.project.stella_boutique.service.guest.rate.GetRateUseCaseInput;
 import com.project.stella_boutique.service.guest.rate.GetRateUseCaseOutput;
 import com.project.stella_boutique.service.guest.product.GetProductUseCase;
 import com.project.stella_boutique.service.guest.product.GetProductUseCaseOutput;
 import com.project.stella_boutique.service.guest.discount.GetDiscountUseCase;
+import com.project.stella_boutique.service.guest.discount.GetDiscountUseCaseInput;
 import com.project.stella_boutique.service.guest.discount.GetDiscountUseCaseOutput;
 
-import com.project.stella_boutique.service.exception.guest.GetDiscountErrorException;
-import com.project.stella_boutique.service.exception.guest.GetProductErrorException;
-import com.project.stella_boutique.service.exception.guest.GetRateErrorException;
+
+import com.project.stella_boutique.service.exception.GetDiscountErrorException;
+import com.project.stella_boutique.service.exception.GetProductErrorException;
+import com.project.stella_boutique.service.exception.GetRateErrorException;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +47,12 @@ public class GuestRestAdapter {
         return ResponseEntity.status(HttpStatus.OK).body(output);
     }
     @GetMapping(value= "/discount")
-    public ResponseEntity<GetDiscountUseCaseOutput> getAllDiscount() {
+    public ResponseEntity<GetDiscountUseCaseOutput> getAllDiscount(@RequestBody GetDiscountUseCaseInput requestBody) {
+        GetDiscountUseCaseInput input = new GetDiscountUseCaseInput();
         GetDiscountUseCaseOutput output = new GetDiscountUseCaseOutput();
+        //------
         try {
-            this.getDiscountUseCase.execute(output);
+            this.getDiscountUseCase.execute(input, output);
         } catch (GetDiscountErrorException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
@@ -55,10 +60,11 @@ public class GuestRestAdapter {
     }
 
     @GetMapping(value= "/rate")
-    public ResponseEntity<GetRateUseCaseOutput> getAllRate(){
+    public ResponseEntity<GetRateUseCaseOutput> getAllRate(@RequestBody GetRateUseCaseInput requestBody){
+        GetRateUseCaseInput input = new GetRateUseCaseInput();
         GetRateUseCaseOutput output = new GetRateUseCaseOutput();
         try {
-            this.getRateUseCase.execute(output);
+            this.getRateUseCase.execute(input, output);
         } catch (GetRateErrorException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }

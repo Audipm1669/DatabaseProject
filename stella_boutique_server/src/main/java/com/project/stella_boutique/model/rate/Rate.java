@@ -1,4 +1,4 @@
-package com.project.stella_boutique.model.item;
+package com.project.stella_boutique.model.rate;
 
 public class Rate {
     
