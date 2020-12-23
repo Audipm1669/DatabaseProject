@@ -103,6 +103,13 @@ export default function Newarrivals() {
     
     <React.Fragment>
       <MyNavbar />
+      <div style={{margin:'10px' , display: 'flex',  justifyContent:'flex-end ', alignItems:'center'}}>
+          <Form inline>
+              <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+              <Button variant="outline-dark">Search</Button>
+          </Form>
+      </div>
+      
       <main>
         {/* Hero unit */}
       
