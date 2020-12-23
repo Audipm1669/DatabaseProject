@@ -62,7 +62,6 @@ const useStyles = makeStyles((theme) => ({
   export default function MyNavbar() {
     const [ state = {
       modal: false,
-      album: AlbumJson,
       },setState] = useState(0);
 
     const toggle = () => {
@@ -72,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
       });
     }
 
-    const [loginStatus, setLoginStatus] = React.useState(false);
+    const [loginStatus, setLoginStatus] = React.useState(true);
     const classes = useStyles();
    
     const useEffect = () => {
@@ -87,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
           { loginStatus ?
           <div>
           <Button color="secondary" onClick={toggle}>購物車({cart.length})</Button>
-          <Button href="" className={classes.navButtons} variant="contained" color="primary">
+          <Button  href="/MyLike" className={classes.navButtons} variant="contained" color="primary">
             My Profile
           </Button>
           <Button href="" className={classes.navButtons} variant="contained" color="primary">

@@ -21,6 +21,8 @@ import Register from './Register';
 import ProductManage from './Seller/ProductManage';
 import OrderManage from './Seller/OrderManage';
 import MemberManage from './Seller/MemberManage';
+import MyLike from './user/MyLike';
+import MyOrder from './user/MyOrder';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -42,6 +44,8 @@ export default function Album() {
           <Route path="/ProductManage" component={ProductManage} exact={true}></Route>
           <Route path="/OrderManage" component={OrderManage} exact={true}></Route>
           <Route path="/MemberManage" component={MemberManage} exact={true}></Route>
+          <Route path="/MyLike" component={MyLike} exact={true}></Route>
+          <Route path="/MyOrder" component={MyOrder} exact={true}></Route>
 
         </Switch>
       </BrowserRouter>
