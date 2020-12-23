@@ -13,7 +13,6 @@ import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import MyNavbar from './MyNavbar';
 
-
 import './App.css';
 import {
   BrowserRouter,
@@ -58,6 +57,10 @@ const useStyles = makeStyles((theme) => ({
   homecover: {
     width:'100%',
   },
+  banner: {
+    margin: '100px 0px',
+    width:'100%',
+  },
   heroContent: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 6),
@@ -96,6 +99,12 @@ const useStyles = makeStyles((theme) => ({
       borderColor:'#ffffff',
       color:'#ffffff'
    },
+   box: {
+    width:'100px'
+   },
+   disocuntBox: {
+    display:'flex',
+   },
   },
 }));
 
@@ -109,8 +118,6 @@ export default function Home() {
     document.title = "home";
   };
   
-
-
   const [anchorProfile, setAnchorProfile] = React.useState(null);
 
   const handleProfileClick = (event) => {
@@ -144,8 +151,14 @@ export default function Home() {
               </Grid>
             </div>
           </Container>
+          <Container maxWidth="md">
+            <Grid>
+            <a href="/Newarrivals">
+              <img src={require('./img/banner.png')}  alt="banner" className={classes.banner} />
+            </a>
+            </Grid>
+          </Container>
         </div>
-        
       </main>
       {/* Footer */}
       <footer className={classes.footer}>

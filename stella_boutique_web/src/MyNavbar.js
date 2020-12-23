@@ -3,11 +3,11 @@ import { Nav,Navbar,NavDropdown,Form,FormControl,Button } from 'react-bootstrap'
 import { makeStyles } from '@material-ui/core/styles';
 import './App.css';
 import {  Modal, ModalHeader, ModalBody, ModalFooter, Table} from 'reactstrap';
+import Avatar from '@material-ui/core/Avatar';
 
 import {
     BrowserRouter,
 } from 'react-router-dom';
-
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -59,44 +59,51 @@ const useStyles = makeStyles((theme) => ({
   
   const cart = [];
   
-  
-  
   export default function MyNavbar() {
     const [ state = {
-            modal: false,
-            album: AlbumJson,
-            },setState] = useState(0);
+      modal: false,
+      },setState] = useState(0);
 
     const toggle = () => {
       setState({
         modal: !state.modal,
-        
+        loginStatus: state.loginStatus,
       });
     }
 
+    const [loginStatus, setLoginStatus] = React.useState(true);
     const classes = useStyles();
-    
    
     const useEffect = () => {
       document.title = "home";
     };
-
-
   
     return (
       <React.Fragment>
-       
         <Navbar className="brand-bar" style={{justifyContent:'space-between'}}>
           <Navbar.Brand href="/">Stella Boutique</Navbar.Brand>
-            <div>
-              <Button color="secondary" onClick={toggle}>購物車({cart.length})</Button>
-              <Button href="/Login" className={classes.navButtons} variant="contained" color="primary">
-                login
-              </Button>
-              <Button href="/Register" className={classes.navButtons} variant="contained" color="primary">
-                register
-              </Button>
-            </div>
+          {console.log(loginStatus)}
+          { loginStatus ?
+          <div>
+          <Button color="secondary" onClick={toggle}>購物車({cart.length})</Button>
+          <Button  href="/MyLike" className={classes.navButtons} variant="contained" color="primary">
+            My Profile
+          </Button>
+          <Button href="" className={classes.navButtons} variant="contained" color="primary">
+            LogOut
+          </Button>
+          {console.log("login")}
+          </div>
+          :
+          <div>
+            <Button href="/Login" className={classes.navButtons} variant="contained" color="primary">
+              login
+            </Button>
+            {console.log("not login")}
+            <Button href="/Register" className={classes.navButtons} variant="contained" color="primary">
+              register
+            </Button>
+          </div>   }
         </Navbar>
         <Navbar bg="dark" variant="dark" className="menu-bar" expand="lg">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -105,27 +112,10 @@ const useStyles = makeStyles((theme) => ({
             <BrowserRouter>
               <Nav.Link href="/Newarrivals">NEW ARRIVALS</Nav.Link>
               <Nav.Link href="/Onsale">ON SALE</Nav.Link>
-              <NavDropdown title="TOPS" id="basic-nav-dropdown">
-                <NavDropdown.Item href="/Shirt">Shirt</NavDropdown.Item>
-                <NavDropdown.Item href="/TShirt">T-Shirt</NavDropdown.Item>
-                <NavDropdown.Item href="/Hoodie">Hoodie</NavDropdown.Item>
-                <NavDropdown.Item href="/Tank Tops">Tank Tops</NavDropdown.Item>
-              </NavDropdown>
-              <NavDropdown title="BOTTOMS" id="basic-nav-dropdown">
-                <NavDropdown.Item href="/Pants">Pants</NavDropdown.Item>
-                <NavDropdown.Item href="/Jeans">Jeans</NavDropdown.Item>
-                <NavDropdown.Item href="/Skirt">Skirt</NavDropdown.Item>
-                <NavDropdown.Item href="/Leggings">Leggings</NavDropdown.Item>
-                <NavDropdown.Item href="/Shorts">Shorts</NavDropdown.Item>
-              </NavDropdown>
-              <NavDropdown title="OUTERWEAR" id="basic-nav-dropdown">
-                <NavDropdown.Item href="/Coat">Coat</NavDropdown.Item>
-                <NavDropdown.Item href="/Jacket">Jacket</NavDropdown.Item>
-              </NavDropdown>
-              <NavDropdown title="DRESSES &JUMPSUITS" id="basic-nav-dropdown">
-                <NavDropdown.Item href="/Dresses">Dresses</NavDropdown.Item>
-                <NavDropdown.Item href="/Jumpsuits">Jumpsuits</NavDropdown.Item>
-              </NavDropdown>
+              <Nav.Link href="/Tops">TOPS</Nav.Link>
+              <Nav.Link href="/Bottom">BOTTOMS</Nav.Link>
+              <Nav.Link href="/Jacket">OUTERWEAR</Nav.Link>
+              <Nav.Link href="/Dresses">DRESSES & JUMPSUITS</Nav.Link>
             </BrowserRouter>
             </Nav>
             <Form inline>
