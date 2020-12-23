@@ -1,4 +1,4 @@
-USE stela_boutique;
+USE stella_boutique;
 
 INSERT `user` VALUES
 (100001, 'test', 'audi', 'audi','1998-12-20','home' ,'0912312345' , 'audi@gmail.com'),
@@ -9,8 +9,8 @@ INSERT `user` VALUES
 (100006, 'test', 'weibin', 'weibin', '1999-05-30', 'home', '0912837465', 'weibin@gmail.com');
 
 INSERT `discount` VALUES
-(300001, 0.8, "New Year Sale 20% OFF","2021-01-01", "2021-01-30"),
-(300001, 0.5, "Christmast Gift 50% OFF","2020-12-15", "2020-12-30");
+(300001, 0.8,"NY001", "New Year Sale 20% OFF","2021-01-01", "2021-01-30"),
+(300002, 0.5,"CT001", "Christmast Gift 50% OFF","2020-12-15", "2020-12-30");
   
 INSERT `item` VALUES
 (200001,"Jolie Jeans Jacket In Green",10,"Jacket","F",1000,"Jacket which is ready to coloring your day by day","../img/clothes/Jacket/JolieJeansJacketInGreen.jpg"),
@@ -31,20 +31,20 @@ INSERT `item` VALUES
 (200016,"Flor Top",10,"Tops","F",8000,"Pair with straight pant","../img/clothes/Tops/FlorTop.jpg"),
 (200017,"Sali Top",10,"Tops","F",8000,"Puffy off shoulder sleeve","../img/clothes/Tops/SaliTop.jpg"),
 (200018,"Braza Top",10,"Tops","F",8000,"Burnt orange Braza","../img/clothes/Tops/BrazaTop.jpg"),
-(200018,"Printed Blue Bini Skirt",10,"Bottom","F",8000,"Still looks good to wear for go to hangout","../img/clothes/Bottom/PrintedBlueBiniSkirt.jpg"),
-(200019,"Printed Beige Goza Skirt",10,"Bottom","F",8000,"Stunning, fancy, yet so comfy","../img/clothes/Bottom/PrintedBeigeGozaSkirt.jpg"),
-(200020,"Pleated Oversize Cardigan In Grey",10,"Jacket","F",860,"Fit that looks good on all","../img/clothes/Jacket/PleatedOversizeCardiganInGrey.jpg"),
-(200021,"Pleated Oversize Cardigan In Maroon",10,"Jacket","F",860,"In the mood for Maroon ♥️","../img/clothes/Jacket/PleatedOversizeCardiganInMaroon.jpg"),
-(200022,"Pleated Oversize Cardigan In White",10,"Jacket","F",860,"Perfect for the morning coffee run","../img/clothes/Jacket/PleatedOversizeCardiganInWhite.jpg"),
-(200023,"ClassicCheongsamInPastel",10,"Dresses","F",1100,"Pretty in every Color","../img/clothes/Jacket/ClassicCheongsamInPastel.jpg"),
-(200024,"Qi Dress",10,"Dresses","F",1160,"New Chinese Classic C0llection","../img/clothes/Jacket/QiDress.jpg"),
-(200025,"ShuangXiDress",10,"Dresses","F",1200,"All good things fullfil your new year","../img/clothes/Jacket/QiDress.jpg"),
-(200026,"Huo Yan Top",10,"Tops","F",800,"Pairing with a scarf","../img/clothes/Tops/HuoYanTop.jpg"),
-(200027,"Feng Fu Top",10,"Tops","F",790,"Lift your style and your mood","../img/clothes/Tops/FengFuTop.jpg"),
-(200028,"Fang Fang Top",10,"Tops","F",750,"Feminine and flowy","../img/clothes/Tops/FangFangTop.jpg"),
-(200029,"Hui Ling Pant",10,"Bottom","F",700,"Wise Jade","../img/clothes/Bottom/HuiLingPants.jpg"),
-(200030,"Mei Rong Pant",10,"Bottom","F",720,"Simple but elegant ","../img/clothes/Bottom/MeiRongPants.jpg"),
-(200031,"Jin Pant",10,"Bottom","F",750,"little ordinary","../img/clothes/Bottom/JinPants.jpg"),
+(200019,"Printed Blue Bini Skirt",10,"Bottom","F",8000,"Still looks good to wear for go to hangout","../img/clothes/Bottom/PrintedBlueBiniSkirt.jpg"),
+(200020,"Printed Beige Goza Skirt",10,"Bottom","F",8000,"Stunning, fancy, yet so comfy","../img/clothes/Bottom/PrintedBeigeGozaSkirt.jpg"),
+(200021,"Pleated Oversize Cardigan In Grey",10,"Jacket","F",860,"Fit that looks good on all","../img/clothes/Jacket/PleatedOversizeCardiganInGrey.jpg"),
+(200022,"Pleated Oversize Cardigan In Maroon",10,"Jacket","F",860,"In the mood for Maroon ♥️","../img/clothes/Jacket/PleatedOversizeCardiganInMaroon.jpg"),
+(200023,"Pleated Oversize Cardigan In White",10,"Jacket","F",860,"Perfect for the morning coffee run","../img/clothes/Jacket/PleatedOversizeCardiganInWhite.jpg"),
+(200024,"ClassicCheongsamInPastel",10,"Dresses","F",1100,"Pretty in every Color","../img/clothes/Jacket/ClassicCheongsamInPastel.jpg"),
+(200025,"Qi Dress",10,"Dresses","F",1160,"New Chinese Classic C0llection","../img/clothes/Jacket/QiDress.jpg"),
+(200026,"ShuangXiDress",10,"Dresses","F",1200,"All good things fullfil your new year","../img/clothes/Jacket/QiDress.jpg"),
+(200027,"Huo Yan Top",10,"Tops","F",800,"Pairing with a scarf","../img/clothes/Tops/HuoYanTop.jpg"),
+(200028,"Feng Fu Top",10,"Tops","F",790,"Lift your style and your mood","../img/clothes/Tops/FengFuTop.jpg"),
+(200029,"Fang Fang Top",10,"Tops","F",750,"Feminine and flowy","../img/clothes/Tops/FangFangTop.jpg"),
+(200030,"Hui Ling Pant",10,"Bottom","F",700,"Wise Jade","../img/clothes/Bottom/HuiLingPants.jpg"),
+(200031,"Mei Rong Pant",10,"Bottom","F",720,"Simple but elegant ","../img/clothes/Bottom/MeiRongPants.jpg"),
+(200032,"Jin Pant",10,"Bottom","F",750,"little ordinary","../img/clothes/Bottom/JinPants.jpg");
 
 INSERT `like` VALUES
 (100001,200001),
@@ -54,9 +54,9 @@ INSERT `like` VALUES
 (100002,200004);
 
 INSERT `rate` VALUES
-(100001,200001,"good",5),
-(100002,200001,"bad quality",1),
-(100003,200001,"good service",4);
+(200001,100001,"good",5),
+(200001,100002,"bad quality",1),
+(200001,100003,"good service",4);
 
 -- status code 0 = new order, 1 = checkout, 2 = shipout, 3 = arrived(done) default 0
 INSERT `order` VALUES
