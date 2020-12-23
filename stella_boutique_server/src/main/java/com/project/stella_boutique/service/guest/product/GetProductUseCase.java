@@ -6,6 +6,13 @@ import com.project.stella_boutique.service.exception.GetProductErrorException;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class GetProductUseCase {
@@ -17,6 +24,33 @@ public class GetProductUseCase {
     }
 
     public void execute(GetProductUseCaseOutput output) throws GetProductErrorException{
-        //code
+        List<Item> productList = new ArrayList<>();    
+        try(Connection connection = this.mysqlDriver.getConnection()){
+            try (PreparedStatement stmt = connection.prepareStatement(
+                "SELECT * FROM `item` WHERE `quantity` != 0")) {
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while(rs.next()) {
+                        int id = Integer.parseInt(rs.getString("id"));
+                        String name = rs.getString("name");
+                        int quantity = Integer.parseInt(rs.getString("quantity"));
+                        String category = rs.getString("category");
+                        String size = rs.getString("size");
+                        Float price = rs.getFloat("price");
+                        String description = rs.getString("description");
+                        String pictureURL = rs.getString("pictureURL");
+    
+                        Item item = new Item(id, name, quantity, category, size, price, description, pictureURL);
+                        productList.add(item);
+                    }
+                }catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        output.setProductList(productList);
     }
 }

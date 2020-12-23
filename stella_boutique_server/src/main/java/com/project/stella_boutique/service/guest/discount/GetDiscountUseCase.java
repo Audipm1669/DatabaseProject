@@ -6,6 +6,7 @@ import com.project.stella_boutique.service.exception.GetDiscountErrorException;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Date;
 
 @Service
 public class GetDiscountUseCase {
@@ -17,6 +18,35 @@ public class GetDiscountUseCase {
     }
 
     public void execute(GetDiscountUseCaseInput input, GetDiscountUseCaseOutput output) throws GetDiscountErrorException {
-        //code
+        List<Discount> discountList = new ArrayList<>();   
+        Date currentDate = input.getCurrentDate(); 
+        try(Connection connection = this.mysqlDriver.getConnection()){
+            try (PreparedStatement stmt = connection.prepareStatement(
+                "SELECT * FROM `discount`")) {
+                try (ResultSet rs = stmt.executeQuery()) { 
+                    while(rs.next()) {
+                        int id = Integer.parseInt(rs.getString("id"));
+                        Float value = rs.getFloat("value");
+                        String code = rs.getString("code");
+                        String discountName = rs.getString("name");
+                        String startDate = rs.getString("startDate").replace("-","/");
+                        String endDate = rs.getString("endDate").replace("-","/");
+
+                        Discount disc = new Discount(id, value, discountName, startDate, endDate, code);
+                        if(currentDate.compareTo(disc.getStartDate()) > 0 && currentDate.compareTo(disc.getEndDate()) < 0){
+                            discountList.add(disc);
+                        }
+                    }
+                }catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        output.setDiscountList(discountList);
     }
 }

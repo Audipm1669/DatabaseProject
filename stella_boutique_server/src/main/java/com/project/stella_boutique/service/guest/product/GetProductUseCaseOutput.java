@@ -14,4 +14,5 @@ public class GetProductUseCaseOutput {
     public List<Item> getProductList() {
         return this.productList;
     }
+
 }

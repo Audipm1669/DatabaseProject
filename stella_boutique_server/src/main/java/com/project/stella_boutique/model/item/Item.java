@@ -9,7 +9,8 @@ public class Item {
     private Float price;
     private String description;
     private String pictureURL;
-    private String name;
+	private String name;
+	private List<>
 
 	public Item(int itemID, String name, int quantity, String category, String size ,Float price, String description, String pictureURL){
 		this.itemID = itemID;

@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.*;
+
 @RestController
 @RequestMapping("/api/guest")
 public class GuestRestAdapter {
@@ -50,7 +52,8 @@ public class GuestRestAdapter {
     public ResponseEntity<GetDiscountUseCaseOutput> getAllDiscount(@RequestBody GetDiscountUseCaseInput requestBody) {
         GetDiscountUseCaseInput input = new GetDiscountUseCaseInput();
         GetDiscountUseCaseOutput output = new GetDiscountUseCaseOutput();
-        //------
+        //------Request body send current date
+        //input.setCurrentDate(currentDate);
         try {
             this.getDiscountUseCase.execute(input, output);
         } catch (GetDiscountErrorException e) {
