@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React ,{Component} from 'react';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -109,8 +109,6 @@ export default function Home() {
     document.title = "home";
   };
   
-
-
   const [anchorProfile, setAnchorProfile] = React.useState(null);
 
   const handleProfileClick = (event) => {

@@ -83,6 +83,8 @@ const useStyles = makeStyles((theme) => ({
       document.title = "home";
     };
 
+    const [displayName] = useState(localStorage.getItem("displayName"));
+
 
   
     return (
@@ -90,6 +92,9 @@ const useStyles = makeStyles((theme) => ({
        
         <Navbar className="brand-bar" style={{justifyContent:'space-between'}}>
           <Navbar.Brand href="/">Stella Boutique</Navbar.Brand>
+            <div>
+              <p>Hi, {displayName}</p>
+            </div>
             <div>
               <Button color="secondary" onClick={toggle}>購物車({cart.length})</Button>
               <Button href="/Login" className={classes.navButtons} variant="contained" color="primary">
