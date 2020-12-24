@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+
+../stella_boutique_web/node_modules/

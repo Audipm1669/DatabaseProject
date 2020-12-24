@@ -1,14 +1,8 @@
-
-
---
 -- Database: `stella_boutique`
---
 CREATE DATABASE IF NOT EXISTS stella_boutique;
 USE stella_boutique;
--- --------------------------------------------------------
---
+
 -- Table structure for table `user`
---
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(6) NOT NULL,
   `password` varchar(100) NOT NULL,
@@ -22,11 +16,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
 );
--- --------------------------------------------------------
---
 -- Table structure for table `item`
---
-
 CREATE TABLE IF NOT EXISTS `item` (
   `id` int(6) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -39,10 +29,8 @@ CREATE TABLE IF NOT EXISTS `item` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 );
--- --------------------------------------------------------
---
+
 -- Table structure for table `discount`
---
 CREATE TABLE IF NOT EXISTS `discount` (
   `id` int(6) NOT NULL,
   `value` float NOT NULL,
@@ -54,11 +42,8 @@ CREATE TABLE IF NOT EXISTS `discount` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `code_UNIQUE` (`code`)
 );
--- --------------------------------------------------------
---
--- Table structure for table `like`
---
 
+-- Table structure for table `like`
 CREATE TABLE IF NOT EXISTS `like` (
   `userID` int(6) NOT NULL,
   `itemID` int(6) NOT NULL,
@@ -68,11 +53,8 @@ CREATE TABLE IF NOT EXISTS `like` (
   CONSTRAINT `userID` FOREIGN KEY (`userID`) REFERENCES `user` (`id`),
   CONSTRAINT `itemID` FOREIGN KEY (`itemID`) REFERENCES `item` (`id`)
 );
--- --------------------------------------------------------
---
--- Table structure for table `order`
---
 
+-- Table structure for table `order`
 CREATE TABLE IF NOT EXISTS `order` (
   `id` int(6) NOT NULL,
   `orderDate` datetime NOT NULL,
@@ -84,10 +66,7 @@ CREATE TABLE IF NOT EXISTS `order` (
   CONSTRAINT `discountID` FOREIGN KEY (`discountID`) REFERENCES `discount` (`id`),
   CONSTRAINT `orderUserID` FOREIGN KEY (`orderUserID`) REFERENCES `user` (`id`)
 );
--- --------------------------------------------------------
---
 -- Table structure for table `itemlist`
---
 CREATE TABLE IF NOT EXISTS `itemlist` (
   `orderItemID` int(6) NOT NULL,
   `orderID` int(6) NOT NULL,
@@ -98,11 +77,8 @@ CREATE TABLE IF NOT EXISTS `itemlist` (
   CONSTRAINT `orderItemID` FOREIGN KEY (`orderItemID`) REFERENCES `item` (`id`),
   CONSTRAINT `orderID` FOREIGN KEY (`orderID`) REFERENCES `order` (`id`)
 );
--- --------------------------------------------------------
---
--- Table structure for table `rate`
---
 
+-- Table structure for table `rate`
 CREATE TABLE IF NOT EXISTS `rate` (
   `rateItemID` int(6) NOT NULL,
   `rateUserID` int(6) NOT NULL,

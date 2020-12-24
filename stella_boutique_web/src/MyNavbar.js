@@ -118,10 +118,7 @@ const useStyles = makeStyles((theme) => ({
               <Nav.Link href="/Dresses">DRESSES & JUMPSUITS</Nav.Link>
             </BrowserRouter>
             </Nav>
-            <Form inline>
-              <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-              <Button variant="outline-light">Search</Button>
-            </Form>
+            
           </Navbar.Collapse>
         </Navbar>
 
