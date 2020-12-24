@@ -149,7 +149,7 @@ export default function Newarrivals() {
                           <h4><Badge color="success">售價：1000</Badge></h4>
                       </CardSubtitle>
                       <CardText>商品描述</CardText>
-                      <Button color="secondary" >購買</Button>
+                      <Button color="secondary" /*onClick={() =>addToCart(product)}*/>購買</Button>
                   </CardContent>
                 </Card>
               </Grid>

@@ -4,7 +4,7 @@ USE stella_boutique;
 
 -- Table structure for table `user`
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(6) NOT NULL,
+  `id` int(6) NOT NULL AUTO_INCREMENT,
   `password` varchar(100) NOT NULL,
   `fullname` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
@@ -16,9 +16,10 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
 );
+
 -- Table structure for table `item`
 CREATE TABLE IF NOT EXISTS `item` (
-  `id` int(6) NOT NULL,
+  `id` int(6) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `quantity` int(11) NOT NULL,
   `category` varchar(100) NOT NULL,
@@ -32,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `item` (
 
 -- Table structure for table `discount`
 CREATE TABLE IF NOT EXISTS `discount` (
-  `id` int(6) NOT NULL,
+  `id` int(6) NOT NULL AUTO_INCREMENT,
   `value` float NOT NULL,
   `code` varchar(5) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -47,16 +48,13 @@ CREATE TABLE IF NOT EXISTS `discount` (
 CREATE TABLE IF NOT EXISTS `like` (
   `userID` int(6) NOT NULL,
   `itemID` int(6) NOT NULL,
-  PRIMARY KEY (`userID`,`itemID`),
-  UNIQUE KEY `userID_UNIQUE` (`userID`),
-  UNIQUE KEY `itemID_UNIQUE` (`itemID`),
   CONSTRAINT `userID` FOREIGN KEY (`userID`) REFERENCES `user` (`id`),
   CONSTRAINT `itemID` FOREIGN KEY (`itemID`) REFERENCES `item` (`id`)
 );
 
 -- Table structure for table `order`
 CREATE TABLE IF NOT EXISTS `order` (
-  `id` int(6) NOT NULL,
+  `id` int(6) NOT NULL AUTO_INCREMENT,
   `orderDate` datetime NOT NULL,
   `status` int(11) NOT NULL,
   `discountID` int(6) DEFAULT NULL,
@@ -71,9 +69,6 @@ CREATE TABLE IF NOT EXISTS `itemlist` (
   `orderItemID` int(6) NOT NULL,
   `orderID` int(6) NOT NULL,
   `amount` int(11) NOT NULL,
-  PRIMARY KEY (`orderItemID`,`orderID`),
-  UNIQUE KEY `orderItemID_UNIQUE` (`orderItemID`),
-  UNIQUE KEY `orderID_UNIQUE` (`orderID`),
   CONSTRAINT `orderItemID` FOREIGN KEY (`orderItemID`) REFERENCES `item` (`id`),
   CONSTRAINT `orderID` FOREIGN KEY (`orderID`) REFERENCES `order` (`id`)
 );
@@ -84,9 +79,6 @@ CREATE TABLE IF NOT EXISTS `rate` (
   `rateUserID` int(6) NOT NULL,
   `comment` varchar(100) DEFAULT NULL,
   `rate` int(11) DEFAULT NULL,
-  PRIMARY KEY (`rateItemID`,`rateUserID`),
-  UNIQUE KEY `rateItemID_UNIQUE` (`rateItemID`),
-  UNIQUE KEY `rateUserID_UNIQUE` (`rateUserID`),
   CONSTRAINT `rateItemID` FOREIGN KEY (`rateItemID`) REFERENCES `item` (`id`),
   CONSTRAINT `rateUserID` FOREIGN KEY (`rateUserID`) REFERENCES `user` (`id`)
 );

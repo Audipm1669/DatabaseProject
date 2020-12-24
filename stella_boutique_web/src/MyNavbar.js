@@ -61,8 +61,8 @@ const useStyles = makeStyles((theme) => ({
   
   export default function MyNavbar() {
     const [ state = {
-      modal: false,
-      },setState] = useState(0);
+            modal: false,
+            },setState] = useState(0);
 
     const toggle = () => {
       setState({

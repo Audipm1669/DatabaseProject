@@ -1,21 +1,41 @@
 package com.project.stella_boutique.model.discount;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Discount {
 
     private int discountID;
     private Float value;
     private String discountName;
-    private String startDate;
-	private String endDate;
+    private Date startDate;
+	private Date endDate;
 	private String code;
 
-	public Discount(int discountID, Float value, String discountName, String startDate, String endDate, String code) {
+	public static final String DATE_FORMAT = "yyyy/MM/dd";
+
+	public Discount(int discountID, 
+					Float value, 
+					String discountName, 
+					String startDate, 
+					String endDate, 
+					String code) {
 		this.discountID = discountID;
 		this.value = value;
 		this.discountName = discountName;
-		this.startDate = startDate;
-		this.endDate = endDate;
 		this.code = code;
+		final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+        try {
+            this.startDate = dateFormat.parse(startDate);
+        } catch (final ParseException e) {
+            throw new IllegalArgumentException("Invalid Start Date: " + startDate);
+        }
+        try {
+            this.endDate = dateFormat.parse(endDate);
+        } catch (final ParseException e) {
+            throw new IllegalArgumentException("Invalid End Date format: " + endDate);
+        }
 	}
 
 	public int getDiscountID() {
@@ -42,20 +62,30 @@ public class Discount {
 		this.discountName = discountName;
 	}
 
-	public String getStartDate() {
+	public Date getStartDate() {
 		return this.startDate;
 	}
 
 	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+		final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+		try {
+            this.startDate = dateFormat.parse(startDate);
+        } catch (final ParseException e) {
+            throw new IllegalArgumentException("Invalid Start Date: " + startDate);
+        }
 	}
 
-	public String getEndDate() {
+	public Date getEndDate() {
 		return this.endDate;
 	}
 
 	public void setEndDate(String endDate) {
-		this.endDate = endDate;
+		final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+		try {
+            this.endDate = dateFormat.parse(endDate);
+        } catch (final ParseException e) {
+            throw new IllegalArgumentException("Invalid End Date format: " + endDate);
+        }
 	}
 	
 	public String getCode() {
