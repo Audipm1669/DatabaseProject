@@ -17,11 +17,31 @@ import com.project.stella_boutique.model.user.User;
 public class StellaBoutiqueApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(StellaBoutiqueApplication.class, args);
+		
 		SellerService sellerService = new SellerService();
-		List<Discount> productList = sellerService.GetDiscount("2020/12/23");
-		for(Discount product:productList){
-			System.out.println(product.getDiscountName());
-		}
+		// -------------------------------------
+		// List<Item> productList = sellerService.GetProduct();
+		// for(Item product:productList){
+		// 	System.out.println(product.getName());
+		// 	if(product.getRatings().size()>1){
+		// 		for(int i=0;i<product.getRatings().size();i++){
+		// 			for(int j=0;j<2;j++){
+		// 				System.out.println(product.getRatings().get(i).get(j));
+		// 			}
+		// 		}
+		// 	}
+		// 	else{
+		// 		System.out.println("no rating");
+		// 	}
+		// 	System.out.println("-------------------");
+		// }
+		// ---------------------------------
+		// List<Discount> discountList = sellerService.GetDiscount("2020/12/24");
+		// for(Discount disc:discountList){
+		// 	System.out.println(disc.getDiscountName());
+		// 	System.out.println("-------------------");
+		// }
+		
 	}
 
 }

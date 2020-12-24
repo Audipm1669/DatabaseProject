@@ -3,6 +3,7 @@ package com.project.stella_boutique.service.guest.product;
 import com.project.stella_boutique.adapter.database.MysqlDriver;
 import com.project.stella_boutique.model.item.Item;
 import com.project.stella_boutique.service.exception.GetProductErrorException;
+import com.project.stella_boutique.service.exception.GetRateErrorException;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,17 +41,31 @@ public class GetProductUseCase {
                         String pictureURL = rs.getString("pictureURL");
     
                         Item item = new Item(id, name, quantity, category, size, price, description, pictureURL);
+                        getRate(item,connection);
                         productList.add(item);
                     }
-                }catch (SQLException e) {
-                    e.printStackTrace();
                 }
-            }catch (SQLException e) {
-                e.printStackTrace();
             }
         }catch (SQLException e) {
             e.printStackTrace();
         }
         output.setProductList(productList);
+    }
+
+    public void getRate(Item item,Connection connection){
+        try (PreparedStatement stmt = connection.prepareStatement(
+            "SELECT * FROM `rate` WHERE `rateItemID` =  ?")) {
+                stmt.setString(1, Integer.toString(item.getItemID()));
+            try (ResultSet rs = stmt.executeQuery()) {
+                while(rs.next()) {
+                    String comment = rs.getString("comment");
+                    int rate = Integer.parseInt(rs.getString("rate"));
+
+                    item.setRatings(comment,rate);
+                }
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

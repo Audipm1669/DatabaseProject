@@ -6,8 +6,13 @@ import com.project.stella_boutique.service.exception.GetDiscountErrorException;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
-
+import java.util.List;
+import java.util.ArrayList;
 @Service
 public class GetDiscountUseCase {
     @Autowired
@@ -37,14 +42,10 @@ public class GetDiscountUseCase {
                             discountList.add(disc);
                         }
                     }
-                }catch (SQLException e) {
-                    e.printStackTrace();
                 }
-
-            }catch (SQLException e) {
-                e.printStackTrace();
             }
         }catch (SQLException e) {
+            System.out.println("Unable to Get Discount from MySQL~~");
             e.printStackTrace();
         }
         output.setDiscountList(discountList);

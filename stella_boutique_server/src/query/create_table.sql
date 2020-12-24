@@ -4,7 +4,7 @@ USE stella_boutique;
 
 -- Table structure for table `user`
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(6) NOT NULL,
+  `id` int(6) NOT NULL AUTO_INCREMENT,
   `password` varchar(100) NOT NULL,
   `fullname` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 -- Table structure for table `item`
 CREATE TABLE IF NOT EXISTS `item` (
-  `id` int(6) NOT NULL,
+  `id` int(6) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `quantity` int(11) NOT NULL,
   `category` varchar(100) NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `item` (
 
 -- Table structure for table `discount`
 CREATE TABLE IF NOT EXISTS `discount` (
-  `id` int(6) NOT NULL,
+  `id` int(6) NOT NULL AUTO_INCREMENT,
   `value` float NOT NULL,
   `code` varchar(5) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `like` (
 
 -- Table structure for table `order`
 CREATE TABLE IF NOT EXISTS `order` (
-  `id` int(6) NOT NULL,
+  `id` int(6) NOT NULL AUTO_INCREMENT,
   `orderDate` datetime NOT NULL,
   `status` int(11) NOT NULL,
   `discountID` int(6) DEFAULT NULL,

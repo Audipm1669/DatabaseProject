@@ -6,6 +6,10 @@ import com.project.stella_boutique.service.exception.AddDiscountErrorException;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @Service
 public class AddSellerDiscountUseCase {
@@ -17,6 +21,22 @@ public class AddSellerDiscountUseCase {
     }
 
     public void execute(AddSellerDiscountUseCaseInput input, AddSellerDiscountUseCaseOutput output) throws AddDiscountErrorException{
-        //code
+    //     try(Connection connection = this.mysqlDriver.getConnection()){
+    //         try (PreparedStatement stmt = connection.prepareStatement(
+    //             "INSERT INTO `discount` (`id`,`value`,`code`,`name`,`startDate`,`endDate`)"
+    //             + "VALUES(?,?,?,?,?,?)")) {
+    //                 stmt.setString(1, Integer.toString(input.getDiscountID()));
+    //                 stmt.setString(2, Float.toString(input.getValue()));
+    //                 stmt.setString(3, input.getCode());
+    //                 stmt.setString(4, input.getDiscountName());
+    //                 stmt.setString(5, SqlDateTimeConverter.toString(input.setEndDate()));
+    //                 stmt.setString(6, SqlDateTimeConverter.toString(input.getEndDate()));
+
+    //                 stmt.executeUpdate();
+    //         }
+    //     }catch (SQLException e) {
+    //         e.printStackTrace();
+    //     }
+    //     output.setDiscountName(input.getDiscountName());
     }
 }

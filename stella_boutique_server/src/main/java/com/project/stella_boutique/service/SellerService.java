@@ -44,13 +44,10 @@ public class SellerService {
                         String pictureURL = rs.getString("pictureURL");
     
                         Item item = new Item(id, name, quantity, category, size, price, description, pictureURL);
+                        getRate(item,connection);
                         productList.add(item);
                     }
-                }catch (SQLException e) {
-                    e.printStackTrace();
                 }
-            }catch (SQLException e) {
-                e.printStackTrace();
             }
         }catch (SQLException e) {
             e.printStackTrace();
@@ -87,12 +84,7 @@ public class SellerService {
                             discountList.add(disc);
                         }
                     }
-                }catch (SQLException e) {
-                    e.printStackTrace();
                 }
-
-            }catch (SQLException e) {
-                e.printStackTrace();
             }
         }catch (SQLException e) {
             e.printStackTrace();
@@ -100,11 +92,60 @@ public class SellerService {
         return discountList;
     }
 
-    /*
+    public void getRate(Item item,Connection connection) throws SQLException{
+        try (PreparedStatement stmt = connection.prepareStatement(
+            "SELECT * FROM `rate` WHERE `rateItemID` =  ?")) {
+                stmt.setString(1, Integer.toString(item.getItemID()));
+            try (ResultSet rs = stmt.executeQuery()) {
+                while(rs.next()) {
+                    String comment = rs.getString("comment");
+                    int rate = Integer.parseInt(rs.getString("rate"));
 
-    public void AddProduct(){
-       insert into product
+                    item.setRatings(comment,rate);
+                }
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
+    // public void AddProduct(){
+    //     public void execute(Item input) throws SQLException{
+    //         try(Connection connection = this.mysqlDriver.getConnection()){
+    //             try (PreparedStatement stmt = connection.prepareStatement(
+    //                 "INSERT INTO `discount` (`id`,`value`,`code`,`name`,`startDate`,`endDate`)"
+    //                 + "VALUES(?,?,?,?,?,?)")) {
+    //                     stmt.setString(1, Integer.toString(input.getDiscountID()));
+    //                     stmt.setString(2, Float.toString(input.getValue()));
+    //                     stmt.setString(3, input.getCode());
+    //                     stmt.setString(4, input.getDiscountName());
+    //                     stmt.setString(5, SqlDateTimeConverter.toString(input.setEndDate()));
+    //                     stmt.setString(6, SqlDateTimeConverter.toString(input.getEndDate()));
+    
+    //                     stmt.executeUpdate();
+    //             }
+    //             try (PreparedStatement stmt = connection.prepareStatement(
+    //                 "INSERT INTO `discount` (`id`,`value`,`code`,`name`,`startDate`,`endDate`)"
+    //                 + "VALUES(?,?,?,?,?,?)")) {
+    //                     stmt.setString(1, Integer.toString(input.getDiscountID()));
+    //                     stmt.setString(2, Float.toString(input.getValue()));
+    //                     stmt.setString(3, input.getCode());
+    //                     stmt.setString(4, input.getDiscountName());
+    //                     stmt.setString(5, SqlDateTimeConverter.toString(input.setEndDate()));
+    //                     stmt.setString(6, SqlDateTimeConverter.toString(input.getEndDate()));
+    
+    //                     stmt.executeUpdate();
+    //             }
+    //         }catch (SQLException e) {
+    //             e.printStackTrace();
+    //         }finally{
+    //             this.mysqlDriver.closeConnection();
+    //         }
+    //         output.setDiscountName(input.getDiscountName());
+    //     }
+    // }
+
+   /*
     public void UpdateProduct(){
         update product
     }
