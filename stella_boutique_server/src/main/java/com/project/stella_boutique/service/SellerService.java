@@ -110,39 +110,26 @@ public class SellerService {
     }
 
     // public void AddProduct(){
-    //     public void execute(Item input) throws SQLException{
-    //         try(Connection connection = this.mysqlDriver.getConnection()){
-    //             try (PreparedStatement stmt = connection.prepareStatement(
-    //                 "INSERT INTO `discount` (`id`,`value`,`code`,`name`,`startDate`,`endDate`)"
-    //                 + "VALUES(?,?,?,?,?,?)")) {
-    //                     stmt.setString(1, Integer.toString(input.getDiscountID()));
-    //                     stmt.setString(2, Float.toString(input.getValue()));
-    //                     stmt.setString(3, input.getCode());
-    //                     stmt.setString(4, input.getDiscountName());
-    //                     stmt.setString(5, SqlDateTimeConverter.toString(input.setEndDate()));
-    //                     stmt.setString(6, SqlDateTimeConverter.toString(input.getEndDate()));
-    
-    //                     stmt.executeUpdate();
-    //             }
-    //             try (PreparedStatement stmt = connection.prepareStatement(
-    //                 "INSERT INTO `discount` (`id`,`value`,`code`,`name`,`startDate`,`endDate`)"
-    //                 + "VALUES(?,?,?,?,?,?)")) {
-    //                     stmt.setString(1, Integer.toString(input.getDiscountID()));
-    //                     stmt.setString(2, Float.toString(input.getValue()));
-    //                     stmt.setString(3, input.getCode());
-    //                     stmt.setString(4, input.getDiscountName());
-    //                     stmt.setString(5, SqlDateTimeConverter.toString(input.setEndDate()));
-    //                     stmt.setString(6, SqlDateTimeConverter.toString(input.getEndDate()));
-    
-    //                     stmt.executeUpdate();
-    //             }
-    //         }catch (SQLException e) {
-    //             e.printStackTrace();
-    //         }finally{
-    //             this.mysqlDriver.closeConnection();
+    //     try(Connection connection = this.mysqlDriver.getConnection()){
+    //         try (PreparedStatement stmt = connection.prepareStatement(
+    //             "INSERT INTO `discount` (`id`,`value`,`code`,`name`,`startDate`,`endDate`)"
+    //             + "VALUES(?,?,?,?,?,?)")) {
+    //                 stmt.setString(1, Integer.toString(input.getDiscountID()));
+    //                 stmt.setString(2, Float.toString(input.getValue()));
+    //                 stmt.setString(3, input.getCode());
+    //                 stmt.setString(4, input.getDiscountName());
+    //                 stmt.setString(5, SqlDateTimeConverter.toString(input.setEndDate());
+    //                 stmt.setString(6, SqlDateTimeConverter.toString(input.getEndDate());
+
+    //                 stmt.executeUpdate();
     //         }
-    //         output.setDiscountName(input.getDiscountName());
+    //     }catch (SQLException e) {
+    //         e.printStackTrace();
+    //     }finally{
+    //         this.mysqlDriver.closeConnection();
     //     }
+    //     output.setDiscountName(input.getDiscountName());
+    // }
     // }
 
    /*
