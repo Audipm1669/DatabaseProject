@@ -26,6 +26,10 @@ public class Item {
 		this.ratings = new ArrayList<List<String>>();
 	}
 
+	public Item() {
+
+	}
+
 	public int getItemID() {
 		return this.itemID;
 	}
@@ -45,7 +49,7 @@ public class Item {
 	public String getCategory() {
 		return this.category;
 	}
-
+	
 	public void setCategory(String category) {
 		this.category = category;
 	}
