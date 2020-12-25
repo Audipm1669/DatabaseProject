@@ -6,14 +6,14 @@ public class Login {
     private MysqlDriver mysqlDriver = new MysqlDriver();
 
     @override
-    public User findByEmail(String userEmail, String password) {
+    public User findByEmail(String username, String password) {
         Connection connection = null;
         User user = null;
 
         try(Connection connection = this.mysqlDriver.getConnection()) {
             try (PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM `user` WHERE `email` = ? and `password` = ?")) {
-                    stmt.setString(1, userEmail);
+                    "SELECT * FROM `user` WHERE `username` = ? and `password` = ?")) {
+                    stmt.setString(1, username);
                     stmt.setString(2, password);
 
                     try (ResultSet rs = stmt.executeQuery()) {

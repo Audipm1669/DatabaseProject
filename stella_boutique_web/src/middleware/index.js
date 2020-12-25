@@ -9,9 +9,9 @@ function getHeaders(token) {
     })
 }
 
-function getBody(email, password) {
+function getBody(username, password) {
     return ({
-        email: email,
+        username: username,
         password: password
     })
 }
@@ -19,10 +19,10 @@ function getBody(email, password) {
 const myMiddleware = store => next => action => {
     if(action.type === "LOGIN_USER") {
         const headers = getHeaders(action.token)
-        const body = getBody(action.email, action.password)
+        const body = getBody(action.username, action.password)
         axios.post(API_HOST + '/login', body, {headers: headers})
         .then(response => {
-            action.loginUser(action.email, action.password, store.dispatch)
+            action.loginUser(action.username, action.password, store.dispatch)
         })
         .catch(err => {
             console.log(err)
