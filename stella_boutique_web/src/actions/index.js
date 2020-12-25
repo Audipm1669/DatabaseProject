@@ -1,7 +1,7 @@
-export function loginUser(userID, password) {
+export function loginUser(email, password) {
     return {
         type: "LOGIN_USER",
-        userID: userID,
+        email: email,
         password: password
     }
 }

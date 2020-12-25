@@ -20,21 +20,18 @@ const useStyles = makeStyles((theme) => ({
 
 function Login() {
   const classes = useStyles();
-  const [userID, setUserID] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // function handleSubmit(event) {
-  //   event.preventDefault();
-  // }
+  function validateForm() {
+    return email.length > 0 && password.length > 0;
+  }
 
-  function submit() {
-    console.log(userID)
-    console.log(password)
-    loginUser(
-      userID,
-      password
-    )
-
+  function handleSubmit(event) {
+    console.log(email);
+    console.log(password);
+    loginUser(email, password);
+    event.preventDefault();
   }
 
   return (
@@ -51,14 +48,14 @@ function Login() {
             </Button>
             </div>
       </Navbar>  
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control
             autoFocus
             type="email"
-            value={userID}
-            onChange={(e) => setUserID(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
         <Form.Group size="lg" controlId="password">
@@ -69,7 +66,7 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button className="LoginBtn" block size="lg" variant="outline-secondary" >
+        <Button className="LoginBtn" block size="lg" variant="outline-secondary" type="submit" value="Submit">
           Login
         </Button>
       </Form>
@@ -80,7 +77,7 @@ function Login() {
 
 function mapDispatchToProps(dispatch) {
   return {
-    loginUser: (userID, password) => dispatch(loginUser(userID, password))
+    loginUser: (email, password) => dispatch(loginUser(email, password))
   }
 }
 
