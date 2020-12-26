@@ -3,8 +3,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
 import { makeStyles } from '@material-ui/core/styles';
-import { connect } from 'react-redux'
-import { loginUser } from './actions'
+import { connect } from 'react-redux';
+import { loginUser } from './actions';
 import { Nav,Navbar } from 'react-bootstrap';
 
 const useStyles = makeStyles((theme) => ({
@@ -28,8 +28,6 @@ function Login() {
   // }
 
   function handleSubmit(event) {
-    console.log(username);
-    console.log(password);
     loginUser(username, password);
     event.preventDefault();
   }

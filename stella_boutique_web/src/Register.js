@@ -3,6 +3,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
 import { makeStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import { registerUser } from './actions';
 
 import { Nav,Navbar } from 'react-bootstrap';
 
@@ -16,14 +18,14 @@ const useStyles = makeStyles((theme) => ({
 
   }));
 
-export default function Register() {
+function Register() {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [fullname, setFullName] = useState("");
   const [username, setUserName] = useState("");
   const [birthday, setBirthday] = useState("");
   const [address, setAddress] = useState("");
-  const [cellphone, setCellphone] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
 
   function validateForm() {
@@ -31,6 +33,14 @@ export default function Register() {
   }
 
   function handleSubmit(event) {
+    console.log(username);
+    console.log(password);
+    console.log(fullname);
+    console.log(birthday);
+    console.log(address);
+    console.log(phoneNumber);
+    console.log(email);
+    registerUser(username, password, fullname, birthday, address, phoneNumber, email);
     event.preventDefault();
   }
 
@@ -93,8 +103,8 @@ export default function Register() {
           <Form.Label>Cellphone</Form.Label>
           <Form.Control
             type="name"
-            value={cellphone}
-            onChange={(e) => setCellphone(e.target.value)}
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </Form.Group>
 
@@ -113,3 +123,11 @@ export default function Register() {
     </div>
   );
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    registerUser: (username, password, fullname, birthday, address, phoneNumber, email) => dispatch(registerUser(username, password, fullname, birthday, address, phoneNumber, email))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Register);
