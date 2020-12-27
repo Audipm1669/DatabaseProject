@@ -51,53 +51,37 @@ public class GetSellerOrderUseCase {
     }
 
     public void getItemList(Order order,Connection connection){
+        Item boughtItem = new Item();
         try (PreparedStatement stmt = connection.prepareStatement(
-            "SELECT * FROM `itemlist` WHERE `orderID` =  ?")) {
+            "select * from itemlist il join item i where il.orderItemId = i.id and il.orderID = ?")) {
                 stmt.setString(1, Integer.toString(order.getOrderID()));
             try (ResultSet rs = stmt.executeQuery()) {
                 while(rs.next()) {
                     int itemID = Integer.parseInt(rs.getString("orderItemID"));
                     int amount = Integer.parseInt(rs.getString("amount"));
-                    
-                    Item boughtItem = getItem(itemID,connection);
+                    int id = Integer.parseInt(rs.getString("id"));
+                    String name = rs.getString("name");
+                    int quantity = Integer.parseInt(rs.getString("quantity"));
+                    String category = rs.getString("category");
+                    String size = rs.getString("size");
+                    Float price = rs.getFloat("price");
+                    String description = rs.getString("description");
+                    String pictureURL = rs.getString("pictureURL");
+    
+                    boughtItem.setItemID(id);
+                    boughtItem.setName(name);
+                    boughtItem.setQuantity(quantity);
+                    boughtItem.setCategory(category);
+                    boughtItem.setSize(size);
+                    boughtItem.setPrice(price);
+                    boughtItem.setDescription(description);
+                    boughtItem.setPictureURL(pictureURL);            
+
                     order.addItemToList(boughtItem,amount);
                 }
             }
         }catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public Item getItem(int itemID,Connection connection){
-        Item searchItem = new Item();
-        try (PreparedStatement stmt = connection.prepareStatement(
-            "SELECT * FROM `item` WHERE `id` =  ?")) {
-                stmt.setString(1, Integer.toString(itemID));
-            try (ResultSet rs = stmt.executeQuery()) {
-                while(rs.next()) {
-                int id = Integer.parseInt(rs.getString("id"));
-                String name = rs.getString("name");
-                int quantity = Integer.parseInt(rs.getString("quantity"));
-                String category = rs.getString("category");
-                String size = rs.getString("size");
-                Float price = rs.getFloat("price");
-                String description = rs.getString("description");
-                String pictureURL = rs.getString("pictureURL");
-
-                searchItem.setItemID(id);
-                searchItem.setName(name);
-                searchItem.setQuantity(quantity);
-                searchItem.setCategory(category);
-                searchItem.setSize(size);
-                searchItem.setPrice(price);
-                searchItem.setDescription(description);
-                searchItem.setPictureURL(pictureURL);            
-            }
-        }
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return searchItem;
-       }
-    
+    }   
 }

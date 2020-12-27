@@ -22,5 +22,6 @@ public class UpdateSellerOrderUseCase {
 
     public void execute(UpdateSellerOrderUseCaseInput input, UpdateSellerOrderUseCaseOutput output) throws UpdateOrderErrorException {
         //code
+        /*update order set status=? where id = ?  */
     }
 }
