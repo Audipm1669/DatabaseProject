@@ -22,5 +22,7 @@ public class UpdateSellerDiscountUseCase {
 
     public void execute(UpdateSellerDiscountUseCaseInput input, UpdateSellerDiscountUseCaseOutput output) throws UpdateDiscountErrorException {
         //code
+        /*"update `discount` SET `value`=?,`code`=?,`name`=?,
+        `startDate`=?,`endDate`=? WHERE id=?  */
     }
 }
