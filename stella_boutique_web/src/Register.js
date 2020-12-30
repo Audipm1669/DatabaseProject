@@ -25,6 +25,7 @@ function Register() {
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
+  const [userID, setUserID] = useState("");
 
   const dispatch = useDispatch();
 
@@ -41,7 +42,8 @@ function Register() {
       birthday: birthday,
       address: address,
       phoneNumber: phoneNumber,
-      email: email
+      email: email,
+      userID: userID,
     })
     event.preventDefault();
   }

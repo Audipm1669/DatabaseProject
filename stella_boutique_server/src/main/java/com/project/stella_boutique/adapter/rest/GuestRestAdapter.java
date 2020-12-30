@@ -8,11 +8,14 @@ import com.project.stella_boutique.service.guest.product.GetProductUseCaseOutput
 import com.project.stella_boutique.service.guest.discount.GetDiscountUseCase;
 import com.project.stella_boutique.service.guest.discount.GetDiscountUseCaseInput;
 import com.project.stella_boutique.service.guest.discount.GetDiscountUseCaseOutput;
+import com.project.stella_boutique.service.management.add.*;
+import com.project.stella_boutique.service.management.login.*;
 
 
 import com.project.stella_boutique.service.exception.GetDiscountErrorException;
 import com.project.stella_boutique.service.exception.GetProductErrorException;
 import com.project.stella_boutique.service.exception.GetRateErrorException;
+import com.project.stella_boutique.service.exception.LoginErrorException;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +40,30 @@ public class GuestRestAdapter {
 
     @Autowired
     GetDiscountUseCase getDiscountUseCase;
+
+    @Autowired
+    LoginUseCase loginUseCase;
+
+    @Autowired
+    AddUserUseCase addUserUseCase;
+
+
+    @PostMapping(value= "/Login")
+    public ResponseEntity<LoginUseCaseOutput> login(@RequestBody LoginUseCaseInput requestBody){
+        System.out.println("--------server----------");
+        LoginUseCaseInput input = new LoginUseCaseInput();
+        LoginUseCaseOutput output = new LoginUseCaseOutput();
+        input.setUsername(requestBody.getUsername());
+        input.setPassword(requestBody.getPassword());
+        System.out.println(input.getUsername());
+        System.out.println(input.getPassword());
+        try {
+            this.loginUseCase.execute(input, output);
+        } catch (LoginErrorException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(output);
+    }
 
     @GetMapping(value= "/product")
     public ResponseEntity<GetProductUseCaseOutput> getAllProduct() {

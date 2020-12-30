@@ -1,8 +1,12 @@
-package com.project.stella_boutique.service.management.add;
+package com.project.stella_boutique.service.management.login;
 
-public class AddUserUseCaseOutput {
+public class LoginUseCaseOutput {
     private int userID;
   
+    public void LoginUseCaseOutput() {
+
+    }
+    
 	public int getUserID() {
         return this.userID;
 	}

@@ -21,10 +21,11 @@ function Login() {
   const classes = useStyles();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [userID, setUserID] = useState("")
 
-  // function validateForm() {
-  //   return email.length > 0 && password.length > 0;
-  // }
+  function validateForm() {
+    return username.length > 0 && password.length > 0;
+  }
   
   const dispatch = useDispatch();
   
@@ -32,13 +33,14 @@ function Login() {
     dispatch({
       type: "LOGIN_USER",
       username: username,
-      password: password
+      password: password,
+      userID: userID,
     })
     event.preventDefault();
   }
 
   function admin() {
-    return email == "admin" && password == "admin";
+    return username == "admin" && password == "admin";
   }
   let button = null;
   if (admin()) {

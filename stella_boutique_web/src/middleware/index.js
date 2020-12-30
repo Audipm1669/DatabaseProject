@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const API_HOST = process.env.REACT_APP_HOST;
+// const API_HOST = process.env.REACT_APP_HOST;
+const API_HOST = "http://localhost:8080/api"
 
 function getHeaders(token) {
     return ({
@@ -9,14 +10,15 @@ function getHeaders(token) {
     })
 }
 
-function getBody(username, password) {
+function getBody(username, password,userID) {
     return ({
         username: username,
-        password: password
+        password: password,
+        userID: userID
     })
 }
 
-function registerData(username, password, fullname, birthday, address, phoneNumber, email) {
+function registerData(username, password, fullname, birthday, address, phoneNumber, email,userID) {
     return({
         username: username,
         password: password,
@@ -24,7 +26,8 @@ function registerData(username, password, fullname, birthday, address, phoneNumb
         birthday: birthday,
         address: address,
         phoneNumber: phoneNumber,
-        email: email
+        email: email,
+        userID: userID
     })
 }
 
@@ -33,9 +36,10 @@ const myMiddleware = store => next => action => {
         const headers = getHeaders(action.token)
         const body = getBody(action.username, action.password)
         console.log(body)
-        axios.post(API_HOST + '/Login', body, {headers: headers})
+        axios.post(API_HOST + '/guest/Login', body, {headers: headers})
         .then(response => {
-            action.loginUser(action.username, action.password, store.dispatch)
+            console.log(action.username, action.password, response.data.userID)
+            action.loginUser(action.username, action.password, response.data.userID, store.dispatch)
         })
         .catch(err => {
             console.log(err)
@@ -70,7 +74,7 @@ const myMiddleware = store => next => action => {
             console.log(err)
             alert("User Register Failed!")
         })
-    } 
+    }
 
 
 }
