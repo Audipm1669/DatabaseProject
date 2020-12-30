@@ -5,9 +5,11 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+import rootReducer from './reducers';
 import myMiddleware from './middleware';
 
 const myStore = createStore(
+  rootReducer,
   applyMiddleware(myMiddleware)
 )
 

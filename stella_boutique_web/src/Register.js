@@ -3,10 +3,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
 import { makeStyles } from '@material-ui/core/styles';
-import { connect } from 'react-redux';
-import { registerUser } from './actions';
-
-import { Nav,Navbar } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { Navbar } from 'react-bootstrap';
 
 const useStyles = makeStyles((theme) => ({
     navButtons: {
@@ -28,19 +26,23 @@ function Register() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
 
+  const dispatch = useDispatch();
+
   function validateForm() {
     return email.length > 0 && password.length > 0;
   }
 
   function handleSubmit(event) {
-    console.log(username);
-    console.log(password);
-    console.log(fullname);
-    console.log(birthday);
-    console.log(address);
-    console.log(phoneNumber);
-    console.log(email);
-    registerUser(username, password, fullname, birthday, address, phoneNumber, email);
+    dispatch({
+      type: "REGISTER_USER",
+      username: username,
+      password: password,
+      fullname: fullname,
+      birthday: birthday,
+      address: address,
+      phoneNumber: phoneNumber,
+      email: email
+    })
     event.preventDefault();
   }
 
@@ -123,11 +125,4 @@ function Register() {
     </div>
   );
 }
-
-function mapDispatchToProps(dispatch) {
-  return {
-    registerUser: (username, password, fullname, birthday, address, phoneNumber, email) => dispatch(registerUser(username, password, fullname, birthday, address, phoneNumber, email))
-  }
-}
-
-export default connect(null, mapDispatchToProps)(Register);
+export default Register;

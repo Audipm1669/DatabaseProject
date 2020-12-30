@@ -32,7 +32,8 @@ const myMiddleware = store => next => action => {
     if(action.type === "LOGIN_USER") {
         const headers = getHeaders(action.token)
         const body = getBody(action.username, action.password)
-        axios.post(API_HOST + '/login', body, {headers: headers})
+        console.log(body)
+        axios.post(API_HOST + '/Login', body, {headers: headers})
         .then(response => {
             action.loginUser(action.username, action.password, store.dispatch)
         })
@@ -51,7 +52,8 @@ const myMiddleware = store => next => action => {
             action.phoneNumber, 
             action.email
             )
-        axios.post(API_HOST + '/register', body, {headers: headers})
+        console.log(body)
+        axios.post(API_HOST + '/Register', body, {headers: headers})
         .then(response => {
             action.registerUser(
                 action.username,

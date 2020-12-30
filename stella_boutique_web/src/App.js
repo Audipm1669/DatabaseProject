@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import { connect } from 'react-redux';
 
 import './App.css';
 import {
@@ -44,7 +45,7 @@ function Copyright() {
   );
 }
 
-export default function Album() {
+function App() {
   return (
       <BrowserRouter>
         <Switch>
@@ -72,3 +73,4 @@ export default function Album() {
  
   );
 }
+export default connect()(App);

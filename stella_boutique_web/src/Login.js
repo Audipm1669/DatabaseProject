@@ -3,9 +3,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
 import { makeStyles } from '@material-ui/core/styles';
-import { connect } from 'react-redux';
-import { loginUser } from './actions';
-import { Nav,Navbar } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { Navbar } from 'react-bootstrap';
 
 const useStyles = makeStyles((theme) => ({
     navButtons: {
@@ -26,9 +25,14 @@ function Login() {
   // function validateForm() {
   //   return email.length > 0 && password.length > 0;
   // }
-
+  const dispatch = useDispatch();
+  
   function handleSubmit(event) {
-    loginUser(username, password);
+    dispatch({
+      type: "LOGIN_USER",
+      username: username,
+      password: password
+    })
     event.preventDefault();
   }
 
@@ -73,10 +77,4 @@ function Login() {
   );
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    loginUser: (username, password) => dispatch(loginUser(username, password))
-  }
-}
-
-export default connect(null, mapDispatchToProps)(Login);
+export default Login;
