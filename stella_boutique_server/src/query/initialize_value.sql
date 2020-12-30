@@ -38,7 +38,7 @@ INSERT `item`(`name`,`quantity`,`category`,`size`,`price`,`description`,`picture
 ("Pleated Oversize Cardigan In White",10,"Jacket","F",860,"Perfect for the morning coffee run","../img/clothes/Jacket/PleatedOversizeCardiganInWhite.jpg"),
 ("Classic Cheongsam In Pastel",10,"Dresses","F",1100,"Pretty in every Color","../img/clothes/Jacket/ClassicCheongsamInPastel.jpg"),
 ("Qi Dress",10,"Dresses","F",1160,"New Chinese Classic C0llection","../img/clothes/Jacket/QiDress.jpg"),
-("ShuangXiDress",10,"Dresses","F",1200,"All good things fullfil your new year","../img/clothes/Jacket/QiDress.jpg"),
+("Shuang Xi Dress",10,"Dresses","F",1200,"All good things fullfil your new year","../img/clothes/Jacket/QiDress.jpg"),
 ("Huo Yan Top",10,"Tops","F",800,"Pairing with a scarf","../img/clothes/Tops/HuoYanTop.jpg"),
 ("Feng Fu Top",10,"Tops","F",790,"Lift your style and your mood","../img/clothes/Tops/FengFuTop.jpg"),
 ("Fang Fang Top",10,"Tops","F",750,"Feminine and flowy","../img/clothes/Tops/FangFangTop.jpg"),

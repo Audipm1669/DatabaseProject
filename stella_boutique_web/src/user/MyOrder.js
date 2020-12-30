@@ -38,15 +38,12 @@ const columns = [
 ];
 
 const rows = [
-  { id: 1, Date: '2020-11-07', State: 'Jon', Cost: 35 },
-  { id: 2, Date: '2020-12-07', State: 'Cersei', Cost: 42 },
-  { id: 3, Date: '2020-11-22', State: 'Jaime', Cost: 45 },
-  { id: 4, Date: '2020-11-29', State: 'Arya', Cost: 16 },
-  { id: 5, Date: '2020-11-19', State: 'Daenerys', Cost: null },
-  { id: 6, Date: '2020-12-03', State: null, Cost: 150 },
-  { id: 7, Date: '2020-11-07', State: 'Ferrara', Cost: 44 },
-  { id: 8, Date: '2020-11-07', State: 'Rossini', Cost: 36 },
-  { id: 9, Date: '2020-11-07', State: 'Harvey', Cost: 65 },
+  { id: 1, Date: '2020-11-07', State: 'Delivered', Cost: 1100 },
+  { id: 2, Date: '2020-12-07', State: 'Delivered', Cost: 800 },
+  { id: 3, Date: '2020-11-22', State: 'Ordered', Cost: 760 },
+  { id: 4, Date: '2020-11-29', State: 'Ordered', Cost: 600 },
+  { id: 5, Date: '2020-11-19', State: 'Ordered', Cost:  2000},
+  { id: 6, Date: '2020-12-03', State: 'Ordered', Cost: 2200 },
 ];
 
 
@@ -93,6 +90,8 @@ export default function MyOrder() {
       <div style={{ height: 400, width: '90%' , margin: '60px'}}>
         <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
       </div>
+
+      <Button style={{ margin: '0 60px'}} color="secondary">Cancel Order</Button>
         
     
       </main>
