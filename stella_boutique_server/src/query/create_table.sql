@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `like` (
 CREATE TABLE IF NOT EXISTS `order` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
   `orderDate` datetime NOT NULL,
-  `status` int(11) NOT NULL,
+  `status` int(11) DEFAULT 0,
   `discountID` int(6) DEFAULT NULL,
   `orderUserID` int(6) NOT NULL,
   PRIMARY KEY (`id`),

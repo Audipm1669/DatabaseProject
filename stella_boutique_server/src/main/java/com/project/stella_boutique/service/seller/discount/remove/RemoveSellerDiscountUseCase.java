@@ -23,7 +23,7 @@ public class RemoveSellerDiscountUseCase {
     public void execute(RemoveSellerDiscountUseCaseInput input, RemoveSellerDiscountUseCaseOutput output) throws RemoveDiscountErrorException {
         try(Connection connection = this.mysqlDriver.getConnection()){
             try (PreparedStatement stmt = connection.prepareStatement(
-                "DELETE `discount` WHERE ``id`=?")) {
+                "DELETE FROM `discount` WHERE ``id`=?")) {
                     stmt.setString(1, Integer.toString(input.getDiscountID()));
 
                     stmt.executeUpdate();

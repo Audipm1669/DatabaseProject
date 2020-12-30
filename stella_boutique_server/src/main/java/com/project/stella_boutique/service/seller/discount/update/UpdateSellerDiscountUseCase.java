@@ -22,6 +22,7 @@ public class UpdateSellerDiscountUseCase {
 
     public void execute(UpdateSellerDiscountUseCaseInput input, UpdateSellerDiscountUseCaseOutput output) throws UpdateDiscountErrorException {
         //code
+        //can only be update before the startDATE
         /*"update `discount` SET `value`=?,`code`=?,`name`=?,
         `startDate`=?,`endDate`=? WHERE id=?  */
     }

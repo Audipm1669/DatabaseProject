@@ -59,9 +59,9 @@ INSERT `rate` VALUES
 (1,3,"good service",4);
 
 -- status code 0 = new order, 1 = checkout, 2 = shipout, 3 = arrived(done) default 0
-INSERT `order`(`orderDate`,`status`,`discountID`,`orderUserID`) VALUES
-("2020-12-16", 0, null, 1),
-("2020-12-15", 3, null, 1);
+INSERT `order`(`orderDate`, `orderUserID`) VALUES
+("2020-12-16", 1),
+("2020-12-15", 1);
 
 INSERT `itemlist` VALUES
 (2,1,2),
