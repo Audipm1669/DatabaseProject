@@ -1,6 +1,16 @@
 package com.project.stella_boutique.service.seller.discount.remove;
 
 public class RemoveSellerDiscountUseCaseInput {
-    //All attributes you need to get from Frontend
-    //Needs Getter and Setter
+    private int discountID;
+    
+    public RemoveSellerDiscountUseCaseInput(){}
+
+	public int getDiscountID() {
+		return this.discountID;
+	}
+
+	public void setDiscountID(int discountID) {
+		this.discountID = discountID;
+	}
+
 }

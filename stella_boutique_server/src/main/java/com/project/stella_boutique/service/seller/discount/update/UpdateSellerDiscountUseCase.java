@@ -6,6 +6,10 @@ import com.project.stella_boutique.service.exception.UpdateDiscountErrorExceptio
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @Service
 public class UpdateSellerDiscountUseCase {
@@ -18,5 +22,7 @@ public class UpdateSellerDiscountUseCase {
 
     public void execute(UpdateSellerDiscountUseCaseInput input, UpdateSellerDiscountUseCaseOutput output) throws UpdateDiscountErrorException {
         //code
+        /*"update `discount` SET `value`=?,`code`=?,`name`=?,
+        `startDate`=?,`endDate`=? WHERE id=?  */
     }
 }

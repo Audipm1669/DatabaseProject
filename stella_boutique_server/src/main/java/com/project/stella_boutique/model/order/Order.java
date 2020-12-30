@@ -1,5 +1,9 @@
 package com.project.stella_boutique.model.order;
 
+import java.util.List;
+import java.util.ArrayList;
+import com.project.stella_boutique.model.item.Item;
+
 public class Order {
 
     private int orderID;
@@ -7,7 +11,7 @@ public class Order {
     private String orderDate;
     private int discountID;
 	private int userID;
-	List<Item> itemlist;
+	private List<List<Object>> itemList;
 	
 	public Order(int orderID, int status, String orderDate, int discountID, int userID){
 		this.orderID = orderID;
@@ -15,6 +19,7 @@ public class Order {
 		this.orderDate = orderDate;
 		this.discountID = discountID;
 		this.userID = userID;
+		this.itemList = new ArrayList<List<Object>>();
 	}
 
 	public int getOrderID() {
@@ -58,4 +63,22 @@ public class Order {
 	}
 
      
+	public List<List<Object>> getItemList() {
+		return this.itemList;
+	}
+
+	public void setItemList(List<List<Object>> itemList) {
+		this.itemList = itemList;
+	}
+
+	public void addItemToList(Item item,int amount) {
+		List<Object> order = new ArrayList<Object>();
+		order.add(item);
+		order.add(amount);
+		this.itemList.add(order);
+	}
+
+
+
+
 }

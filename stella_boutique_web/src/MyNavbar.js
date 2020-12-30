@@ -77,33 +77,27 @@ const useStyles = makeStyles((theme) => ({
     const useEffect = () => {
       document.title = "home";
     };
+
+    const [displayName] = useState(localStorage.getItem("displayName"));
+
+
   
     return (
       <React.Fragment>
         <Navbar className="brand-bar" style={{justifyContent:'space-between'}}>
           <Navbar.Brand href="/">Stella Boutique</Navbar.Brand>
-          {console.log(loginStatus)}
-          { loginStatus ?
-          <div>
-          <Button color="secondary" onClick={toggle}>購物車({cart.length})</Button>
-          <Button  href="/MyLike" className={classes.navButtons} variant="contained" color="primary">
-            My Profile
-          </Button>
-          <Button href="" className={classes.navButtons} variant="contained" color="primary">
-            LogOut
-          </Button>
-          {console.log("login")}
-          </div>
-          :
-          <div>
-            <Button href="/Login" className={classes.navButtons} variant="contained" color="primary">
-              login
-            </Button>
-            {console.log("not login")}
-            <Button href="/Register" className={classes.navButtons} variant="contained" color="primary">
-              register
-            </Button>
-          </div>   }
+            <div>
+              <p>Hi, {displayName}</p>
+            </div>
+            <div>
+              <Button color="secondary" onClick={toggle}>購物車({cart.length})</Button>
+              <Button href="/Login" className={classes.navButtons} variant="contained" color="primary">
+                login
+              </Button>
+              <Button href="/Register" className={classes.navButtons} variant="contained" color="primary">
+                register
+              </Button>
+            </div>
         </Navbar>
         <Navbar bg="dark" variant="dark" className="menu-bar" expand="lg">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

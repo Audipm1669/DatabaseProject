@@ -12,9 +12,9 @@ public class AddSellerDiscountUseCaseInput {
 	private Date endDate;
     private String code;
     
-    public static final String DATE_FORMAT = "yyyy/MM/dd";
+    private final String DATE_FORMAT = "yyyy/MM/dd";
 
-    public AddSellerDiscountUseCaseInput();
+    public AddSellerDiscountUseCaseInput(){}
 
 	public AddSellerDiscountUseCaseInput(int discountID, 
 					Float value, 
@@ -26,7 +26,7 @@ public class AddSellerDiscountUseCaseInput {
 		this.value = value;
 		this.discountName = discountName;
 		this.code = code;
-		final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+		final SimpleDateFormat dateFormat = new SimpleDateFormat(this.DATE_FORMAT);
         try {
             this.startDate = dateFormat.parse(startDate);
         } catch (final ParseException e) {
@@ -67,8 +67,12 @@ public class AddSellerDiscountUseCaseInput {
 		return this.startDate;
 	}
 
+	public String getStartDateString() {
+		return ToString(this.startDate);
+	}
+
 	public void setStartDate(String startDate) {
-		final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+		final SimpleDateFormat dateFormat = new SimpleDateFormat(this.DATE_FORMAT);
 		try {
             this.startDate = dateFormat.parse(startDate);
         } catch (final ParseException e) {
@@ -80,8 +84,12 @@ public class AddSellerDiscountUseCaseInput {
 		return this.endDate;
 	}
 
+	public String getEndDateString() {
+		return ToString(this.endDate);
+	}
+
 	public void setEndDate(String endDate) {
-		final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+		final SimpleDateFormat dateFormat = new SimpleDateFormat(this.DATE_FORMAT);
 		try {
             this.endDate = dateFormat.parse(endDate);
         } catch (final ParseException e) {
@@ -97,4 +105,7 @@ public class AddSellerDiscountUseCaseInput {
 		this.code = code;
 	}
 
+	public String ToString(Date date) {
+        return (new SimpleDateFormat(this.DATE_FORMAT)).format(date);
+    }
 }

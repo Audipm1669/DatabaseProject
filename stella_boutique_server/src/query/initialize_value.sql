@@ -8,11 +8,11 @@ INSERT `user` (`password`,`fullname`,`username`,`birthday`,`address`,`phoneNumbe
 ('test', 'stella', 'stefalen', '1998-04-25', 'home', '0987654321', 'stella@gmail.com'),
 ('test', 'weibin', 'weibin', '1999-05-30', 'home', '0912837465', 'weibin@gmail.com');
 
-INSERT `discount` ( `id`, `value`,`code` ,`name` ,`startDate`,`endDate`) VALUES
+INSERT `discount` (`value`,`code` ,`name` ,`startDate`,`endDate`) VALUES
 (0.8,"NY001", "New Year Sale 20% OFF","2021-01-01", "2021-01-30"),
 (0.5,"CT001", "Christmast Gift 50% OFF","2020-12-15", "2020-12-30");
   
-INSERT `item` VALUES
+INSERT `item`(`name`,`quantity`,`category`,`size`,`price`,`description`,`pictureURL`) VALUES
 ("Jolie Jeans Jacket In Green",10,"Jacket","F",1000,"Jacket which is ready to coloring your day by day","../img/clothes/Jacket/JolieJeansJacketInGreen.jpg"),
 ("Jolie Jeans Jacket In Nude",10,"Jacket","F",1000,"Jacket which is ready to coloring your day by day","../img/clothes/Jacket/JolieJeansJacketInNude.jpg"),
 ("Jolie Jeans Jacket In Red",10,"Jacket","F",1000,"Jacket which is ready to coloring your day by day","../img/clothes/Jacket/JolieJeansJacketInRed.jpg"),
@@ -59,7 +59,7 @@ INSERT `rate` VALUES
 (1,3,"good service",4);
 
 -- status code 0 = new order, 1 = checkout, 2 = shipout, 3 = arrived(done) default 0
-INSERT `order` VALUES
+INSERT `order`(`orderDate`,`status`,`discountID`,`orderUserID`) VALUES
 ("2020-12-16", 0, null, 1),
 ("2020-12-15", 3, null, 1);
 

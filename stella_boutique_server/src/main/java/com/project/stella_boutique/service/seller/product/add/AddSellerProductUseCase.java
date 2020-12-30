@@ -18,5 +18,6 @@ public class AddSellerProductUseCase {
 
     public void execute(AddSellerProductUseCaseInput input, AddSellerProductUseCaseOutput output) throws AddProductErrorException {
         //code
+        /* INSERT `item` VALUES (.......)*/
     }
 }

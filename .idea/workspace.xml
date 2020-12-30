@@ -1,11 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d422d5a5-30ef-4482-a88d-48ad2f5551c0" name="Default Changelist" comment="" />
+    <list default="true" id="d422d5a5-30ef-4482-a88d-48ad2f5551c0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/management/Register.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stella_boutique_web/src/actions/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stella_boutique_web/src/middleware/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stella_boutique_web/src/reducers/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stella_boutique_web/src/reducers/loginReducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stella_boutique_web/src/reducers/registerRedux.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_server/bin/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_server/bin/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/model/item/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/model/item/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/model/order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/model/order/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/SellerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/SellerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/guest/product/GetProductUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/guest/product/GetProductUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/management/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/management/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/discount/add/AddSellerDiscountUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/discount/add/AddSellerDiscountUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/discount/add/AddSellerDiscountUseCaseInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/discount/add/AddSellerDiscountUseCaseInput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/discount/add/AddSellerDiscountUseCaseOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/discount/add/AddSellerDiscountUseCaseOutput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/discount/get/GetSellerDiscountUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/discount/get/GetSellerDiscountUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/discount/remove/RemoveSellerDiscountUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/discount/remove/RemoveSellerDiscountUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/discount/remove/RemoveSellerDiscountUseCaseInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/discount/remove/RemoveSellerDiscountUseCaseInput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/discount/update/UpdateSellerDiscountUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/discount/update/UpdateSellerDiscountUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/order/get/GetSellerOrderUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/order/get/GetSellerOrderUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/order/update/UpdateSellerOrderUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/order/update/UpdateSellerOrderUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/order/update/UpdateSellerOrderUseCaseInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/order/update/UpdateSellerOrderUseCaseInput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/product/add/AddSellerProductUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_server/src/main/java/com/project/stella_boutique/service/seller/product/add/AddSellerProductUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_server/src/query/initialize_value.sql" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_server/src/query/initialize_value.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_web/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_web/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_web/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_web/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_web/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_web/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_web/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_web/src/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_web/src/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_web/src/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_web/src/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_web/src/MyNavbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_web/src/MyNavbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_web/src/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_web/src/Register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stella_boutique_web/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/stella_boutique_web/src/index.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -21,7 +59,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="d422d5a5-30ef-4482-a88d-48ad2f5551c0" name="Default Changelist" comment="" />

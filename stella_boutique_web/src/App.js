@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import { connect } from 'react-redux';
 
 import './App.css';
 import {
@@ -28,7 +29,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-export default function Album() {
+function App() {
   return (
       <BrowserRouter>
         <Switch>
@@ -52,3 +53,4 @@ export default function Album() {
  
   );
 }
+export default connect()(App);
