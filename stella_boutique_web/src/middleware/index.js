@@ -1,7 +1,10 @@
-import axios from 'axios'
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 // const API_HOST = process.env.REACT_APP_HOST;
-const API_HOST = "http://localhost:8080/api"
+const API_HOST = "http://localhost:8080/api";
+
+// const dispatch = useDispatch();
 
 function getHeaders(token) {
     return ({
@@ -33,18 +36,18 @@ function registerData(username, password, fullname, birthday, address, phoneNumb
 
 const myMiddleware = store => next => action => {
     if(action.type === "LOGIN_USER") {
-        const headers = getHeaders(action.token)
-        const body = getBody(action.username, action.password)
-        console.log(body)
+        const headers = getHeaders(action.token);
+        const body = getBody(action.username, action.password);
+        console.log(body);
         axios.post(API_HOST + '/guest/Login', body, {headers: headers})
         .then(response => {
-            console.log(action.username, action.password, response.data.userID)
-            action.loginUser(action.username, action.password, response.data.userID, store.dispatch)
+            localStorage.setItem("username", action.username);
+            localStorage.setItem("userID", response.data.userID);
         })
         .catch(err => {
             console.log(err)
             alert("User Authentication Failed!")
-        })
+        });
     } else if(action.type === "REGISTER_USER") {
         const headers = getHeaders(action.token)
         const body = registerData(
@@ -74,6 +77,8 @@ const myMiddleware = store => next => action => {
             console.log(err)
             alert("User Register Failed!")
         })
+    } else {
+        return next(action)
     }
 
 

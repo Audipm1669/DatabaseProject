@@ -1,9 +1,8 @@
-import React,{Component,useState } from 'react';
-import { Nav,Navbar,NavDropdown,Form,FormControl,Button } from 'react-bootstrap';
+import React,{ useState } from 'react';
+import { Nav ,Navbar ,Button } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
 import './App.css';
 import {  Modal, ModalHeader, ModalBody, ModalFooter, Table} from 'reactstrap';
-import Avatar from '@material-ui/core/Avatar';
 
 import {
     BrowserRouter,
@@ -71,29 +70,41 @@ const useStyles = makeStyles((theme) => ({
       });
     }
 
-    const [loginStatus, setLoginStatus] = React.useState(true);
     const classes = useStyles();
    
     const useEffect = () => {
       document.title = "home";
     };
 
-    const [displayName] = useState(localStorage.getItem("displayName"));
+    const [username] = useState(localStorage.getItem("username"));
+    const [userID] = useState(localStorage.getItem("userID"));
 
+    function handleLogout() {
+      localStorage.clear();
+      window.location.href = '/';
+    }
 
-  
+    function isLogin() {
+      if( username === "") {
+        return <Button href="/Login" className={classes.navButtons} variant="contained" color="primary">login</Button>
+      } else {
+        return <Button href="/Login" className={classes.navButtons} variant="contained" color="primary" onClick={handleLogout}>logout</Button>
+      }
+    }
+
     return (
       <React.Fragment>
         <Navbar className="brand-bar" style={{justifyContent:'space-between'}}>
           <Navbar.Brand href="/">Stella Boutique</Navbar.Brand>
             <div>
-              <p>Hi, {displayName}</p>
+              <p>Hi, {username} {userID} </p>
             </div>
             <div>
               <Button color="secondary" onClick={toggle}>購物車({cart.length})</Button>
-              <Button href="/Login" className={classes.navButtons} variant="contained" color="primary">
+              {isLogin()}
+              {/* <Button href="/Login" className={classes.navButtons} variant="contained" color="primary">
                 login
-              </Button>
+              </Button> */}
               <Button href="/Register" className={classes.navButtons} variant="contained" color="primary">
                 register
               </Button>
