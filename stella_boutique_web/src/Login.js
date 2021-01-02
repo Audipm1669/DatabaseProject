@@ -6,6 +6,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import { Navbar } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { loginUser} from './actions';
 
 const useStyles = makeStyles((theme) => ({
     navButtons: {
@@ -18,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-function Login() {
+function Login(props) {
   const classes = useStyles();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -32,19 +34,15 @@ function Login() {
   const history = useHistory();
   
   function handleSubmit(event) {
-    dispatch({
-      type: "LOGIN_USER",
-      username: username,
-      password: password,
-      userID: 0
-    })
+    props.loginUser(username,password,userID);
+    event.preventDefault();
+  }
 
+  function mount(){
     // if the server give the response data it will redirect to home page
-    if(localStorage.getItem("username") !== "") {
+    if(props.LoginUser.userID != 0) {
       window.location.href = '/';
     }
-
-    event.preventDefault();
   }
 
   function admin() {
@@ -98,9 +96,23 @@ function Login() {
           Login
         </Button>
       </Form>
+      {mount()}
     </div>
-    
   );
 }
 
-export default Login;
+function mapStateToProps(state) {
+  return {
+    LoginUser: state.LoginUser
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    loginUser: (username,password,userID) => {
+      dispatch(loginUser(username,password,userID))
+    }
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Login);

@@ -1,12 +1,11 @@
-import React,{ useState } from 'react';
+import React,{ useState,useEffect } from 'react';
 import { Nav ,Navbar ,Button } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
 import './App.css';
 import {  Modal, ModalHeader, ModalBody, ModalFooter, Table} from 'reactstrap';
-
-import {
-    BrowserRouter,
-} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { enterWeb, setUser} from './actions';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -58,77 +57,89 @@ const useStyles = makeStyles((theme) => ({
   
   const cart = [];
   
-  export default function MyNavbar() {
+function MyNavbar(props) {
     const [ state = {
-            modal: false,
+            cart: false,
             },setState] = useState(0);
-
-    const toggle = () => {
+    const handleCart = () => {
       setState({
-        modal: !state.modal,
-        loginStatus: state.loginStatus,
+        cart: !state.cart,
       });
     }
-
+    const [userID,setUserID] = useState(localStorage.getItem("userID"));
+    const [username,setUername] = useState(localStorage.getItem("username"));
     const classes = useStyles();
-   
-    const useEffect = () => {
-      document.title = "home";
-    };
 
-    const [username] = useState(localStorage.getItem("username"));
-    const [userID] = useState(localStorage.getItem("userID"));
+    useState(() => {
+      props.enterWeb();
+      props.setUser(username,userID);
+    });
 
     function handleLogout() {
       localStorage.clear();
       window.location.href = '/';
     }
 
-    function isLogin() {
-      if( username === "") {
-        return <Button href="/Login" className={classes.navButtons} variant="contained" color="primary">login</Button>
-      } else {
-        return <Button href="/Login" className={classes.navButtons} variant="contained" color="primary" onClick={handleLogout}>logout</Button>
-      }
-    }
+    const history = useHistory();
 
+    const goToNewArrival = () => {
+      history.push("/Newarrivals")
+    };
+    const goToOnSale = () => {
+      history.push("/Onsale")
+    };
+    const goToTops = () => {
+      history.push("/Tops")
+    };
+    const goToBottoms = () => {
+      history.push("/Bottom")
+    };
+    const goToOutwear = () => {
+      history.push("/Jacket")
+    };
+    const goToDresses = () => {
+      history.push("/Dresses")
+    };
+
+    const [orderList,createOrderList] = useState(false);
+    function createOrder() {
+    }
+    
     return (
       <React.Fragment>
         <Navbar className="brand-bar" style={{justifyContent:'space-between'}}>
           <Navbar.Brand href="/">Stella Boutique</Navbar.Brand>
             <div>
-              <p>Hi, {username} {userID} </p>
+              <p>Welome{userID == 0?null:", "+username} </p> 
             </div>
+            {userID == 0? 
             <div>
-              <Button color="secondary" onClick={toggle}>購物車({cart.length})</Button>
-              {isLogin()}
-              {/* <Button href="/Login" className={classes.navButtons} variant="contained" color="primary">
-                login
-              </Button> */}
-              <Button href="/Register" className={classes.navButtons} variant="contained" color="primary">
-                register
-              </Button>
+              <Button href="/Login" className={classes.navButtons} variant="contained" color="primary">login</Button>
+              <Button href="/Register" className={classes.navButtons} variant="contained" color="primary">register</Button>
+            </div> :
+            <div>
+              <Button color="secondary" onClick={handleCart}>購物車({cart.length})</Button>
+              <Button href="/Login" className={classes.navButtons} variant="contained" color="primary" onClick={handleLogout}>logout</Button>
             </div>
+            }
         </Navbar>
         <Navbar bg="dark" variant="dark" className="menu-bar" expand="lg">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-            <BrowserRouter>
-              <Nav.Link href="/Newarrivals">NEW ARRIVALS</Nav.Link>
-              <Nav.Link href="/Onsale">ON SALE</Nav.Link>
-              <Nav.Link href="/Tops">TOPS</Nav.Link>
-              <Nav.Link href="/Bottom">BOTTOMS</Nav.Link>
-              <Nav.Link href="/Jacket">OUTERWEAR</Nav.Link>
-              <Nav.Link href="/Dresses">DRESSES & JUMPSUITS</Nav.Link>
-            </BrowserRouter>
+              <Nav.Link onClick={goToNewArrival}>NEW ARRIVALS</Nav.Link>
+              <Nav.Link onClick={goToOnSale}>ON SALE</Nav.Link>
+              <Nav.Link onClick={goToTops}>TOPS</Nav.Link>
+              <Nav.Link onClick={goToBottoms}>BOTTOMS</Nav.Link>
+              <Nav.Link onClick={goToOutwear}>OUTERWEAR</Nav.Link>
+              <Nav.Link onClick={goToDresses}>DRESSES & JUMPSUITS</Nav.Link>
             </Nav>
             
           </Navbar.Collapse>
         </Navbar>
 
-        <Modal isOpen={state.modal} toggle={toggle}>
-          <ModalHeader toggle={toggle}>購物車</ModalHeader>
+        <Modal isOpen={state.cart} toggle={handleCart}>
+          <ModalHeader toggle={handleCart}>購物車</ModalHeader>
           <ModalBody>
             <Table>
                 <thead>
@@ -158,12 +169,29 @@ const useStyles = makeStyles((theme) => ({
             </Table>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={toggle}>結帳</Button>{' '}
-            <Button color="secondary" onClick={toggle}>取消</Button>
+            <Button color="primary" onClick={handleCart}>結帳</Button>{' '}
+            <Button color="secondary" onClick={handleCart}>取消</Button>
           </ModalFooter>
         </Modal>
-        
-        
       </React.Fragment>
     );
   }
+
+  function mapStateToProps(state) {
+    return {
+      ProductList: state.ProductList,
+      LoginUser: state.LoginUser
+    }
+  }
+  
+  function mapDispatchToProps(dispatch) {
+    return {
+      enterWeb: () => {
+        dispatch(enterWeb())
+      },
+      setUser: (username,userID) => {
+        dispatch(setUser(username,userID))
+      }
+    }
+  }
+  export default connect(mapStateToProps,mapDispatchToProps)(MyNavbar);

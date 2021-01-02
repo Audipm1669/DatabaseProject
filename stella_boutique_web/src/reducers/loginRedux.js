@@ -1,4 +1,4 @@
-const initialState = {
+var initialState = {
     username: "",
     password: "",
     userID: 0
@@ -7,13 +7,16 @@ const initialState = {
 const loginReducer = (state = initialState, action) => {
     switch(action.type) {
         case "LOGIN_USER": {
-            console.log(action.username);
-            console.log(action.password);
-            console.log(action.userID);
             return {
                 ...state,
                 username: action.username,
                 password: action.password,
+                userID: action.userID
+            }
+        }
+        case "SET_USER": {
+            return {
+                username: action.username,
                 userID: action.userID
             }
         }

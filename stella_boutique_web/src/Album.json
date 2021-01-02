@@ -2,7 +2,7 @@
 [
   {
     "id": 1,
-    "img": "./img/clothes/Dresses/ClassicCheongsamInPastel.jpg",
+    "img": "./img/clothes/Dress/ClassicCheongsamInPastel.jpg",
     "title": "Classic Cheongsam In Pastel",
     "desc": "Pretty in every Color",
     "price": 1100,
@@ -10,14 +10,14 @@
   },
   {
     "id": 2,
-    "img": "./img/clothes/Dresses/QiDress.jpg",
+    "img": "./img/clothes/Dress/QiDress.jpg",
     "title": "Qi Dress",
     "desc":"New Chinese Classic C0llection",
     "price": 1160
   },
   {
     "id": 3,
-    "img": "./img/clothes/Dresses/ShuangXiDress.jpg",
+    "img": "./img/clothes/Dress/ShuangXiDress.jpg",
     "title": "Shuang Xi Dress",
     "desc": "All good things fullfil your new year",
     "price": 1200

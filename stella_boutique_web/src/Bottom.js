@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import AlbumJson from './Album.json';
+import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import { Container, Row, Col, Jumbotron, Card, CardImg, CardBody ,  CardTitle, CardSubtitle, CardText, Badge } from 'reactstrap';
 import { Form,FormControl,Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { getNewArrival} from './actions';
 
-class Newarrivals extends Component {
-  constructor(props){
-    super(props)
-  }
+class Bottom extends Component {
+
     render() {
         return (
             <div>
@@ -24,7 +20,7 @@ class Newarrivals extends Component {
                 <Row style={{margin:'10px 100px' , display: 'flex',  justifyContent:'flex-end ', alignItems:'center'}}>
                 {
                   this.props.ProductList.map((item,key) => {
-                    if(key>23){
+                    if(item.category == "Bottom"){
                       return(
                       <Col sm={6} md={4} className="mb-3" >
                         <Card style={{margin:'0px 50px'}}>
@@ -49,12 +45,13 @@ class Newarrivals extends Component {
             </div>
         );
     }
+
 }
 
 function mapStateToProps(state) {
-  return {
-    ProductList: state.ProductList
+    return {
+      ProductList: state.ProductList
+    }
   }
-}
-
-export default connect(mapStateToProps,null)(withRouter(Newarrivals));
+  
+  export default connect(mapStateToProps,null)(withRouter(Bottom));

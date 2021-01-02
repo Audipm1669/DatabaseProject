@@ -66,7 +66,8 @@ public class GuestRestAdapter {
     }
 
     @GetMapping(value= "/product")
-    public ResponseEntity<GetProductUseCaseOutput> getAllProduct() {
+    public ResponseEntity<GetProductUseCaseOutput> getAllProduct() {        
+        System.out.println("--------server----------");
         GetProductUseCaseOutput output = new GetProductUseCaseOutput();
         try {
             this.getProductUseCase.execute(output);
@@ -75,6 +76,8 @@ public class GuestRestAdapter {
         }
         return ResponseEntity.status(HttpStatus.OK).body(output);
     }
+
+
     @GetMapping(value= "/discount")
     public ResponseEntity<GetDiscountUseCaseOutput> getAllDiscount(@RequestBody GetDiscountUseCaseInput requestBody) {
         GetDiscountUseCaseInput input = new GetDiscountUseCaseInput();

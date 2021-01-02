@@ -32,7 +32,7 @@ class MyLike extends Component {
                   album.map(product => (
                     <Col sm={6} md={4} className="mb-3">
                       <Card style={{margin:'0px 50px'}}>
-                        <CardImg src={require("../img/clothes/Dresses/ClassicCheongsamInPastel.jpg")} alt="Card image cap" />
+                        <CardImg src={require("../img/clothes/Dress/ClassicCheongsamInPastel.jpg")} alt="Card image cap" />
                         <CardBody >
                           <CardTitle>{product.title}</CardTitle>
                           <CardSubtitle> 

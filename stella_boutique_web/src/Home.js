@@ -133,7 +133,6 @@ export default function Home() {
     
     
     <React.Fragment>
-      <MyNavbar />
       <main>
         {/* Hero unit */}
         <div className={classes.heroContent}>
