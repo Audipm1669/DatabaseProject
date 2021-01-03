@@ -1,7 +1,9 @@
 package com.project.stella_boutique.model.item;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class Item {
-    
     private int itemID;
     private int quantity;
     private String category;
@@ -9,7 +11,8 @@ public class Item {
     private Float price;
     private String description;
     private String pictureURL;
-    private String name;
+	private String name;
+	private List<List<String>> ratings;
 
 	public Item(int itemID, String name, int quantity, String category, String size ,Float price, String description, String pictureURL){
 		this.itemID = itemID;
@@ -20,6 +23,11 @@ public class Item {
 		this.price = price;
 		this.description = description;
 		this.pictureURL = pictureURL;
+		this.ratings = new ArrayList<List<String>>();
+	}
+
+	public Item() {
+
 	}
 
 	public int getItemID() {
@@ -41,7 +49,7 @@ public class Item {
 	public String getCategory() {
 		return this.category;
 	}
-
+	
 	public void setCategory(String category) {
 		this.category = category;
 	}
@@ -85,7 +93,16 @@ public class Item {
 	public void setName(String name) {
 		this.name = name;
 	}
-
     
+	public List<List<String>> getRatings() {
+		return this.ratings;
+	}
+
+	public void setRatings(String comment, int rate) {
+		List<String> rating = new ArrayList<String>();
+		rating.add(comment);
+		rating.add(Integer.toString(rate));
+		this.ratings.add(rating);
+	}
     
 }

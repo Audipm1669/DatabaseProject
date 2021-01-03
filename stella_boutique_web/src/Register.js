@@ -3,8 +3,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
 import { makeStyles } from '@material-ui/core/styles';
-
-import { Nav,Navbar } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { Navbar } from 'react-bootstrap';
 
 const useStyles = makeStyles((theme) => ({
     navButtons: {
@@ -16,21 +16,35 @@ const useStyles = makeStyles((theme) => ({
 
   }));
 
-export default function Register() {
+function Register() {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [fullname, setFullName] = useState("");
   const [username, setUserName] = useState("");
   const [birthday, setBirthday] = useState("");
   const [address, setAddress] = useState("");
-  const [cellphone, setCellphone] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
+  const [userID, setUserID] = useState("");
+
+  const dispatch = useDispatch();
 
   function validateForm() {
     return email.length > 0 && password.length > 0;
   }
 
   function handleSubmit(event) {
+    dispatch({
+      type: "REGISTER_USER",
+      username: username,
+      password: password,
+      fullname: fullname,
+      birthday: birthday,
+      address: address,
+      phoneNumber: phoneNumber,
+      email: email,
+      userID: userID,
+    })
     event.preventDefault();
   }
 
@@ -93,8 +107,8 @@ export default function Register() {
           <Form.Label>Cellphone</Form.Label>
           <Form.Control
             type="name"
-            value={cellphone}
-            onChange={(e) => setCellphone(e.target.value)}
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </Form.Group>
 
@@ -113,3 +127,4 @@ export default function Register() {
     </div>
   );
 }
+export default Register;

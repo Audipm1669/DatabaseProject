@@ -3,8 +3,11 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
 import { makeStyles } from '@material-ui/core/styles';
-
-import { Nav,Navbar } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
+import { Navbar } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { loginUser} from './actions';
 
 const useStyles = makeStyles((theme) => ({
     navButtons: {
@@ -17,23 +20,37 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-export default function Login() {
+function Login(props) {
   const classes = useStyles();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [userID, setUserID] = useState(0)
 
   function validateForm() {
-    return email.length > 0 && password.length > 0;
+    return username.length > 0 && password.length > 0;
   }
-
+  
+  const dispatch = useDispatch();
+  const history = useHistory();
+  
   function handleSubmit(event) {
+    props.loginUser(username,password,userID);
     event.preventDefault();
   }
 
-  function admin() {
-    return email == "admin" && password == "admin";
+  function mount(){
+    // if the server give the response data it will redirect to home page
+    if(props.LoginUser.userID != 0) {
+      window.location.href = '/';
+    }
   }
+
+  function admin() {
+    return username == "admin" && password == "admin";
+  }
+
   let button = null;
+  
   if (admin()) {
     button = <Button href="/ProductManage" className="LoginBtn" block size="lg" variant="outline-secondary" disabled={!validateForm()}>
     Login
@@ -45,8 +62,6 @@ export default function Login() {
   }
 
   return (
-    
-      
     <div className="Login">
       <Navbar className="brand-bar" style={{justifyContent:'space-between'}}>
           <Navbar.Brand href="/">Stella Boutique</Navbar.Brand>
@@ -61,12 +76,12 @@ export default function Login() {
       </Navbar>  
       <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
-          <Form.Label>Email</Form.Label>
+          <Form.Label>Username</Form.Label>
           <Form.Control
             autoFocus
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </Form.Group>
         <Form.Group size="lg" controlId="password">
@@ -77,10 +92,27 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        {button}
-        
+        <Button className="LoginBtn" block size="lg" variant="outline-secondary" type="submit" value="Submit">
+          Login
+        </Button>
       </Form>
+      {mount()}
     </div>
-    
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    LoginUser: state.LoginUser
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    loginUser: (username,password,userID) => {
+      dispatch(loginUser(username,password,userID))
+    }
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Login);
