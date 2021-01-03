@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import AlbumJson from './Album.json';
 import { withRouter } from "react-router-dom";
-import { Container, Row, Col, Jumbotron, Card, CardImg, CardBody ,  CardTitle, CardSubtitle, CardText, Badge } from 'reactstrap';
+import { Row } from 'reactstrap';
 import { Form,FormControl,Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { getNewArrival} from './actions';
+import ProductItem from './ProductItem';
 
 class Newarrivals extends Component {
   constructor(props){
     super(props)
+    this.state = {
+      itemID:0,
+      shoppingCart:{},
+    }
+    this.addToCart = this.addToCart.bind(this)
+  }
+
+  addToCart(){
+    console.log(this.state.itemID)
+    localStorage.setItem("shoppingCart", JSON.stringify(this.shoppingCart));
   }
     render() {
         return (
@@ -25,22 +34,9 @@ class Newarrivals extends Component {
                 {
                   this.props.ProductList.map((item,key) => {
                     if(key>23){
+                      console.log(item.itemID)
                       return(
-                      <Col sm={6} md={4} className="mb-3" >
-                        <Card style={{margin:'0px 50px'}}>
-                          <CardImg src={require(""+item.pictureURL)} alt="Card image cap" />
-                          <CardBody >
-                            <CardTitle>{item.name}</CardTitle>
-                            <CardSubtitle> 
-                              <h4>
-                                  <Badge color="success">售價：{item.price}</Badge>
-                              </h4>
-                            </CardSubtitle>
-                            <CardText>{item.description}</CardText>
-                            <Button color="secondary" onClick={this.getItem}>購買</Button>
-                          </CardBody >
-                        </Card>
-                      </Col>
+                       <ProductItem key={item.itemID} product={item}/>
                       )
                     }  
                   })

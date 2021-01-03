@@ -36,16 +36,16 @@ export function enterWeb(){
     }
 }
 
-export function getNewArrival(productList) {
-    return {
-        type: "GET_NEW_ARRIVAL",
-        productList: productList,        
-    }
-}
-
 export function setProductList(productList) {
     return {
         type: "SET_PRODUCT_LIST",
         productList: productList
+    }
+}
+
+export function checkoutOrder(orderList){
+    return{
+        type: "ADD_ORDER",
+        orderList: orderList
     }
 }

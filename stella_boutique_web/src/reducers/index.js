@@ -6,7 +6,7 @@ import productReducer from './productReducer';
 const rootReducer = combineReducers({
     LoginUser: loginReducer,
     registerUser: registerReducer,
-    ProductList: productReducer 
+    ProductList: productReducer
 })
 
 export default rootReducer

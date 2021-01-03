@@ -43,8 +43,8 @@ const myMiddleware = store => next => action => {
         .then(response => {
             action.userID =  response.data.userID;
             action.setUser(action.username,response.data.userID,store.dispatch);
-            action.setNewArrival(action.productList,)
             localStorage.setItem("username", action.username);
+            localStorage.setItem("cart",JSON.stringify([0]));
             console.log("middleware " + response.data.userID)
             if(response.data.userID!=0 || response.data.userID!= null ){
                 localStorage.setItem("userID", response.data.userID);
@@ -94,22 +94,27 @@ const myMiddleware = store => next => action => {
         axios.get(API_HOST + '/guest/product', body, {headers: headers})
         .then(response => {
             action.setProductList(response.data.productList,store.dispatch);
-            response.data.productList.map((item,key) => {
-                console.log("key "+ key)
-                console.log("id "+ item.itemID)
-                console.log(item.name)
-                console.log(item.quantity)
-                console.log(item.category)
-                console.log(item.size)
-                console.log(item.price)
-                console.log(item.description)
-                console.log(item.pictureURL)
-            })
             console.log("middleware " + response.data.productList)
         })
         .catch(err => {
             console.log(err)
             alert("Entering Web Failed!")
+        });
+    } else if(action.type === "ADD_ORDER"){
+        const headers = getHeaders(action.token);
+        const body = {
+            orderList: action.orderList
+        }
+        console.log("middleware add order");
+        console.log(body.orderList);
+        axios.post(API_HOST + '/user/create/order', body, {headers: headers})
+        .then(response => {
+            // action.setProductList(response.data.productList,store.dispatch);
+            console.log("middleware " + action.orderList)
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Creating Order Failed!")
         });
     } else {
         return next(action)

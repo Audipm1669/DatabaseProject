@@ -117,4 +117,16 @@ public class UserRestAdapter {
         }
         return ResponseEntity.status(HttpStatus.OK).body(output);
     }
+    @PostMapping(value = "/create/order")
+    public ResponseEntity<AddOrderUseCaseOutput> AddOrder(@RequestBody AddOrderUseCaseInput requestBody) {
+        AddOrderUseCaseInput input = new AddOrderUseCaseInput();
+        AddOrderUseCaseOutput output = new AddOrderUseCaseOutput();
+        //----
+        try {
+            this.addOrderUseCase.execute(input, output);
+        } catch (AddOrderErrorException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(output);
+    }
 }

@@ -5,7 +5,10 @@ import com.project.stella_boutique.service.exception.AddOrderErrorException;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 @Service
 public class AddOrderUseCase {
     @Autowired
@@ -16,6 +19,21 @@ public class AddOrderUseCase {
     }
 
     public void execute(AddOrderUseCaseInput input, AddOrderUseCaseOutput output) throws AddOrderErrorException {
-        //code
-    }
+        System.out.println("gogo");
+        // try(Connection connection = this.mysqlDriver.getConnection()) {
+        //     try (PreparedStatement stmt = connection.prepareStatement(
+        //             "INSERT INTO `order`" +
+        //             "(`orderDate`,`status`,`orderUserID`)" +
+        //             "VALUES(?, ?, ?)"
+        //         )) {
+        //             stmt.setString(1, input.getOrderDateString());
+        //             stmt.setString(2, String.valueOf(input.getStatus()));
+        //             stmt.setString(3, String.valueOf(input.getUserID()));
+
+        //             stmt.executeUpdate();
+        //         }
+        // } catch (SQLException e) {
+        //     e.printStackTrace();
+        // }
+    }   
 }

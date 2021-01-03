@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import './App.css';
 import {  Modal, ModalHeader, ModalBody, ModalFooter, Table} from 'reactstrap';
 import { connect } from 'react-redux';
-import { enterWeb, setUser} from './actions';
+import { enterWeb, setUser , checkoutOrder} from './actions';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -54,21 +54,12 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor:'#9e7d7a',
     }
   }));
-  
-  const cart = [];
-  
+    
 function MyNavbar(props) {
-    const [ state = {
-            cart: false,
-            },setState] = useState(0);
-    const handleCart = () => {
-      setState({
-        cart: !state.cart,
-      });
-    }
     const [userID,setUserID] = useState(localStorage.getItem("userID"));
     const [username,setUername] = useState(localStorage.getItem("username"));
     const classes = useStyles();
+    var cartItems = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
 
     useState(() => {
       props.enterWeb();
@@ -100,25 +91,45 @@ function MyNavbar(props) {
     const goToDresses = () => {
       history.push("/Dresses")
     };
-
-    const [orderList,createOrderList] = useState(false);
-    function createOrder() {
-    }
     
+    const [cartOpen, setcartOpenOpen] = useState(false);
+    const handleCartOpen = () => {
+      setcartOpenOpen(!cartOpen)
+    }
+    const removeProduct = payload => {
+      console.log(cartItems);
+      cartItems.pop(payload.itemID);
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+      handleCartOpen();
+      console.log('removeProduct' +payload.itemID );
+    }
+
+    const clearCart = () => {
+        cartItems = [0];
+        localStorage.setItem("cart", JSON.stringify(cartItems));
+        handleCartOpen();
+        console.log('clearCart' );
+    }
+
+    const handleCheckout = () => {
+      cartItems = JSON.parse(localStorage.getItem('cart'));
+      props.checkoutOrder(cartItems);
+      console.log('handleCheckout' );
+    }
     return (
       <React.Fragment>
         <Navbar className="brand-bar" style={{justifyContent:'space-between'}}>
           <Navbar.Brand href="/">Stella Boutique</Navbar.Brand>
             <div>
-              <p>Welome{userID == 0?null:", "+username} </p> 
+              <p>Welome{userID == null?null:", "+username} </p> 
             </div>
-            {userID == 0? 
+            {userID == null? 
             <div>
               <Button href="/Login" className={classes.navButtons} variant="contained" color="primary">login</Button>
               <Button href="/Register" className={classes.navButtons} variant="contained" color="primary">register</Button>
             </div> :
             <div>
-              <Button color="secondary" onClick={handleCart}>購物車({cart.length})</Button>
+              <Button color="secondary" onClick={handleCartOpen}>購物車</Button>
               <Button href="/Login" className={classes.navButtons} variant="contained" color="primary" onClick={handleLogout}>logout</Button>
             </div>
             }
@@ -138,39 +149,44 @@ function MyNavbar(props) {
           </Navbar.Collapse>
         </Navbar>
 
-        <Modal isOpen={state.cart} toggle={handleCart}>
-          <ModalHeader toggle={handleCart}>購物車</ModalHeader>
+        <Modal isOpen={cartOpen} toggle={handleCartOpen}>
+          <ModalHeader toggle={handleCartOpen}>購物車</ModalHeader>
           <ModalBody>
             <Table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>品項</th>
-                        <th>價格</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>300</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>150</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>900</td>
-                    </tr>
-                </tbody>
+              <thead>
+                <tr>
+                    <th>#</th>
+                    <th>品項</th>
+                    <th>價格</th>
+                    <th>     </th>
+                </tr>
+              </thead>
+              <tbody>
+              {
+                cartItems.map((cartItem,key1)=>{
+                  return(
+                  props.ProductList.map((item,key) => {
+                    if(cartItem.toString() == item.itemID.toString()){
+                      console.log("true")
+                      return(
+                        <tr>
+                          <th scope="row">{1}</th>
+                          <td>{item.name}</td>
+                          <td>{item.price}</td>
+                          <td><button onClick={() => removeProduct(item)}>-</button></td>
+                        </tr>
+                      )
+                    }
+                })
+                )
+              })
+              } 
+              </tbody>
             </Table>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={handleCart}>結帳</Button>{' '}
-            <Button color="secondary" onClick={handleCart}>取消</Button>
+            <Button color="primary" onClick={handleCheckout}>結帳</Button>
+            <Button color="secondary" onClick={clearCart}>取消</Button>
           </ModalFooter>
         </Modal>
       </React.Fragment>
@@ -191,6 +207,9 @@ function MyNavbar(props) {
       },
       setUser: (username,userID) => {
         dispatch(setUser(username,userID))
+      },
+      checkoutOrder: (orderList) => {
+        dispatch(checkoutOrder(orderList))
       }
     }
   }

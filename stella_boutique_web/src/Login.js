@@ -40,7 +40,7 @@ function Login(props) {
 
   function mount(){
     // if the server give the response data it will redirect to home page
-    if(props.LoginUser.userID != 0) {
+    if(props.LoginUser.userID != null) {
       window.location.href = '/';
     }
   }
@@ -63,17 +63,6 @@ function Login(props) {
 
   return (
     <div className="Login">
-      <Navbar className="brand-bar" style={{justifyContent:'space-between'}}>
-          <Navbar.Brand href="/">Stella Boutique</Navbar.Brand>
-            <div>
-            <Button href="/Login" className={classes.navButtons} variant="contained" color="primary">
-              login
-            </Button>
-            <Button href="/Register" className={classes.navButtons} variant="contained" color="primary">
-              register
-            </Button>
-            </div>
-      </Navbar>  
       <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Username</Form.Label>
