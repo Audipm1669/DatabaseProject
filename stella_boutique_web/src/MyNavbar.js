@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   export default function MyNavbar() {
     const [ state = {
             modal: false,
-            album: AlbumJson,
+            // album: AlbumJson,
             },setState] = useState(0);
 
     const toggle = () => {
