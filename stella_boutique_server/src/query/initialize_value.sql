@@ -9,6 +9,7 @@ INSERT `user` (`password`,`fullname`,`username`,`birthday`,`address`,`phoneNumbe
 ('test', 'weibin', 'weibin', '1999-05-30', 'home', '0912837465', 'weibin@gmail.com');
 
 INSERT `discount` (`value`,`code` ,`name` ,`startDate`,`endDate`) VALUES
+(0,0,0,0,0),
 (0.8,"NY001", "New Year Sale 20% OFF","2021-01-01", "2021-01-30"),
 (0.5,"CT001", "Christmast Gift 50% OFF","2020-12-15", "2020-12-30");
   
@@ -60,8 +61,8 @@ INSERT `rate` VALUES
 
 -- status code 0 = new order, 1 = checkout, 2 = shipout, 3 = arrived(done) default 0
 INSERT `order`(`orderDate`,`status`,`discountID`,`orderUserID`) VALUES
-("2020-12-16", 0, null, 1),
-("2020-12-15", 3, null, 1);
+("2020-12-16", 0, 0, 1),
+("2020-12-15", 3, 0, 1);
 
 INSERT `itemlist` VALUES
 (2,1,2),

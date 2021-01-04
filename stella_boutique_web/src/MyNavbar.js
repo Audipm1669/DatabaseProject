@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import './App.css';
 import {  Modal, ModalHeader, ModalBody, ModalFooter, Table, Alert} from 'reactstrap';
 import { connect } from 'react-redux';
-import { setUser , checkoutOrder} from './actions';
+import { setUser , checkoutOrder , getOrderList} from './actions';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -92,6 +92,8 @@ function MyNavbar(props) {
       history.push("/Dresses")
     };
     const goToMyOrder = () => {
+      console.log("getting order");
+      props.getOrderList(userID);
       history.push("/MyOrder")
     };
 
@@ -174,7 +176,6 @@ function MyNavbar(props) {
                   return(
                   props.ProductList.map((item,key) => {
                     if(cartItem.toString() == item.itemID.toString()){
-                      console.log("true")
                       { totalPrice += item.price }
                       return(
                         <tr>
@@ -221,6 +222,9 @@ function MyNavbar(props) {
       },
       checkoutOrder: (orderList) => {
         dispatch(checkoutOrder(orderList))
+      },
+      getOrderList: (userID) => {
+        dispatch(getOrderList(userID))
       }
     }
   }

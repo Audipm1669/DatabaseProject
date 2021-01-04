@@ -5,6 +5,15 @@ import com.project.stella_boutique.service.exception.HistoryOrderErrorException;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.lang.Math;
+import java.util.List;
+import java.util.ArrayList;
+import com.project.stella_boutique.model.order.Order;
+import com.project.stella_boutique.model.item.Item;
 
 @Service
 public class HistoryOrderUseCase {
@@ -16,6 +25,78 @@ public class HistoryOrderUseCase {
     }
 
     public void execute(HistoryOrderUseCaseInput input, HistoryOrderUseCaseOutput output) throws HistoryOrderErrorException {
-        //code
+        System.out.println("getting order list");
+        List<Order> orderList = new ArrayList<>();    
+        try(Connection connection=this.mysqlDriver.getConnection()){
+            try (PreparedStatement stmt = connection.prepareStatement(
+                "SELECT * FROM `order` WHERE `orderUserID`= ? ")) {
+                    stmt.setString(1, Integer.toString(input.getUserID()));
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while(rs.next()) {
+                        int id = Integer.parseInt(rs.getString("id"));
+                        String orderDate = rs.getString("orderDate");
+                        int status = Integer.parseInt(rs.getString("status"));
+                        String discount =  rs.getString("discountID");
+                        int discountID = Integer.parseInt(rs.getString("discountID"));
+
+                        Order order = new Order(id,status,orderDate,discountID,input.getUserID());
+                        getItemOrder(connection,order);
+                        orderList.add(order);
+                    }
+                }   
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        output.setOrderList(orderList);
+    }
+    public void getItemOrder(Connection connection, Order order){
+        try (PreparedStatement stmt = connection.prepareStatement(
+            "SELECT * FROM `itemlist` WHERE `orderID` =  ?")) {
+                stmt.setString(1, Integer.toString(order.getOrderID()));
+            try (ResultSet rs = stmt.executeQuery()) {
+                while(rs.next()) {
+                    int id = Integer.parseInt(rs.getString("orderItemID"));
+                    int amount = Integer.parseInt(rs.getString("amount"));
+                    Item item = getItemByID(connection,id);
+                    order.addItemToList(item,amount);
+                    int price = Math.round(item.getPrice()) * amount;
+                    order.setPrice(price);
+                }
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public Item getItemByID(Connection connection,int itemID){
+        Item item = new Item();
+        try (PreparedStatement stmt = connection.prepareStatement(
+            "SELECT * FROM `item` WHERE `id` = ?")) {
+                stmt.setString(1, Integer.toString(itemID));
+            try (ResultSet rs = stmt.executeQuery()) {
+                while(rs.next()) {
+                    int id = Integer.parseInt(rs.getString("id"));
+                    String name = rs.getString("name");
+                    int quantity = Integer.parseInt(rs.getString("quantity"));
+                    String category = rs.getString("category");
+                    String size = rs.getString("size");
+                    Float price = rs.getFloat("price");
+                    String description = rs.getString("description");
+                    String pictureURL = rs.getString("pictureURL");
+
+                    item.setItemID(id);
+                    item.setName(name);
+                    item.setQuantity(quantity);
+                    item.setCategory(category);
+                    item.setSize(size);
+                    item.setPrice(price);
+                    item.setDescription(description);
+                    item.setPictureURL(pictureURL);
+                }
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return item;
     }
 }

@@ -12,9 +12,6 @@ import com.project.stella_boutique.service.user.like.remove.RemoveLikeUseCaseOut
 import com.project.stella_boutique.service.user.order.add.AddOrderUseCase;
 import com.project.stella_boutique.service.user.order.add.AddOrderUseCaseInput;
 import com.project.stella_boutique.service.user.order.add.AddOrderUseCaseOutput;
-import com.project.stella_boutique.service.user.order.cancel.CancelOrderUseCase;
-import com.project.stella_boutique.service.user.order.cancel.CancelOrderUseCaseInput;
-import com.project.stella_boutique.service.user.order.cancel.CancelOrderUseCaseOutput;
 import com.project.stella_boutique.service.user.order.history.HistoryOrderUseCase;
 import com.project.stella_boutique.service.user.order.history.HistoryOrderUseCaseInput;
 import com.project.stella_boutique.service.user.order.history.HistoryOrderUseCaseOutput;
@@ -32,7 +29,6 @@ import com.project.stella_boutique.service.exception.AddLikeErrorException;
 import com.project.stella_boutique.service.exception.GetLikeErrorException;
 import com.project.stella_boutique.service.exception.RemoveLikeErrorException;
 import com.project.stella_boutique.service.exception.AddOrderErrorException;
-import com.project.stella_boutique.service.exception.CancelOrderErrorException;
 import com.project.stella_boutique.service.exception.HistoryOrderErrorException;
 import com.project.stella_boutique.service.exception.AddIntoOrderErrorException;
 import com.project.stella_boutique.service.exception.RemoveFromOrderErrorException;
@@ -63,9 +59,6 @@ public class UserRestAdapter {
 
     @Autowired
     AddOrderUseCase addOrderUseCase;
-
-    @Autowired
-    CancelOrderUseCase cancelOrderUseCase;
 
     @Autowired
     HistoryOrderUseCase historyOrderUseCase;
@@ -135,6 +128,20 @@ public class UserRestAdapter {
         try {
             this.addOrderUseCase.execute(input,output);
         } catch (AddOrderErrorException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(output);
+    }
+    @PostMapping(value = "/history")
+    public ResponseEntity<HistoryOrderUseCaseOutput> HistoryOrder(@RequestBody HistoryOrderUseCaseInput requestBody) {
+        System.out.println("----------server----------");        
+        HistoryOrderUseCaseInput input = new HistoryOrderUseCaseInput();
+        HistoryOrderUseCaseOutput output = new HistoryOrderUseCaseOutput();
+        input.setUserID(requestBody.getUserID());
+        // //----
+        try {
+            this.historyOrderUseCase.execute(input,output);
+        } catch (HistoryOrderErrorException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
         return ResponseEntity.status(HttpStatus.OK).body(output);

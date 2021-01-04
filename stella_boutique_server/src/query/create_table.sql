@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `order` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
   `orderDate` datetime NOT NULL,
   `status` int(11) NOT NULL,
-  `discountID` int(6) DEFAULT NULL,
+  `discountID` int(6) DEFAULT 1,
   `orderUserID` int(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),

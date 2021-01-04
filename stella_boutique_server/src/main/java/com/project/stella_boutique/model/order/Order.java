@@ -12,7 +12,9 @@ public class Order {
     private int discountID;
 	private int userID;
 	private List<List<Object>> itemList;
-	
+	private List<Integer> Price;
+	private int totalPrice;
+
 	public Order(int orderID, int status, String orderDate, int discountID, int userID){
 		this.orderID = orderID;
 		this.status = status;
@@ -20,6 +22,7 @@ public class Order {
 		this.discountID = discountID;
 		this.userID = userID;
 		this.itemList = new ArrayList<List<Object>>();
+		this.totalPrice = new ArrayList<Integer>();
 	}
 
 	public int getOrderID() {
@@ -78,7 +81,17 @@ public class Order {
 		this.itemList.add(order);
 	}
 
+	public int getTotalPrice() {
+		int sum = 0;
+		for(int i = 0; i<this.Price.size();i++){
+			sum+=this.Price.get(i);
+		}
+		this.totalPrice = sum;
+		return sum;
+	}
 
-
-
+	public void setPrice(int Price) {
+		this.Price.add(Price);
+	}
+	
 }

@@ -35,6 +35,13 @@ export function enterWeb(){
         setProductList:(productList, dispatch) => dispatch(setProductList(productList))
     }
 }
+export function getOrderList(userID){
+    return {
+        type: "GET_ORDER_LIST",
+        userID: userID,
+        setOrderList:(userOrderList, dispatch) => dispatch(setOrderList(userOrderList))
+    }
+}
 
 export function setProductList(productList) {
     return {
@@ -49,3 +56,41 @@ export function checkoutOrder(orderList){
         orderList: orderList
     }
 }
+
+export function setOrderList(userOrderList){
+    return{
+        type: "SET_ORDER_LIST",
+        userOrderList: userOrderList
+    }
+}
+
+export function addLikeItem(userID , itemID){
+    return{
+        type: "ADD_LIKE_ITEM",
+        userID: userID,
+        itemID: itemID
+    }
+}
+
+export function removeLikeItem(userID , itemID){
+    return{
+        type: "REMOVE_LIKE_ITEM",
+        userID: userID,
+        itemID: itemID
+    }
+}
+
+export function getLikeItemList(userID ){
+    return{
+        type: "GET_LIKE_ITEM",
+        userID: userID,        
+        setLikeItemList:(userOrderList, dispatch) => dispatch(setLikeItemList(userOrderList))
+    }
+}
+export function setLikeItemList(userMyLikeList){
+    return{
+        type: "SET_ORDER_LIST",
+        userOrderList: userMyLikeList
+    }
+}
+

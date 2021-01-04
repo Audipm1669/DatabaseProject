@@ -39,7 +39,7 @@ const myMiddleware = store => next => action => {
     if(action.type === "LOGIN_USER") {
         const headers = getHeaders(action.token);
         const body = getBody(action.username, action.password);
-        console.log(body);
+        // console.log(body);
         axios.post(API_HOST + '/guest/Login', body, {headers: headers})
         .then(response => {
             action.userID =  response.data.userID;
@@ -67,7 +67,7 @@ const myMiddleware = store => next => action => {
             action.phoneNumber, 
             action.email
             )
-        console.log(body)
+        // console.log(body)
         axios.post(API_HOST + '/Register', body, {headers: headers})
         .then(response => {
             action.registerUser(
@@ -94,7 +94,7 @@ const myMiddleware = store => next => action => {
         axios.get(API_HOST + '/guest/product', body, {headers: headers})
         .then(response => {
             action.setProductList(response.data.productList,store.dispatch);
-            console.log("middleware " + response.data.productList)
+            // console.log("middleware " + response.data.productList)
         })
         .catch(err => {
             console.log(err)
@@ -107,7 +107,6 @@ const myMiddleware = store => next => action => {
             userID : localStorage.getItem("userID")
         }
         console.log("middleware add order");
-        console.log(body.itemList);
         axios.post(API_HOST + '/user/create/order', body, {headers: headers})
         .then(response => {
             console.log("middleware " + body.itemList)
@@ -117,7 +116,72 @@ const myMiddleware = store => next => action => {
             console.log(err)
             alert("Creating Order Failed!")
         });
-    } else {
+    }  else if(action.type === "GET_ORDER_LIST"){
+        const headers = getHeaders(action.token);
+        const body = {
+            userID: action.userID
+        }
+        console.log("getting order history");
+        axios.post(API_HOST + '/user/history', body, {headers: headers})
+        .then(response => {
+            action.setOrderList(response.data.orderList,store.dispatch);
+            console.log(response.data.orderList);
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Getting User Profile Failed!")
+        });
+    }else if(action.type === "ADD_LIKE_ITEM"){
+        const headers = getHeaders(action.token);
+        const body = {
+            userID : action.userID,
+            itemID : action.itemID
+        }
+        console.log("middleware add like");
+        console.log(body);
+        // axios.post(API_HOST + '/user/create/order', body, {headers: headers})
+        // .then(response => {
+        //     console.log("middleware " + body.itemList)
+        //     console.log("middleware " + body.userID)
+        // })
+        // .catch(err => {
+        //     console.log(err)
+        //     alert("Creating Order Failed!")
+        // });
+    }else if(action.type === "REMOVE_LIKE_ITEM"){
+        const headers = getHeaders(action.token);
+        const body = {
+            userID : action.userID,
+            itemID : action.itemID
+        }
+        console.log("middleware remove like");
+        console.log(body);
+        // axios.post(API_HOST + '/user/create/order', body, {headers: headers})
+        // .then(response => {
+        //     console.log("middleware " + body.itemList)
+        //     console.log("middleware " + body.userID)
+        // })
+        // .catch(err => {
+        //     console.log(err)
+        //     alert("Creating Order Failed!")
+        // });
+    }else if(action.type === "GET_LIKE_ITEM"){
+        const headers = getHeaders(action.token);
+        const body = {
+            itemList: action.orderList,
+            userID : localStorage.getItem("userID")
+        }
+        console.log("middleware add order");
+        axios.post(API_HOST + '/user/create/order', body, {headers: headers})
+        .then(response => {
+            console.log("middleware " + body.itemList)
+            console.log("middleware " + body.userID)
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Creating Order Failed!")
+        });
+    }else {
         return next(action)
     }
 

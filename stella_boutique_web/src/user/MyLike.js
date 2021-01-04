@@ -1,20 +1,28 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import MyNavbar from '../MyNavbar';
 import AlbumJson from '../Album.json';
 import { Nav,Navbar,Form,FormControl,Button } from 'react-bootstrap';
 import { BrowserRouter} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getOrderList, removeLikeItem} from '../actions';
+import { useHistory } from 'react-router-dom';
 
 import { Container, Row, Col, Jumbotron, Card, CardImg, CardBody ,  CardTitle, CardSubtitle, CardText, Badge } from 'reactstrap';
 
 
-class MyLike extends Component {
-  state = {
-    album: AlbumJson,
+function MyLike(props){
+  const history = useHistory();
+  const userID = useState(localStorage.getItem("userID"));
+
+  function GoToHistory(){
+    props.getOrderList(userID)
+    history.push("/MyOrder")
   }
-    render() {
-      const { album } = this.state;
+  // state = {
+  //   album: AlbumJson,
+  // }
+      // const { album } = this.astate;
         return (
             <div>
               <Navbar bg="dark" variant="dark" className="menu-bar" expand="lg">
@@ -23,7 +31,7 @@ class MyLike extends Component {
                   <Nav className="mr-auto">
                   <BrowserRouter>
                     <Nav.Link href="/MyLike">LIKE</Nav.Link>
-                    <Nav.Link href="/MyOrder">ORDER</Nav.Link>
+                    <Nav.Link onClick={GoToHistory}>ORDER</Nav.Link>
                   </BrowserRouter>
                   </Nav>
                 </Navbar.Collapse>
@@ -35,7 +43,7 @@ class MyLike extends Component {
                     </Form>
                 </div>
                 <Row style={{margin:'10px 100px' , display: 'flex',  justifyContent:'flex-end ', alignItems:'center'}}>
-                {
+                {/* {
                   album.map(product => (
                     <Col sm={6} md={4} className="mb-3">
                       <Card style={{margin:'0px 50px'}}>
@@ -55,14 +63,22 @@ class MyLike extends Component {
                       </Card>
                     </Col>
                   ))
-                }
+                } */}
                 </Row>
 
                 
             </div>
         );
-    }
-
 }
 
-export default MyLike;
+function mapDispatchToProps(dispatch) {
+  return {
+    getOrderList: (userID) => {
+      dispatch(getOrderList(userID))
+    },
+    removeLikeItem: (userID,itemID) => {
+      dispatch(removeLikeItem(userID,itemID))
+    } 
+  }
+}
+export default connect(null,mapDispatchToProps)(MyLike);

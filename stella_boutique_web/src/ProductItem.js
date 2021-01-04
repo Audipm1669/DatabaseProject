@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState} from 'react';
 import {Col, Card, CardImg, CardBody ,  CardTitle, CardSubtitle, CardText, Badge } from 'reactstrap';
 import { Button } from 'react-bootstrap';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import { connect } from 'react-redux';
+import { addLikeItem,removeLikeItem} from './actions';
 
 
-const ProductItem = ({product}) => {
+function ProductItem(props){
     var cartItems = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
     var like = false;
     var likeColor = "secondary";
+    const [userID,setUserID] = useState(localStorage.getItem("userID"));
     
     const addProduct = payload => {
         cartItems = JSON.parse(localStorage.getItem('cart'))
@@ -22,11 +25,13 @@ const ProductItem = ({product}) => {
         if(like == false)
         {   
             like = true; 
+            props.addLikeItem(userID,payload.itemID);
             likeColor = "secondary"
         }
         else
         {
             like = false;
+            props.removeLikeItem(userID,payload.itemID);
             likeColor = "default"
         } 
         console.log(like);
@@ -37,23 +42,32 @@ const ProductItem = ({product}) => {
     return ( 
         <Col sm={6} md={4} className="mb-3" >
             <Card style={{margin:'0px 50px'}}>
-                <CardImg src={require(""+product.pictureURL)} alt="Card image cap" />
+                <CardImg src={require(""+props.product.pictureURL)} alt="Card image cap" />
                 <CardBody >
-                <CardTitle>{product.name}</CardTitle>
+                <CardTitle>{props.product.name}</CardTitle>
                 <CardSubtitle> 
                     <h4>
-                        <Badge color="success">售價：{product.price}</Badge>
+                        <Badge color="success">售價：{props.product.price}</Badge>
                     </h4>
                 </CardSubtitle>
-                <CardText>{product.description}</CardText>
-                <Button color="secondary" onClick={() => addProduct(product)}>購買</Button>
+                <CardText>{props.product.description}</CardText>
+                <Button color="secondary" onClick={() => addProduct(props.product)}>購買</Button>
                 <IconButton aria-label="add like">
-                    <FavoriteIcon color={likeColor} onClick={() => addLike(product)} /> 
+                    <FavoriteIcon color={likeColor} onClick={() => addLike(props.product)} /> 
                 </IconButton>
                 </CardBody >
             </Card>
          </Col>
      );
 }
- 
-export default ProductItem;
+function mapDispatchToProps(dispatch) {
+    return {
+      removeLikeItem: (userID,itemID) => {
+        dispatch(removeLikeItem(userID,itemID))
+      },
+      addLikeItem: (userID,itemID) => {
+        dispatch(addLikeItem(userID,itemID))
+      } 
+    }
+  }
+  export default connect(null,mapDispatchToProps)(ProductItem);
