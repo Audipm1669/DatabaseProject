@@ -68,15 +68,7 @@ export default function OrderManage() {
     
     
     <React.Fragment>
-        <Navbar className="brand-bar" style={{justifyContent:'space-between'}}>
-          <Navbar.Brand href="/">Stella Boutique</Navbar.Brand>
-            <div>
-              hi,Admin
-              <Button href="/" className={classes.navButtons} variant="contained" color="primary">
-                logout
-              </Button>
-            </div>
-        </Navbar>
+
         <Navbar bg="dark" variant="dark" className="menu-bar" expand="lg">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

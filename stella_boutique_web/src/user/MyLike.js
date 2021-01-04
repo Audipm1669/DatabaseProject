@@ -3,24 +3,31 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import MyNavbar from '../MyNavbar';
 import AlbumJson from '../Album.json';
+import { Nav,Navbar,Form,FormControl,Button } from 'react-bootstrap';
+import { BrowserRouter} from 'react-router-dom';
 
 import { Container, Row, Col, Jumbotron, Card, CardImg, CardBody ,  CardTitle, CardSubtitle, CardText, Badge } from 'reactstrap';
-import { Form,FormControl,Button } from 'react-bootstrap';
+
 
 class MyLike extends Component {
   state = {
     album: AlbumJson,
   }
-
-  
-  
-
     render() {
       const { album } = this.state;
-
         return (
             <div>
-                <MyNavbar />
+              <Navbar bg="dark" variant="dark" className="menu-bar" expand="lg">
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="mr-auto">
+                  <BrowserRouter>
+                    <Nav.Link href="/MyLike">LIKE</Nav.Link>
+                    <Nav.Link href="/MyOrder">ORDER</Nav.Link>
+                  </BrowserRouter>
+                  </Nav>
+                </Navbar.Collapse>
+              </Navbar>
                 <div style={{margin:'10px' , display: 'flex',  justifyContent:'flex-end ', alignItems:'center'}}>
                     <Form inline>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />

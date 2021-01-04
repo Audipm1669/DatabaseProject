@@ -40,7 +40,7 @@ function Login(props) {
 
   function mount(){
     // if the server give the response data it will redirect to home page
-    if(props.LoginUser.userID != null) {
+    if(props.LoginUser.userID != null && props.LoginUser.userID !=0 ) {
       window.location.href = '/';
     }
   }

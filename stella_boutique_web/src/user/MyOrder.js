@@ -4,9 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Divider from '@material-ui/core/Divider';
 
-import {
-  BrowserRouter,
-} from 'react-router-dom';
+import { BrowserRouter} from 'react-router-dom';
 
 import * as React from 'react';
 import { DataGrid } from '@material-ui/data-grid';
@@ -65,15 +63,6 @@ export default function MyOrder() {
     
     
     <React.Fragment>
-        <Navbar className="brand-bar" style={{justifyContent:'space-between'}}>
-          <Navbar.Brand href="/">Stella Boutique</Navbar.Brand>
-            <div>
-              hi, {"username"}
-              <Button href="/" className={classes.navButtons} variant="contained" color="primary">
-                logout
-              </Button>
-            </div>
-        </Navbar>
         <Navbar bg="dark" variant="dark" className="menu-bar" expand="lg">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

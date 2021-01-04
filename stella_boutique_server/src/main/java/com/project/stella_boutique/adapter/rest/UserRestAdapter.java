@@ -47,6 +47,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.ArrayList;
 @RestController
 @RequestMapping("/api/user")
 public class UserRestAdapter {
@@ -119,11 +121,19 @@ public class UserRestAdapter {
     }
     @PostMapping(value = "/create/order")
     public ResponseEntity<AddOrderUseCaseOutput> AddOrder(@RequestBody AddOrderUseCaseInput requestBody) {
+        System.out.println("----------server----------");        
         AddOrderUseCaseInput input = new AddOrderUseCaseInput();
         AddOrderUseCaseOutput output = new AddOrderUseCaseOutput();
-        //----
+        input.setItemList(requestBody.getItemList());
+        input.setOrderDate("2021/01/1");
+        input.setUserID(requestBody.getUserID());
+        System.out.println(input.getItemList());        
+        System.out.println(input.getUserID());
+        System.out.println("----------server----------");
+
+        // //----
         try {
-            this.addOrderUseCase.execute(input, output);
+            this.addOrderUseCase.execute(input,output);
         } catch (AddOrderErrorException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }

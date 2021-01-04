@@ -5,8 +5,22 @@ import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import { Container, Row, Col, Jumbotron, Card, CardImg, CardBody ,  CardTitle, CardSubtitle, CardText, Badge } from 'reactstrap';
 import { Form,FormControl,Button } from 'react-bootstrap';
-class Jacket extends Component {
+import ProductItem from './ProductItem';
 
+class Jacket extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      itemID:0,
+      shoppingCart:{},
+    }
+    this.addToCart = this.addToCart.bind(this)
+  }
+
+  addToCart(){
+    console.log(this.state.itemID)
+    localStorage.setItem("shoppingCart", JSON.stringify(this.shoppingCart));
+  }
     render() {
         return (
             <div>
@@ -20,22 +34,9 @@ class Jacket extends Component {
                 {
                   this.props.ProductList.map((item,key) => {
                     if(item.category == "Jacket"){
+                      console.log(item.itemID)
                       return(
-                      <Col sm={6} md={4} className="mb-3" >
-                        <Card style={{margin:'0px 50px'}}>
-                          <CardImg src={require(""+item.pictureURL)} alt="Card image cap" />
-                          <CardBody >
-                            <CardTitle>{item.name}</CardTitle>
-                            <CardSubtitle> 
-                              <h4>
-                                  <Badge color="success">售價：{item.price}</Badge>
-                              </h4>
-                            </CardSubtitle>
-                            <CardText>{item.description}</CardText>
-                            <Button color="secondary" onClick={this.getItem}>購買</Button>
-                          </CardBody >
-                        </Card>
-                      </Col>
+                       <ProductItem key={item.itemID} product={item}/>
                       )
                     }  
                   })

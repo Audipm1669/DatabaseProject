@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import './App.css';
 import {  Modal, ModalHeader, ModalBody, ModalFooter, Table} from 'reactstrap';
 import { connect } from 'react-redux';
-import { enterWeb, setUser , checkoutOrder} from './actions';
+import { setUser , checkoutOrder} from './actions';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -62,7 +62,6 @@ function MyNavbar(props) {
     var cartItems = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
 
     useState(() => {
-      props.enterWeb();
       props.setUser(username,userID);
     });
 
@@ -91,7 +90,10 @@ function MyNavbar(props) {
     const goToDresses = () => {
       history.push("/Dresses")
     };
-    
+    const goToMyOrder = () => {
+      history.push("/MyOrder")
+    };
+
     const [cartOpen, setcartOpenOpen] = useState(false);
     const handleCartOpen = () => {
       setcartOpenOpen(!cartOpen)
@@ -114,6 +116,8 @@ function MyNavbar(props) {
     const handleCheckout = () => {
       cartItems = JSON.parse(localStorage.getItem('cart'));
       props.checkoutOrder(cartItems);
+      clearCart();
+      //alert to tell user checkout sucess
       console.log('handleCheckout' );
     }
     return (
@@ -130,7 +134,8 @@ function MyNavbar(props) {
             </div> :
             <div>
               <Button color="secondary" onClick={handleCartOpen}>購物車</Button>
-              <Button href="/Login" className={classes.navButtons} variant="contained" color="primary" onClick={handleLogout}>logout</Button>
+              <Button className={classes.navButtons} variant="contained" color="primary" onClick={goToMyOrder}>Profile</Button>
+              <Button href="/Login" className={classes.navButtons} variant="contained" color="primary" onClick={handleLogout}>logout</Button>              
             </div>
             }
         </Navbar>
@@ -202,9 +207,6 @@ function MyNavbar(props) {
   
   function mapDispatchToProps(dispatch) {
     return {
-      enterWeb: () => {
-        dispatch(enterWeb())
-      },
       setUser: (username,userID) => {
         dispatch(setUser(username,userID))
       },

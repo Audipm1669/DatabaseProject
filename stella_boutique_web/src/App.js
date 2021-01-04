@@ -6,11 +6,18 @@ import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MyNavbar from './MyNavbar';
+import { ModeComment } from '@material-ui/icons';
+import { enterWeb } from './actions';
 
 
 class App extends Component {
+constructor(props){
+  super(props)
+}
+componentDidMount(){
+  this.props.enterWeb();
 
-
+}
  render(){ 
   return (
     <div>
@@ -20,4 +27,11 @@ class App extends Component {
     );
   }
 }
-export default connect()(App);
+
+function mapDispatchToProps(dispatch) {
+  return {
+    enterWeb: () => dispatch(enterWeb())
+  }
+}
+
+export default connect(null,mapDispatchToProps)(App);

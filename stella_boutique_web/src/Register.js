@@ -50,17 +50,6 @@ function Register() {
 
   return (
     <div className="Login">
-        <Navbar className="brand-bar" style={{justifyContent:'space-between'}}>
-          <Navbar.Brand href="/">Stella Boutique</Navbar.Brand>
-            <div>
-            <Button href="/Login" className={classes.navButtons} variant="contained" color="primary">
-              login
-            </Button>
-            <Button href="/Register" className={classes.navButtons} variant="contained" color="primary">
-              register
-            </Button>
-            </div>
-      </Navbar>  
       <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>

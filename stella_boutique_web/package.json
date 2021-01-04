@@ -14,6 +14,7 @@
     "bootstrap": "^4.5.3",
     "caniuse-lite": "^1.0.30001166",
     "formik": "^2.2.6",
+    "moment": "^2.29.1",
     "postcss-preset-env": "^6.7.0",
     "react": "^16.14.0",
     "react-bootstrap": "^1.3.0",

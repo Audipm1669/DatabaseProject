@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 
+
 // const API_HOST = process.env.REACT_APP_HOST;
 const API_HOST = "http://localhost:8080/api";
 
@@ -43,11 +44,10 @@ const myMiddleware = store => next => action => {
         .then(response => {
             action.userID =  response.data.userID;
             action.setUser(action.username,response.data.userID,store.dispatch);
-            localStorage.setItem("username", action.username);
-            localStorage.setItem("cart",JSON.stringify([0]));
-            console.log("middleware " + response.data.userID)
-            if(response.data.userID!=0 || response.data.userID!= null ){
-                localStorage.setItem("userID", response.data.userID);
+            if(response.data.userID!=0 && response.data.userID!= null ){
+                localStorage.setItem("username", action.username);
+                localStorage.setItem("userID", response.data.userID);            
+                localStorage.setItem("cart",JSON.stringify([0]));            
             }else{  
                 alert("Invalid username or password")
             }
@@ -103,14 +103,15 @@ const myMiddleware = store => next => action => {
     } else if(action.type === "ADD_ORDER"){
         const headers = getHeaders(action.token);
         const body = {
-            orderList: action.orderList
+            itemList: action.orderList,
+            userID : localStorage.getItem("userID")
         }
         console.log("middleware add order");
-        console.log(body.orderList);
+        console.log(body.itemList);
         axios.post(API_HOST + '/user/create/order', body, {headers: headers})
         .then(response => {
-            // action.setProductList(response.data.productList,store.dispatch);
-            console.log("middleware " + action.orderList)
+            console.log("middleware " + body.itemList)
+            console.log("middleware " + body.userID)
         })
         .catch(err => {
             console.log(err)
