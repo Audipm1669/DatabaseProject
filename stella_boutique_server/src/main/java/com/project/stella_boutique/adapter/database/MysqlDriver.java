@@ -8,7 +8,7 @@ public class MysqlDriver {
     private String password;
 
     public MysqlDriver() {
-        this.mysqlURL = "jdbc:mysql://127.0.0.1:3306/stella_boutique";
+        this.mysqlURL = "jdbc:mysql://127.0.0.1:3306/stella_boutique?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
         this.user = "root";
         this.password = "admin";
     }

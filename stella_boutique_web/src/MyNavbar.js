@@ -2,7 +2,7 @@ import React,{ useState,useEffect } from 'react';
 import { Nav ,Navbar ,Button } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
 import './App.css';
-import {  Modal, ModalHeader, ModalBody, ModalFooter, Table} from 'reactstrap';
+import {  Modal, ModalHeader, ModalBody, ModalFooter, Table, Alert} from 'reactstrap';
 import { connect } from 'react-redux';
 import { setUser , checkoutOrder} from './actions';
 import { useHistory } from 'react-router-dom';
@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
   }));
     
 function MyNavbar(props) {
+    var totalPrice = 0;
     const [userID,setUserID] = useState(localStorage.getItem("userID"));
     const [username,setUername] = useState(localStorage.getItem("username"));
     const classes = useStyles();
@@ -119,6 +120,7 @@ function MyNavbar(props) {
       clearCart();
       //alert to tell user checkout sucess
       console.log('handleCheckout' );
+      alert(`已從您的信用卡中扣除 ${totalPrice}元！`);
     }
     return (
       <React.Fragment>
@@ -173,6 +175,7 @@ function MyNavbar(props) {
                   props.ProductList.map((item,key) => {
                     if(cartItem.toString() == item.itemID.toString()){
                       console.log("true")
+                      { totalPrice += item.price }
                       return(
                         <tr>
                           <th scope="row">{1}</th>
@@ -180,6 +183,7 @@ function MyNavbar(props) {
                           <td>{item.price}</td>
                           <td><button onClick={() => removeProduct(item)}>-</button></td>
                         </tr>
+                        
                       )
                     }
                 })
@@ -188,6 +192,11 @@ function MyNavbar(props) {
               } 
               </tbody>
             </Table>
+            <Alert color="success" className="text-right">
+                總價：
+                {totalPrice}
+                元
+              </Alert>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={handleCheckout}>結帳</Button>
