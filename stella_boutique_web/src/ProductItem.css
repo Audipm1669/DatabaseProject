@@ -1,0 +1,9 @@
+.img {
+    height:300px;
+    overflow:hidden;
+    border:1px solid rgb(255, 255, 255);
+}
+    
+.img .card-img{
+    margin-top: -5%;
+}
