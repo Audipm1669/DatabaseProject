@@ -1,4 +1,5 @@
 import React,{ useState,useEffect } from 'react';
+import Form from "react-bootstrap/Form";
 import { Nav ,Navbar ,Button } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
 import './App.css';
@@ -11,40 +12,11 @@ const useStyles = makeStyles((theme) => ({
     icon: {
       marginRight: theme.spacing(2),
     },
-    homecoverdiv: {
-      display:'flex',
-      alignItems:'center',
-      justifyContent:'center',
-      width:'100%',
-    },
-    homecover: {
-      width:'100%',
-    },
-    heroContent: {
-      backgroundColor: theme.palette.background.paper,
-      padding: theme.spacing(8, 0, 6),
-      backgroundColor: '#f7ebea',
-    },
     navButtons: {
       fontFamily: 'Bebas Neue',
       '&:hover': {
         color:'#c26d5c'
      },
-    },
-    cardGrid: {
-      paddingTop: theme.spacing(8),
-      paddingBottom: theme.spacing(8),
-    },
-    card: {
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-    },
-    cardMedia: {
-      paddingTop: '56.25%', // 16:9
-    },
-    cardContent: {
-      flexGrow: 1,
     },
     footer: {
       backgroundColor: theme.palette.background.paper,
@@ -57,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
     
 function MyNavbar(props) {
     var totalPrice = 0;
+    const [discount, setDiscount] = useState("");
     const [userID,setUserID] = useState(localStorage.getItem("userID"));
     const [username,setUername] = useState(localStorage.getItem("username"));
     const classes = useStyles();
@@ -109,7 +82,7 @@ function MyNavbar(props) {
       }
     };
     const GoToMyLikes = () => {
-      console.log("item like"+ props.userMyLike)
+      console.log("item like"+ props.userMyLikeList)
       console.log("product list "+ props.ProductList)
       history.push("/MyLike")
     }
@@ -142,6 +115,13 @@ function MyNavbar(props) {
       clearCart();
       //alert to tell user checkout sucess
       console.log('handleCheckout' );
+    }
+
+    const getDiscount = () => {
+      console.log(discount)
+      //Hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee to send discount-code and to get the discount value
+      
+
     }
     return (
       <React.Fragment>
@@ -222,6 +202,19 @@ function MyNavbar(props) {
               } 
               </tbody>
             </Table>
+            <div style={{display:"inline"}}>
+              <label>請輸入折扣碼:</label>
+              <input
+                  autoFocus
+                  type="text"
+                  value={discount}
+                  onChange={(e) => setDiscount(e.target.value)}
+                  style={{display:"inline",width:"50%", margin:"10px"}}
+              />
+              <Button style={{display:"inline",margin:"10px"}} className="LoginBtn" size="md" variant="outline-secondary" onClick={getDiscount}>
+                輸入
+              </Button>
+            </div>
             <Alert color="success" className="text-right">
                 總價：
                 {totalPrice}
@@ -241,7 +234,7 @@ function MyNavbar(props) {
     return {
       ProductList: state.ProductList,
       LoginUser: state.LoginUser,    
-      userMyLike: state.userMyLike
+      userMyLikeList: state.userMyLikeList
     }
   }
   
