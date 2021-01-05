@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import MyNavbar from './MyNavbar';
 import SellerNavBar from './Seller/SellerNavBar'
 import { ModeComment } from '@material-ui/icons';
-import { enterWeb ,getLikeItemList ,getOrderList } from './actions';
+import { enterWeb ,getLikeItemList ,getOrderList,enterAdmin } from './actions';
 
 
 class App extends Component {
@@ -21,6 +21,7 @@ constructor(props){
 componentDidMount(){
   const userID = localStorage.getItem("userID");
   if(userID == "admin"){
+    this.props.enterAdmin();
     this.setState({
       admin:true
     })
@@ -50,6 +51,7 @@ componentDidMount(){
 function mapDispatchToProps(dispatch) {
   return {
     enterWeb: () => dispatch(enterWeb()),
+    enterAdmin: () => dispatch(enterAdmin()),
     getLikeItemList: (userID) => {
       dispatch(getLikeItemList(userID))
     },

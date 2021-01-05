@@ -64,9 +64,7 @@ function OrderManage(props) {
 
   return (
     <React.Fragment>
-        <SellerNavBar/>
       <main>
-
       <div style={{ height: 400, width: '90%' , margin: '60px'}}>
       <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -79,7 +77,8 @@ function OrderManage(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.userOrderList.map((order,index) => (
+          {console.log("order page "+props.sellerOrder)}
+          {props.sellerOrder.map((order,index) => (
             <TableRow align="left" key={index}>
               <TableCell component="th" scope="row">
                 {index+1}
@@ -99,7 +98,7 @@ function OrderManage(props) {
 }
 function mapStateToProps(state) {
   return {
-    userOrderList: state.userOrderList
+    sellerOrder: state.sellerOrder
   }
 }
 function mapDispatchToProps(dispatch) {

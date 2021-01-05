@@ -53,7 +53,6 @@ function MemberManage(props) {
 
   return (
     <React.Fragment>
-        <SellerNavBar/>
       <main>
 
       <div style={{ height: 400, width: '90%' , margin: '60px'}}>
@@ -61,6 +60,7 @@ function MemberManage(props) {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
+            {}
             <TableCell align="left">ID</TableCell>
             <TableCell>Full Name</TableCell>
             <TableCell>User Name</TableCell>
@@ -71,19 +71,19 @@ function MemberManage(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {/* {props.userList.map((user,id) => (
+          {props.sellerUser.map((user,id) => (
             <TableRow align="left" key={id}>
               <TableCell component="th" scope="row">
                 {id+1}
               </TableCell>
-              <TableCell>{user.fullname}</TableCell>
+              <TableCell>{user.fullName}</TableCell>
               <TableCell>{user.username}</TableCell>
               <TableCell>{user.birthday}</TableCell>
               <TableCell>{user.address}</TableCell>
               <TableCell>{user.phoneNumber}</TableCell>
               <TableCell>{user.email}</TableCell>
             </TableRow>
-          ))} */}
+          ))}
         </TableBody>
       </Table>
     </TableContainer>
@@ -94,7 +94,7 @@ function MemberManage(props) {
 }
 function mapStateToProps(state) {
   return {
-    // userList: state.userList
+    sellerUser: state.sellerUser
   }
 }
 function mapDispatchToProps(dispatch) {

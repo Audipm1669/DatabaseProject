@@ -22,17 +22,16 @@ public class AddUserUseCase {
         try(Connection connection = this.mysqlDriver.getConnection()) {
             try (PreparedStatement stmt = connection.prepareStatement(
                     "INSERT INTO `user`" +
-                    "(`id`, `password`, `fullname`, `username`, `birthday`, `address`, `phoneNumber`, `email`)" +
-                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?)"
+                    "(`password`, `fullname`, `username`, `birthday`, `address`, `phoneNumber`, `email`)" +
+                    "VALUES(?, ?, ?, ?, ?, ?, ?)"
                 )) {
-                    stmt.setString(1, "NULL");
-                    stmt.setString(2, password);
-                    stmt.setString(3, fullname);
-                    stmt.setString(4, username);
-                    stmt.setString(5, birthday);
-                    stmt.setString(6, address);
-                    stmt.setString(7, phoneNumber);
-                    stmt.setString(8, email);
+                    stmt.setString(1, password);
+                    stmt.setString(2, fullname);
+                    stmt.setString(3, username);
+                    stmt.setString(4, birthday);
+                    stmt.setString(5, address);
+                    stmt.setString(6, phoneNumber);
+                    stmt.setString(7, email);
 
                     stmt.executeUpdate();
                 }

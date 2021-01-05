@@ -27,8 +27,7 @@ import com.project.stella_boutique.service.seller.product.remove.RemoveSellerPro
 import com.project.stella_boutique.service.seller.product.update.UpdateSellerProductUseCase;
 import com.project.stella_boutique.service.seller.product.update.UpdateSellerProductUseCaseInput;
 import com.project.stella_boutique.service.seller.product.update.UpdateSellerProductUseCaseOutput;
-
-
+import com.project.stella_boutique.service.management.user.*;
 import com.project.stella_boutique.service.exception.AddDiscountErrorException;
 import com.project.stella_boutique.service.exception.AddProductErrorException;
 import com.project.stella_boutique.service.exception.GetDiscountErrorException;
@@ -39,6 +38,7 @@ import com.project.stella_boutique.service.exception.RemoveProductErrorException
 import com.project.stella_boutique.service.exception.UpdateDiscountErrorException;
 import com.project.stella_boutique.service.exception.UpdateOrderErrorException;
 import com.project.stella_boutique.service.exception.UpdateProductErrorException;
+import com.project.stella_boutique.service.exception.LoginErrorException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -81,6 +81,9 @@ public class SellerRestAdapter {
 
     @Autowired
     UpdateSellerProductUseCase updateSellerProductUseCase;
+
+    @Autowired
+    GetUserUseCase getUserUseCase;
     
     //--------------------------------------------------------------------------------------------------------------------------------
     //------------------------------------------------------- Seller Discount --------------------------------------------------------
@@ -142,6 +145,7 @@ public class SellerRestAdapter {
     //--------------------------------------------------------------------------------------------------------------------------------
     @GetMapping(value = "/get/order")
     public ResponseEntity<GetSellerOrderUseCaseOutput> getOrder() {
+        System.out.println("getting order list");
         GetSellerOrderUseCaseOutput output = new GetSellerOrderUseCaseOutput();
         try {
             this.getSellerOrderUseCase.execute(output);
@@ -215,6 +219,17 @@ public class SellerRestAdapter {
         try {
             this.updateSellerProductUseCase.execute(input, output);
         } catch (UpdateProductErrorException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(output);
+    }
+
+    @GetMapping(value = "/get/user")
+    public ResponseEntity<GetUserUseCaseOutput> getUser() {
+        GetUserUseCaseOutput output = new GetUserUseCaseOutput();
+        try {
+            this.getUserUseCase.execute(output);
+        } catch (LoginErrorException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
         return ResponseEntity.status(HttpStatus.OK).body(output);
