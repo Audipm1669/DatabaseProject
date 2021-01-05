@@ -99,7 +99,7 @@ function MyOrder(props) {
 function mapStateToProps(state) {
   return {
     userOrderList: state.userOrderList,
-    userMyLikeList: state.userMyLikeList
+    userMyLike: state.userMyLike
   }
 }
 function mapDispatchToProps(dispatch) {
