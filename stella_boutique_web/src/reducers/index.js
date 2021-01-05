@@ -7,6 +7,8 @@ import UserMyLikeReducer from './UserMyLikeReducer';
 import SellerUserReducer from './SellerUserReducer';
 import SellerOrderReducer from './SellerOrderReducer';
 import SellerProductReducer from './SellerProductReducer';
+import UserDiscountListReducer from './UserDiscountListReducer';
+
 const rootReducer = combineReducers({
     LoginUser: loginReducer,
     registerUser: registerReducer,
@@ -15,7 +17,8 @@ const rootReducer = combineReducers({
     userMyLike: UserMyLikeReducer,
     sellerUser: SellerUserReducer,
     sellerOrder: SellerOrderReducer,
-    sellerProduct: SellerProductReducer
+    sellerProduct: SellerProductReducer,
+    userDiscountList: UserDiscountListReducer
 })
 
 export default rootReducer

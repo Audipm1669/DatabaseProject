@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import "../Login.css";
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import { loginUser , getOrderList , getLikeItemList} from '../actions';
+import { addProduct} from '../actions';
 
 const useStyles = makeStyles((theme) => ({
     navButtons: {
@@ -19,10 +19,13 @@ const useStyles = makeStyles((theme) => ({
 
 
 function AddProduct(props) {
-  var imgUrl = "/img/";
+  var imgUrl = "./img/";
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+  const [size, setSize] = useState("");
+  const [category, setCategory] = useState("");
+  const [quantity, setQuantity] = useState("");
 
   var fileInput = React.createRef();
 
@@ -37,18 +40,18 @@ function AddProduct(props) {
     console.log(src);
     imgUrl = imgUrl+src;
     console.log(imgUrl);
-    
-    // props.loginUser(imgUrl,name,price,description);
+    props.addProduct(name,quantity,category,size,price,description,imgUrl);
     event.preventDefault();
+    window.location.href = '/ProductManage';
 
   }
-
 
   let button = null;
 
   return (
     <div className="Login">
       <Form name="form">
+        <h2>ADD PRODUCT</h2>
         <Form.Group size="lg" controlId="picform">
         <Form.Label>Product Picture</Form.Label>
             <input
@@ -61,6 +64,7 @@ function AddProduct(props) {
                 className="pic"
             />
         </Form.Group>
+
         <Form.Group size="lg" controlId="name">
           <Form.Label>Product Name</Form.Label>
           <Form.Control
@@ -69,7 +73,29 @@ function AddProduct(props) {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-        </Form.Group>
+          </Form.Group>
+
+        <Form.Group size="lg" controlId="category">
+          <Form.Label>Category</Form.Label>
+          <Form.Control
+            autoFocus
+            type="text"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          />
+          </Form.Group>
+
+        <Form.Group size="lg" controlId="size">
+          <Form.Label>Size</Form.Label>
+          <Form.Control
+            autoFocus
+            type="text"
+            value={size}
+            onChange={(e) => setSize(e.target.value)}
+          />
+          </Form.Group>
+
+
         <Form.Group size="lg" controlId="price">
           <Form.Label>Price</Form.Label>
           <Form.Control
@@ -78,6 +104,7 @@ function AddProduct(props) {
             onChange={(e) => setPrice(e.target.value)}
           />
         </Form.Group>
+
         <Form.Group size="lg" controlId="description">
           <Form.Label>Description</Form.Label>
           <Form.Control
@@ -86,6 +113,16 @@ function AddProduct(props) {
             onChange={(e) => setDescription(e.target.value)}
           />
         </Form.Group>
+
+        <Form.Group size="lg" controlId="quantity">
+          <Form.Label>Quantity</Form.Label>
+          <Form.Control
+            type="text"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+          />
+        </Form.Group>
+
         <Button className="LoginBtn" block size="lg" variant="outline-secondary" onClick={handleSubmit} value="Submit">
           ADD
         </Button>
@@ -95,18 +132,12 @@ function AddProduct(props) {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    // LoginUser: state.LoginUser
-  }
-}
-
 function mapDispatchToProps(dispatch) {
   return {
-    // loginUser: (username,password,userID) => {
-    //   dispatch(loginUser(username,password,userID))
-    // }
+    addProduct: (name,quantity,category,size,price,description,pictureURL) => {
+      dispatch(addProduct(name,quantity,category,size,price,description,pictureURL))
+    }
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(AddProduct);
+export default connect(null,mapDispatchToProps)(AddProduct);

@@ -25,11 +25,11 @@ public class AddSellerDiscountUseCase {
             try (PreparedStatement stmt = connection.prepareStatement(
                 "INSERT INTO `discount` (`value`,`code`,`name`,`startDate`,`endDate`)"
                 + "VALUES(?,?,?,?,?)")) {
-                    stmt.setString(2, Float.toString(input.getValue()));
-                    stmt.setString(3, input.getCode());
-                    stmt.setString(4, input.getDiscountName());
+                    stmt.setString(1, Float.toString(input.getValue()));
+                    stmt.setString(2, input.getCode());
+                    stmt.setString(3, input.getName());
+                    stmt.setString(4, input.getEndDateString());
                     stmt.setString(5, input.getEndDateString());
-                    stmt.setString(6, input.getEndDateString());
 
                     stmt.executeUpdate();
             }

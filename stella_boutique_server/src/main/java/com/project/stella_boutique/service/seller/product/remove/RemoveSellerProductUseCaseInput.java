@@ -1,6 +1,17 @@
 package com.project.stella_boutique.service.seller.product.remove;
 
 public class RemoveSellerProductUseCaseInput {
-    //All Attributes You need to get from the frontend
-    //Need Setter and Getter
+    private int itemID;
+
+    public RemoveSellerProductUseCaseInput(){
+        
+    }
+	public int getItemID() {
+		return this.itemID;
+	}
+
+	public void setItemID(int itemID) {
+		this.itemID = itemID;
+	}
+
 }

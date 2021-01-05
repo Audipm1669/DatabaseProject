@@ -100,6 +100,18 @@ const myMiddleware = store => next => action => {
             console.log(err)
             alert("Entering Web Failed!")
         });
+
+        console.log("middleware get discount");
+        axios.get(API_HOST + '/guest/discount', body, {headers: headers})
+        .then(response => {
+            action.setUserDiscountList(response.data.discountList,store.dispatch);
+            console.log("discount list " +response.data.discountList )
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Get Discount Failed!")
+        });
+
     } else if(action.type === "ADD_ORDER"){
         const headers = getHeaders(action.token);
         const body = {
@@ -183,6 +195,7 @@ const myMiddleware = store => next => action => {
         const body = {
         }
         console.log("prepare admin");
+
         axios.get(API_HOST + '/seller/get/order', body, {headers: headers})
         .then(response => {
             action.setSellerOrderList(response.data.orderList,store.dispatch);
@@ -192,6 +205,7 @@ const myMiddleware = store => next => action => {
             console.log(err)
             alert("Entering Web Failed!")
         });
+
         axios.get(API_HOST + '/seller/get/user', body, {headers: headers})
         .then(response => {
             action.setSellerUserList(response.data.userList,store.dispatch);
@@ -201,6 +215,7 @@ const myMiddleware = store => next => action => {
             console.log(err)
             alert("Entering Web Failed!")
         });
+
         axios.get(API_HOST + '/seller/get/product', body, {headers: headers})
         .then(response => {
             action.setSellerProductList(response.data.productList,store.dispatch);
@@ -225,17 +240,80 @@ const myMiddleware = store => next => action => {
             console.log(err)
             alert("Changing Status Failed!")
         });
-    }else if(action.type === "LOAD_ORDER_LIST"){
+    }else if(action.type === "EDIT_PRODUCT"){
         const headers = getHeaders(action.token);
         const body = {
+            itemID: action.itemID,
+            name: action.name,
+            price: action.price,
+            description: action.description
         }
-        axios.get(API_HOST + '/seller/get/order', body, {headers: headers})
+        console.log(body);
+        console.log("update product");
+        axios.post(API_HOST + '/seller/update/product', body, {headers: headers})
         .then(response => {
-            action.setSellerOrderList(response.data.orderList,store.dispatch);
+            console.log("product have been update");
         })
         .catch(err => {
             console.log(err)
-            alert("Entering Web Failed!")
+            alert("Edit Product Failed!")
+        });
+    }else if(action.type === "REMOVE_PRODUCT"){
+        const headers = getHeaders(action.token);
+        const body = {
+            itemID: action.itemID
+        }
+        console.log(body);
+        console.log("remove product");
+        axios.post(API_HOST + '/seller/remove/product', body, {headers: headers})
+        .then(response => {
+            console.log("product have been remove");
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Remove Product Failed!")
+        });
+    }else if(action.type === "ADD_PRODUCT"){
+        const headers = getHeaders(action.token);
+        const body = { 
+            name: action.name,
+            quantity: action.quantity,
+            category: action.category,
+            size: action.size,
+            price: action.price,
+            description: action.description,
+            pictureURL: action.pictureURL
+        }
+        console.log(body);
+        console.log("adding product");
+        axios.post(API_HOST + '/seller/add/product', body, {headers: headers})
+        .then(response => {
+            console.log("product have been add");
+            alert("Add Product Success!")
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Add Product Failed!")
+        });
+    }else if(action.type === "ADD_DISCOUNT"){
+        const headers = getHeaders(action.token);
+        const body = { 
+            value: action.value,
+            code: action.code,
+            name: action.name,
+            startDate: action.startDate,
+            endDate: action.endDate
+        }
+        console.log(body);
+        console.log("adding Discount");
+        axios.post(API_HOST + '/seller/add/discount', body, {headers: headers})
+        .then(response => {
+            console.log("Discount have been add");
+            alert("Add Discount Success!")
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Add Discount Failed!")
         });
     }else {
         return next(action)
@@ -245,3 +323,7 @@ const myMiddleware = store => next => action => {
 }
 
 export default myMiddleware
+
+
+
+

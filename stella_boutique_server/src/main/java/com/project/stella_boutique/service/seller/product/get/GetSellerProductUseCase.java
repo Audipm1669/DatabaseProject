@@ -27,7 +27,7 @@ public class GetSellerProductUseCase {
         List<Item> productList = new ArrayList<>();    
         try(Connection connection = this.mysqlDriver.getConnection()){
             try (PreparedStatement stmt = connection.prepareStatement(
-                "SELECT * FROM `item`")) {
+                "SELECT * FROM `item` ORDER BY `quantity` DESC")) {
                 try (ResultSet rs = stmt.executeQuery()) {
                     while(rs.next()) {
                         int id = Integer.parseInt(rs.getString("id"));

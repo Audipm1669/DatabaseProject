@@ -5,7 +5,15 @@
     .Login {
       padding: 0 0;
       height: 60vw;
-      background-color: #faeeec;
+      /* background-color: #faeeec; */
+      background-image:url('../src/img/background.jpg');
+      background-repeat:no-repeat;
+      -moz-background-size:100% 100%;
+      -webkit-background-size:100% 100%;
+      -o-background-size:100% 100%;
+      background-size:100% 100%;
+
+      font-weight: 600;
     }
   
     .Login form {

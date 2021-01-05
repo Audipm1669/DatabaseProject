@@ -5,7 +5,7 @@ export function loginUser(username, password, userID) {
         password: password,
         userID: userID,
         setUser:(username, userID, dispatch) => dispatch(setUser(username, userID)),
-        setLikeItemList:(userOrderList, dispatch) => dispatch(setLikeItemList(userOrderList)),
+        setLikeItemList:(userMyLike, dispatch) => dispatch(setLikeItemList(userMyLike)),
         setOrderList:(userOrderList, dispatch) => dispatch(setOrderList(userOrderList))
     }
 }
@@ -34,7 +34,9 @@ export function registerUser(username, password, fullname, birthday, address, ph
 export function enterWeb(){
     return {
         type: "ENTER_WEB",
-        setProductList:(productList, dispatch) => dispatch(setProductList(productList))
+        setProductList:(productList, dispatch) => dispatch(setProductList(productList)),
+        setUserDiscountList:(userDiscountList,dispatch)=> dispatch(setUserDiscountList(userDiscountList)),
+
     }
 }
 export function getOrderList(userID){
@@ -128,9 +130,46 @@ export function updateStatus(orderID , status){
         status: status
     }
 }
-export function loadOrderList(){
+export function editProduct(itemID,name,price,description){
     return{
-        type: "LOAD_ORDER_LIST",
-        setSellerOrderList:(sellerUser, dispatch) => dispatch(setSellerUserList(sellerUser))
+        type: "EDIT_PRODUCT",
+        itemID: itemID,
+        name: name,
+        price: price,
+        description: description
+    }
+}
+export function removeProduct(itemID){
+    return{
+        type: "REMOVE_PRODUCT",
+        itemID: itemID
+    }
+}
+export function addProduct(name,quantity,category,size,price,description,pictureURL){
+    return{
+        type: "ADD_PRODUCT",
+        name: name,
+        quantity: quantity,
+        category: category,
+        size: size,
+        price: price,
+        description: description,
+        pictureURL: pictureURL
+    }
+}
+export function addDiscount(value,code,name,startDate,endDate){
+    return{
+        type: "ADD_DISCOUNT",
+        value: value,
+        code: code,
+        name: name,
+        startDate: startDate,
+        endDate: endDate
+    }
+}
+export function setUserDiscountList(userDiscountList){
+    return{
+        type: "SET_DISCOUNT_LIST",
+        userDiscountList: userDiscountList
     }
 }
