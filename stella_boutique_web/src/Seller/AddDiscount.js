@@ -20,9 +20,10 @@ const useStyles = makeStyles((theme) => ({
 
 function AddDiscount(props) {
   const [code, setCode] = useState("");
+  const [value, setValue] = useState("");
  
   function handleSubmit(event) {
-
+    console.log(value);
     console.log(code);
     
     // props.loginUser(imgUrl,name,price,description);
@@ -32,14 +33,25 @@ function AddDiscount(props) {
 
   return (
     <div className="Login">
+     
       <Form name="form">
-        
+        <h2>ADD DISCOUNT</h2>
+        <Form.Group size="lg" controlId="value">
+          <Form.Label>Discount Percentage</Form.Label>
+          <Form.Control
+            type="number"
+            placeholder="(only number. example:0.8)"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+          />
+        </Form.Group>
         <Form.Group size="lg" controlId="code">
-          <Form.Label>Price</Form.Label>
+          <Form.Label>Discount Code</Form.Label>
           <Form.Control
             type="text"
             value={code}
             onChange={(e) => setCode(e.target.value)}
+            step="0.01"
           />
         </Form.Group>
         

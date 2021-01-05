@@ -15,7 +15,8 @@ import OrderManage from './Seller/OrderManage';
 import MemberManage from './Seller/MemberManage';
 import MyLike from './user/MyLike';
 import MyOrder from './user/MyOrder';
-import AddProduct from './Seller/AddProduct'
+import AddProduct from './Seller/AddProduct';
+import AddDiscount from './Seller/AddDiscount';
 
 class AllRoutes extends Component {
 
@@ -38,6 +39,7 @@ class AllRoutes extends Component {
                     <Route path="/MyLike" component={MyLike} exact={true}></Route>
                     <Route path="/MyOrder" component={MyOrder} exact={true}></Route>
                     <Route path="/AddProduct" component={AddProduct} exact={true}></Route>
+                    <Route path="/AddDiscount" component={AddDiscount} exact={true}></Route>
                 </Switch>
             </div>
         )

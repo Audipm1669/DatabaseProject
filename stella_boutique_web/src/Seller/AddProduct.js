@@ -51,6 +51,7 @@ function AddProduct(props) {
   return (
     <div className="Login">
       <Form name="form">
+        <h2>ADD PRODUCT</h2>
         <Form.Group size="lg" controlId="picform">
         <Form.Label>Product Picture</Form.Label>
             <input
