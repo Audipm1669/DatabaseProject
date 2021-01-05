@@ -6,9 +6,6 @@ import { withRouter } from "react-router-dom";
 import { Container, Row, Col, Jumbotron, Card, CardImg, CardBody ,  CardTitle, CardSubtitle, CardText, Badge } from 'reactstrap';
 import { Form,FormControl,Button } from 'react-bootstrap';
 import ProductItemForSeller from '../ProductItemForSeller';
-import { Nav,Navbar,NavDropdown } from 'react-bootstrap';
-import { BrowserRouter} from 'react-router-dom';
-import SellerNavBar from './SellerNavBar';
 
 
 class ProductManage extends Component {
