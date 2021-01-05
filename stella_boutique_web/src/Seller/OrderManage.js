@@ -61,41 +61,48 @@ function OrderManage(props) {
   const processOrder = playload => {
     console.log("update order "+playload.orderID)
     props.updateStatus(playload.orderID,1)
+    window.location.href = "/OrderManage"
+  }
+
+  const canProcess = playload => {
+    console.log("Check Process "+playload.orderID)
+    if(playload.status != 0)
+      return true;
   }
 
   return (
     <React.Fragment>
       <main>
-      <div style={{ height: 400, width: '90%' , margin: '60px'}}>
-      <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="left">No</TableCell>
-            <TableCell>Date</TableCell>
-            <TableCell align="right">Status</TableCell>
-            <TableCell align="right">Total Price</TableCell>
-            <TableCell align="right"></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {props.sellerOrder.map((order,index) => (
-            <TableRow align="left" key={index}>
-              <TableCell component="th" scope="row">
-                {index+1}
-              </TableCell>
-              <TableCell>{order.orderDate}</TableCell>
-              <TableCell align="right">{getstatus(order.status)}</TableCell>
-              <TableCell align="right">{order.totalPrice}</TableCell>
-              <TableCell align="right">
-                <Button onCLick={() => processOrder(order)}>Process</Button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-      </div>
+        <div style={{ height: 400, width: '90%' , margin: '60px'}}>
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="left">No</TableCell>
+                  <TableCell>Date</TableCell>
+                  <TableCell align="right">Status</TableCell>
+                  <TableCell align="right">Total Price</TableCell>
+                  <TableCell align="right"></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {props.sellerOrder.map((order,index) => (
+                  <TableRow align="left" key={index}>
+                    <TableCell component="th" scope="row">
+                      {index+1}
+                    </TableCell>
+                    <TableCell>{order.orderDate}</TableCell>
+                    <TableCell align="right">{getstatus(order.status)}</TableCell>
+                    <TableCell align="right">{order.totalPrice}</TableCell>
+                    <TableCell align="right">
+                      <Button onClick={() => processOrder(order)} disabled = {canProcess(order)} >Process</Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
       </main>
     </React.Fragment>
   );

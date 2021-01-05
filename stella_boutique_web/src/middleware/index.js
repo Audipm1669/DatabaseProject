@@ -169,7 +169,7 @@ const myMiddleware = store => next => action => {
         console.log(body);
         axios.post(API_HOST + '/user/remove/like', body, {headers: headers})
         .then(response => {
-            console.log("middleware " + body.itemList)
+            console.log("middleware " + body.itemID)
             console.log("middleware " + body.userID)
         })
         .catch(err => {
