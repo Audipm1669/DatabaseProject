@@ -7,6 +7,7 @@ import {  Modal, ModalHeader, ModalBody, ModalFooter, Table, Alert} from 'reacts
 import { connect } from 'react-redux';
 import { setUser , checkoutOrder , getOrderList , getLikeItemList} from './actions';
 import { useHistory } from 'react-router-dom';
+import { TramRounded } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -119,9 +120,24 @@ function MyNavbar(props) {
 
     const getDiscount = () => {
       console.log(discount)
-      //Hereeeeeeeeeeeeeeeeeeeeeeeee
-      
-
+      var found = false;
+      var value = 0;
+      console.log(props.userDiscountList);
+      props.userDiscountList.map((disc)=>{
+        console.log(disc.code)
+        console.log(disc.code == discount)
+        if(disc.code == discount){
+          value = disc.value
+          found=true;
+        }
+      })
+      if(found){
+        console.log(totalPrice *= value)
+        totalPrice = totalPrice*value
+        console.log(totalPrice)
+      }else{
+        alert("voucher is unavailable")
+      }
     }
     return (
       <React.Fragment>
@@ -234,7 +250,8 @@ function MyNavbar(props) {
     return {
       ProductList: state.ProductList,
       LoginUser: state.LoginUser,    
-      userMyLike: state.userMyLike
+      userMyLike: state.userMyLike,
+      userDiscountList : state.userDiscountList
     }
   }
   

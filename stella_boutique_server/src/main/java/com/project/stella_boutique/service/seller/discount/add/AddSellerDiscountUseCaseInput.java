@@ -5,9 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AddSellerDiscountUseCaseInput {
-    private int discountID;
     private Float value;
-    private String discountName;
+    private String name;
     private Date startDate;
 	private Date endDate;
     private String code;
@@ -16,15 +15,14 @@ public class AddSellerDiscountUseCaseInput {
 
     public AddSellerDiscountUseCaseInput(){}
 
-	public AddSellerDiscountUseCaseInput(int discountID, 
+	public AddSellerDiscountUseCaseInput( 
 					Float value, 
-					String discountName, 
+					String code, 
+					String name, 
 					String startDate, 
-					String endDate, 
-					String code) {
-		this.discountID = discountID;
+					String endDate) {
 		this.value = value;
-		this.discountName = discountName;
+		this.name = name;
 		this.code = code;
 		final SimpleDateFormat dateFormat = new SimpleDateFormat(this.DATE_FORMAT);
         try {
@@ -38,15 +36,6 @@ public class AddSellerDiscountUseCaseInput {
             throw new IllegalArgumentException("Invalid End Date format: " + endDate);
         }
 	}
-
-	public int getDiscountID() {
-		return this.discountID;
-	}
-
-	public void setDiscountID(int discountID) {
-		this.discountID = discountID;
-	}
-
 	public Float getValue() {
 		return this.value;
 	}
@@ -55,12 +44,12 @@ public class AddSellerDiscountUseCaseInput {
 		this.value = value;
 	}
 
-	public String getDiscountName() {
-		return this.discountName;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setDiscountName(String discountName) {
-		this.discountName = discountName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Date getStartDate() {
@@ -107,5 +96,14 @@ public class AddSellerDiscountUseCaseInput {
 
 	public String ToString(Date date) {
         return (new SimpleDateFormat(this.DATE_FORMAT)).format(date);
-    }
+	}
+	
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
 }

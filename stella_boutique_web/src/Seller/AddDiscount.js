@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import "../Login.css";
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import { loginUser , getOrderList , getLikeItemList} from '../actions';
+import { addDiscount } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
     navButtons: {
@@ -21,12 +21,15 @@ const useStyles = makeStyles((theme) => ({
 function AddDiscount(props) {
   const [code, setCode] = useState("");
   const [value, setValue] = useState("");
+  const [name, setName] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
  
   function handleSubmit(event) {
     console.log(value);
     console.log(code);
     
-    // props.loginUser(imgUrl,name,price,description);
+    props.addDiscount(value,code,name,startDate,endDate);
     event.preventDefault();
 
   }
@@ -35,7 +38,16 @@ function AddDiscount(props) {
     <div className="Login">
      
       <Form name="form">
-        <h2>ADD DISCOUNT</h2>
+        <h2>ADD DISCOUNT</h2><Form.Group size="lg" controlId="code">
+          <Form.Label>Discount Code</Form.Label>
+          <Form.Control
+            type="text"
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            step="0.01"
+          />
+        </Form.Group>
+
         <Form.Group size="lg" controlId="value">
           <Form.Label>Discount Percentage</Form.Label>
           <Form.Control
@@ -45,13 +57,33 @@ function AddDiscount(props) {
             onChange={(e) => setValue(e.target.value)}
           />
         </Form.Group>
-        <Form.Group size="lg" controlId="code">
-          <Form.Label>Discount Code</Form.Label>
+
+        <Form.Group size="lg" controlId="name">
+          <Form.Label>Event Name</Form.Label>
           <Form.Control
             type="text"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-            step="0.01"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group size="lg" controlId="startDate">
+          <Form.Label>Start Date</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="(YYYY/MM/DD)"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+        </Form.Group>
+        
+        <Form.Group size="lg" controlId="endDate">
+          <Form.Label>End Date</Form.Label>
+          <Form.Control
+            type="text"            
+            placeholder="(YYYY/MM/DD)"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
           />
         </Form.Group>
         
@@ -64,18 +96,12 @@ function AddDiscount(props) {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    // LoginUser: state.LoginUser
-  }
-}
-
 function mapDispatchToProps(dispatch) {
   return {
-    // loginUser: (username,password,userID) => {
-    //   dispatch(loginUser(username,password,userID))
-    // }
+    addDiscount: (value,code,name,startDate,endDate) => {
+      dispatch(addDiscount(value,code,name,startDate,endDate))
+    }
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(AddDiscount);
+export default connect(null,mapDispatchToProps)(AddDiscount);

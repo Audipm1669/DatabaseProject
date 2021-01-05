@@ -34,7 +34,9 @@ export function registerUser(username, password, fullname, birthday, address, ph
 export function enterWeb(){
     return {
         type: "ENTER_WEB",
-        setProductList:(productList, dispatch) => dispatch(setProductList(productList))
+        setProductList:(productList, dispatch) => dispatch(setProductList(productList)),
+        setUserDiscountList:(userDiscountList,dispatch)=> dispatch(setUserDiscountList(userDiscountList)),
+
     }
 }
 export function getOrderList(userID){
@@ -153,7 +155,21 @@ export function addProduct(name,quantity,category,size,price,description,picture
         price: price,
         description: description,
         pictureURL: pictureURL
-
-
+    }
+}
+export function addDiscount(value,code,name,startDate,endDate){
+    return{
+        type: "ADD_DISCOUNT",
+        value: value,
+        code: code,
+        name: name,
+        startDate: startDate,
+        endDate: endDate
+    }
+}
+export function setUserDiscountList(userDiscountList){
+    return{
+        type: "SET_DISCOUNT_LIST",
+        userDiscountList: userDiscountList
     }
 }

@@ -79,11 +79,11 @@ public class GuestRestAdapter {
 
 
     @GetMapping(value= "/discount")
-    public ResponseEntity<GetDiscountUseCaseOutput> getAllDiscount(@RequestBody GetDiscountUseCaseInput requestBody) {
+    public ResponseEntity<GetDiscountUseCaseOutput> getAllDiscount() {
         GetDiscountUseCaseInput input = new GetDiscountUseCaseInput();
         GetDiscountUseCaseOutput output = new GetDiscountUseCaseOutput();
         //------Request body send current date
-        //input.setCurrentDate(currentDate);
+        input.setCurrentDate("2021/01/07");
         try {
             this.getDiscountUseCase.execute(input, output);
         } catch (GetDiscountErrorException e) {

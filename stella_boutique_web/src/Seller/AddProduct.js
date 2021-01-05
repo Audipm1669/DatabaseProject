@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function AddProduct(props) {
-  var imgUrl = "/img/";
+  var imgUrl = "./img/";
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
