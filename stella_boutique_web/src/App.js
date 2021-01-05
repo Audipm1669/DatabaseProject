@@ -9,6 +9,7 @@ import MyNavbar from './MyNavbar';
 import SellerNavBar from './Seller/SellerNavBar'
 import { ModeComment } from '@material-ui/icons';
 import { enterWeb ,getLikeItemList ,getOrderList,enterAdmin } from './actions';
+import '@devexpress/dx-react-chart-bootstrap4/dist/dx-react-chart-bootstrap4.css';
 
 
 class App extends Component {

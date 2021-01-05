@@ -1,12 +1,18 @@
 import { Nav,Navbar,NavDropdown,Form,FormControl,Button } from 'react-bootstrap';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import { BrowserRouter} from 'react-router-dom';
-import SellerNavBar from './SellerNavBar';
+import { ArgumentScale, Animation } from '@devexpress/dx-react-chart';
+import { scalePoint } from 'd3-scale';
+import {
+  Chart,
+  BarSeries,
+  Title,
+  ArgumentAxis,
+  ValueAxis,
+} from '@devexpress/dx-react-chart-material-ui';
+
 
 import * as React from 'react';
-
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -23,20 +29,6 @@ import '../App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const columns = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'Date', headerName: 'Date', width: 130 },
-  { field: 'State', headerName: 'State', width: 130 },
-  {
-    field: 'Cost',
-    headerName: 'Cost',
-    type: 'number',
-    width: 90,
-  },
-];
-
-
-
 const useStyles = makeStyles({
   table: {
     margin:'100px',
@@ -45,7 +37,13 @@ const useStyles = makeStyles({
   },
 });
 
+
+
 function OrderManage(props) {
+  var sale2020 = 0;
+  var sale2021 = 0;
+  var y = 0;
+  
   const classes = useStyles();
   const history = useHistory();
 
@@ -56,6 +54,25 @@ function OrderManage(props) {
     { return "shipout" }
     else 
     { return "done" }
+  }
+
+  function getsale (year,sale) {
+    console.log(year)
+    y = parseInt(year) - 2000
+    console.log(y)
+    console.log(sale)
+    if (y == 20)
+    { sale2020 += sale }
+    else if (y == 21) 
+    { sale2021 += sale }
+    else 
+    { }
+   console.log(sale2020)
+   console.log(sale2021)
+
+    return sale
+
+   
   }
 
   const processOrder = playload => {
@@ -69,8 +86,17 @@ function OrderManage(props) {
     if(playload.status != 0)
       return true;
   }
+  console.log("----------")
+  console.log(sale2020)
+  var data = [
+    
+  ];
+
+
 
   return (
+    
+    
     <React.Fragment>
       <main>
         <div style={{ height: 400, width: '90%' , margin: '60px'}}>
@@ -93,7 +119,7 @@ function OrderManage(props) {
                     </TableCell>
                     <TableCell>{order.orderDate}</TableCell>
                     <TableCell align="right">{getstatus(order.status)}</TableCell>
-                    <TableCell align="right">{order.totalPrice}</TableCell>
+                    <TableCell align="right">{getsale(order.orderDate.toString().substring(0,4),order.totalPrice)}</TableCell>
                     <TableCell align="right">
                       <Button onClick={() => processOrder(order)} disabled = {canProcess(order)} >Process</Button>
                     </TableCell>
@@ -101,6 +127,23 @@ function OrderManage(props) {
                 ))}
               </TableBody>
             </Table>
+            <Chart
+              data={data= [
+                { year: '2020', sale: sale2020 },
+                { year: '2021', sale: sale2021 },
+              ]}
+              style={{margin:"100px 500px"}}
+            >
+              <ArgumentAxis />
+              <ValueAxis max={7} />
+
+              <BarSeries
+                valueField="sale"
+                argumentField="year"
+              />
+              <Title text="銷售報表" />
+              <Animation />
+            </Chart>
           </TableContainer>
         </div>
       </main>

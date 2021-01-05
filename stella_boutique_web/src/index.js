@@ -8,6 +8,7 @@ import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
 import myMiddleware from './middleware';
 import { Route, BrowserRouter } from 'react-router-dom';
+import '@devexpress/dx-react-chart-bootstrap4/dist/dx-react-chart-bootstrap4.css';
 
 
 const myStore = createStore(
