@@ -1,12 +1,18 @@
 import { Nav,Navbar,NavDropdown,Form,FormControl,Button } from 'react-bootstrap';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import { BrowserRouter} from 'react-router-dom';
-import SellerNavBar from './SellerNavBar';
+import { ArgumentScale, Animation } from '@devexpress/dx-react-chart';
+import { scalePoint } from 'd3-scale';
+import {
+  Chart,
+  BarSeries,
+  Title,
+  ArgumentAxis,
+  ValueAxis,
+} from '@devexpress/dx-react-chart-material-ui';
+
 
 import * as React from 'react';
-
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -23,20 +29,6 @@ import '../App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const columns = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'Date', headerName: 'Date', width: 130 },
-  { field: 'State', headerName: 'State', width: 130 },
-  {
-    field: 'Cost',
-    headerName: 'Cost',
-    type: 'number',
-    width: 90,
-  },
-];
-
-
-
 const useStyles = makeStyles({
   table: {
     margin:'100px',
@@ -45,7 +37,18 @@ const useStyles = makeStyles({
   },
 });
 
+
+
+
+
+
 function OrderManage(props) {
+  var sale2020 = 0;
+  var sale2021 = 0;
+  const data = [
+    { year: '2020', population: sale2020 },
+    { year: '2021', population: sale2021 },
+  ];
   const classes = useStyles();
   const history = useHistory();
 
@@ -58,12 +61,28 @@ function OrderManage(props) {
     { return "done" }
   }
 
+  function getsale (year,sale) {
+    console.log(year.toString().substring(0,4))
+    console.log(sale)
+    if (year.toString().substring(0,4) == '2020')
+    { sale2020 += sale }
+    else if (year.includes("2021")) 
+    { sale2021 += sale }
+    else 
+    { sale2020 += 0 }
+    return sale
+  }
+
   const processOrder = playload => {
     console.log("update order "+playload.orderID)
     props.updateStatus(playload.orderID,1)
   }
 
+
+
   return (
+    
+    
     <React.Fragment>
       <main>
       <div style={{ height: 400, width: '90%' , margin: '60px'}}>
@@ -79,23 +98,40 @@ function OrderManage(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.sellerOrder.map((order,index) => (
+          {props.sellerOrder.map((order,index) => 
+          (
             <TableRow align="left" key={index}>
               <TableCell component="th" scope="row">
                 {index+1}
               </TableCell>
               <TableCell>{order.orderDate}</TableCell>
               <TableCell align="right">{getstatus(order.status)}</TableCell>
-              <TableCell align="right">{order.totalPrice}</TableCell>
+              <TableCell align="right">{getsale(order.orderDate,order.totalPrice)}</TableCell>
               <TableCell align="right">
-                <Button onCLick={() => processOrder(order)}>Process</Button>
+                <Button onClick={() => processOrder(order)}>Process</Button>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+
+      <Chart
+          data={data}
+          style={{margin:"100px 500px"}}
+        >
+          <ArgumentAxis />
+          <ValueAxis max={7} />
+
+          <BarSeries
+            valueField="population"
+            argumentField="year"
+          />
+          <Title text="World population" />
+          <Animation />
+        </Chart>
     </TableContainer>
       </div>
+
       </main>
     </React.Fragment>
   );
