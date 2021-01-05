@@ -119,7 +119,7 @@ function OrderManage(props) {
                     </TableCell>
                     <TableCell>{order.orderDate}</TableCell>
                     <TableCell align="right">{getstatus(order.status)}</TableCell>
-                    <TableCell align="right">{order.totalPrice}</TableCell>
+                    <TableCell align="right">{getsale(order.orderDate.toString().substring(0,4),order.totalPrice)}</TableCell>
                     <TableCell align="right">
                       <Button onClick={() => processOrder(order)} disabled = {canProcess(order)} >Process</Button>
                     </TableCell>
@@ -127,6 +127,23 @@ function OrderManage(props) {
                 ))}
               </TableBody>
             </Table>
+            <Chart
+              data={data= [
+                { year: '2020', sale: sale2020 },
+                { year: '2021', sale: sale2021 },
+              ]}
+              style={{margin:"100px 500px"}}
+            >
+              <ArgumentAxis />
+              <ValueAxis max={7} />
+
+              <BarSeries
+                valueField="sale"
+                argumentField="year"
+              />
+              <Title text="銷售報表" />
+              <Animation />
+            </Chart>
           </TableContainer>
         </div>
       </main>
