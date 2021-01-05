@@ -117,7 +117,7 @@ const myMiddleware = store => next => action => {
         const body = {
             itemList: action.orderList,
             userID : localStorage.getItem("userID"),
-            disocuntID: action.disocuntID
+            discountID: action.discountID
         }
         console.log("middleware add order");
         console.log(body)
@@ -129,14 +129,17 @@ const myMiddleware = store => next => action => {
             console.log(err)
             alert("Creating Order Failed!")
         });
-    }  else if(action.type === "GET_ORDER_LIST"){
+    } else if(action.type === "GET_ORDER_LIST"){
         const headers = getHeaders(action.token);
         const body = {
             userID: action.userID
         }
         console.log("getting order history");
+        console.log(body)
+
         axios.post(API_HOST + '/user/history', body, {headers: headers})
         .then(response => {
+            console.log(response.data.orderList)
             action.setOrderList(response.data.orderList,store.dispatch);
         })
         .catch(err => {

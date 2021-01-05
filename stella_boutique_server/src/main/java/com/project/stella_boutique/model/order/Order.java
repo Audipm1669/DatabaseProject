@@ -89,7 +89,12 @@ public class Order {
 			for(int i = 0; i<this.Price.size();i++){
 				sum+=this.Price.get(i);
 			}
+			
+			System.out.println(sum);
+			System.out.println(value);
 			sum = (double)sum*value;
+			
+			System.out.println(sum);
 			return sum;
 		}else{
 			double sum = 0;
@@ -105,7 +110,9 @@ public class Order {
 	public void setPrice(int Price) {
 		this.Price.add(Price);
 	}
-	
+	public List<Integer>  getPrice() {
+		return this.Price;
+	}
 
 	public double getValue() {
 		return this.value;

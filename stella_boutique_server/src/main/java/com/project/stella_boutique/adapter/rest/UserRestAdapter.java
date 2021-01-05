@@ -146,9 +146,10 @@ public class UserRestAdapter {
     }
     @PostMapping(value = "/history")
     public ResponseEntity<HistoryOrderUseCaseOutput> HistoryOrder(@RequestBody HistoryOrderUseCaseInput requestBody) {
-        System.out.println("----------server----------");        
+        System.out.println("----------server get history----------");        
         HistoryOrderUseCaseInput input = new HistoryOrderUseCaseInput();
         HistoryOrderUseCaseOutput output = new HistoryOrderUseCaseOutput();
+        System.out.println(requestBody.getUserID());
         input.setUserID(requestBody.getUserID());
         // //----
         try {

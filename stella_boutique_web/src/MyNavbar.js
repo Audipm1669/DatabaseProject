@@ -262,8 +262,8 @@ function MyNavbar(props) {
       setUser: (username,userID) => {
         dispatch(setUser(username,userID))
       },
-      checkoutOrder: (orderList,disocuntID) => {
-        dispatch(checkoutOrder(orderList,disocuntID))
+      checkoutOrder: (orderList,discountID) => {
+        dispatch(checkoutOrder(orderList,discountID))
       },
       getOrderList: (userID) => {
         dispatch(getOrderList(userID))

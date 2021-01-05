@@ -68,9 +68,7 @@ CREATE TABLE IF NOT EXISTS `order` (
 CREATE TABLE IF NOT EXISTS `itemlist` (
   `orderItemID` int(6) NOT NULL,
   `orderID` int(6) NOT NULL,
-  `amount` int(11) NOT NULL,
-  CONSTRAINT `orderItemID` FOREIGN KEY (`orderItemID`) REFERENCES `item` (`id`),
-  CONSTRAINT `orderID` FOREIGN KEY (`orderID`) REFERENCES `order` (`id`)
+  `amount` int(11) NOT NULL
 );
 
 -- Table structure for table `rate`

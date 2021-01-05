@@ -67,9 +67,10 @@ public class AddOrderUseCase {
     public void addToItemList(Connection connection,AddOrderUseCaseInput input,AddOrderUseCaseOutput output) throws AddOrderErrorException {
         for(int i =0;i<input.getItemListLength();i++){
             int itemId = Integer.parseInt(input.getItemNo(i));
-
+            System.out.println("itemId");
+            System.out.println(itemId);
             Boolean status = isInItemList(connection,itemId,output.getId());
-            if(status){
+            if(status && itemId != 0 ){
                 int itemAmount = getAmount(connection,itemId,output.getId())+1;
                 
                 System.out.println("orderID");
@@ -96,7 +97,7 @@ public class AddOrderUseCase {
                     e.printStackTrace();
                 } 
             
-            }else{
+            }else if (itemId != 0){
                 try (PreparedStatement stmt = connection.prepareStatement(
                         "INSERT `itemlist` VALUES(?,?,?)"
                     )) {                        

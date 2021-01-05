@@ -41,7 +41,7 @@ public class HistoryOrderUseCase {
 
                         Order order = new Order(id,status,orderDate,discountID,input.getUserID());
                         getItemOrder(connection,order);
-                        order.setValue(getDiscountValue(connection,discountID));
+                        getDiscountValue(connection,discountID,order);
                         orderList.add(order);
                     }
                 }   
@@ -59,8 +59,12 @@ public class HistoryOrderUseCase {
                 while(rs.next()) {
                     int id = Integer.parseInt(rs.getString("orderItemID"));
                     int amount = Integer.parseInt(rs.getString("amount"));
+                    System.out.println("go to get item");
+                    System.out.println(id);
                     Item item = getItemByID(connection,id);
+                    System.out.println(item.getName());
                     order.addItemToList(item,amount);
+                    System.out.println(item.getPrice());
                     int price = Math.round(item.getPrice()) * amount;
                     order.setPrice(price);
                 }
@@ -85,6 +89,9 @@ public class HistoryOrderUseCase {
                     String description = rs.getString("description");
                     String pictureURL = rs.getString("pictureURL");
 
+                    System.out.println("get item");
+                    System.out.println(name);
+
                     item.setItemID(id);
                     item.setName(name);
                     item.setQuantity(quantity);
@@ -100,11 +107,10 @@ public class HistoryOrderUseCase {
         }
         return item;
     }
-    public double getDiscountValue(Connection connection,int discountID){
-        double valueDisc = 0;
+    public void getDiscountValue(Connection connection,int discountID,Order order){
         System.out.println("---------get discount value--------");
         try (PreparedStatement stmt = connection.prepareStatement(
-            "SELECT `value` FROM `discount` WHERE `id`= ? ")) {
+            "SELECT `value` FROM `discount` WHERE `id`= ?")) {
                 stmt.setString(1, String.valueOf(discountID));
             try (ResultSet rs = stmt.executeQuery()) {
                 while(rs.next()) {
@@ -112,12 +118,11 @@ public class HistoryOrderUseCase {
 
                     System.out.println("disocunt");
                     System.out.println(value);
-                    valueDisc = value;
+                    order.setValue(value);
                 }
             }
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        return valueDisc;
     }
 }
