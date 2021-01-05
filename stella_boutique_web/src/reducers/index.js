@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
     registerUser: registerReducer,
     ProductList: productReducer,
     userOrderList: UserOrderListReducer,
-    UserMyLike: UserMyLikeReducer
+    userMyLike: UserMyLikeReducer
 })
 
 export default rootReducer

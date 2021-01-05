@@ -5,6 +5,8 @@ export function loginUser(username, password, userID) {
         password: password,
         userID: userID,
         setUser:(username, userID, dispatch) => dispatch(setUser(username, userID)),
+        setLikeItemList:(userOrderList, dispatch) => dispatch(setLikeItemList(userOrderList)),
+        setOrderList:(userOrderList, dispatch) => dispatch(setOrderList(userOrderList))
     }
 }
 
@@ -89,8 +91,8 @@ export function getLikeItemList(userID ){
 }
 export function setLikeItemList(userMyLikeList){
     return{
-        type: "SET_ORDER_LIST",
-        userOrderList: userMyLikeList
+        type: "SET_MY_LIKE_LIST",
+        userMyLikeList: userMyLikeList
     }
 }
 

@@ -68,19 +68,6 @@ export default function OrderManage() {
     
     
     <React.Fragment>
-
-        <Navbar bg="dark" variant="dark" className="menu-bar" expand="lg">
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-            <BrowserRouter>
-              <Nav.Link href="/ProductManage">PRODUCT</Nav.Link>
-              <Nav.Link href="/OrderManage">ORDER</Nav.Link>
-              <Nav.Link href="/MemberManage">MEMBER</Nav.Link>
-            </BrowserRouter>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
       <main>
 
       <div style={{ height: 400, width: '90%' , margin: '60px'}}>

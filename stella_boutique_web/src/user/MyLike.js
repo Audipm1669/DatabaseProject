@@ -5,8 +5,9 @@ import AlbumJson from '../Album.json';
 import { Nav,Navbar,Form,FormControl,Button } from 'react-bootstrap';
 import { BrowserRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getOrderList, removeLikeItem} from '../actions';
+import { getOrderList, removeLikeItem , getLikeItemList} from '../actions';
 import { useHistory } from 'react-router-dom';
+import ProductItem from '../ProductItem';
 
 import { Container, Row, Col, Jumbotron, Card, CardImg, CardBody ,  CardTitle, CardSubtitle, CardText, Badge } from 'reactstrap';
 
@@ -15,62 +16,50 @@ function MyLike(props){
   const history = useHistory();
   const userID = useState(localStorage.getItem("userID"));
 
+  function GoToMyLikes(){
+    props.getLikeItemList(userID)
+    console.log("item like"+ props.userMyLike)
+    console.log("product list "+ props.ProductList)
+    history.push("/MyLike")
+  }
   function GoToHistory(){
     props.getOrderList(userID)
     history.push("/MyOrder")
   }
-  // state = {
-  //   album: AlbumJson,
-  // }
-      // const { album } = this.astate;
-        return (
-            <div>
-              <Navbar bg="dark" variant="dark" className="menu-bar" expand="lg">
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                  <Nav className="mr-auto">
-                  <BrowserRouter>
-                    <Nav.Link href="/MyLike">LIKE</Nav.Link>
-                    <Nav.Link onClick={GoToHistory}>ORDER</Nav.Link>
-                  </BrowserRouter>
-                  </Nav>
-                </Navbar.Collapse>
-              </Navbar>
-                <div style={{margin:'10px' , display: 'flex',  justifyContent:'flex-end ', alignItems:'center'}}>
-                    <Form inline>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button variant="outline-dark">Search</Button>
-                    </Form>
-                </div>
-                <Row style={{margin:'10px 100px' , display: 'flex',  justifyContent:'flex-end ', alignItems:'center'}}>
-                {/* {
-                  album.map(product => (
-                    <Col sm={6} md={4} className="mb-3">
-                      <Card style={{margin:'0px 50px'}}>
-                        <CardImg src={require("../img/clothes/Dress/ClassicCheongsamInPastel.jpg")} alt="Card image cap" />
-                        <CardBody >
-                          <CardTitle>{product.title}</CardTitle>
-                          <CardSubtitle> 
-                            <h4>
-                              
-                                <Badge color="success">售價：{product.price}</Badge>
-                              
-                            </h4>
-                          </CardSubtitle>
-                          <CardText>{product.desc}</CardText>
-                          <Button color="secondary">Unlike</Button>
-                        </CardBody >
-                      </Card>
-                    </Col>
-                  ))
-                } */}
-                </Row>
-
-                
+    return (
+        <div>
+            <div style={{margin:'10px' , display: 'flex',  justifyContent:'flex-end ', alignItems:'center'}}>
+                <Form inline>
+                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                    <Button variant="outline-dark">Search</Button>
+                </Form>
             </div>
-        );
+            <Row style={{margin:'10px 100px' , display: 'flex',  justifyContent:'flex-end ', alignItems:'center'}}>
+            {console.log(props.ProductList)}
+            {console.log(props.userMyLike)}
+            {
+              props.ProductList.map((item,key) => {
+                return(
+                  props.userMyLike.map((likeItem,key1) => {
+                    if(item.itemID == likeItem){
+                      return(
+                        <ProductItem key={item.itemID} product={item}/>
+                      )
+                    }
+                  })
+                )
+              })
+            }
+            </Row>
+        </div>
+    );
 }
-
+function mapStateToProps(state) {
+  return {
+    userMyLike: state.userMyLike,    
+    ProductList: state.ProductList
+  }
+}
 function mapDispatchToProps(dispatch) {
   return {
     getOrderList: (userID) => {
@@ -84,4 +73,4 @@ function mapDispatchToProps(dispatch) {
     }
   }
 }
-export default connect(null,mapDispatchToProps)(MyLike);
+export default connect(mapStateToProps,mapDispatchToProps)(MyLike);

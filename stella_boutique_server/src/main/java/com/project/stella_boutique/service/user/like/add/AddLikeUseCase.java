@@ -36,4 +36,5 @@ public class AddLikeUseCase {
         }
         output.setItemID(input.getItemID());
     }
+
 }

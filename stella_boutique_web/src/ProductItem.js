@@ -22,6 +22,19 @@ function ProductItem(props){
         console.log('addProduct' +payload.itemID );
     }
 
+    const getLike = () => {
+        console.log('item id ' + props.product.itemID );
+        props.userMyLike.map((likeItem)=>{
+            console.log('like id ' + likeItem );
+            if(props.product.itemID == likeItem){
+                console.log("true")
+                like = true;
+            }else{
+                like = false;
+            }
+        })
+    }
+
     const addLike = payload => {
         if(like == false)
         {   
@@ -55,13 +68,22 @@ function ProductItem(props){
                 <CardText>{props.product.description}</CardText>
                 <Button color="secondary" onClick={() => addProduct(props.product)}>購買</Button>
                 <IconButton aria-label="add like">
-                    <FavoriteIcon color={likeColor} onClick={() => addLike(props.product)} /> 
+                    {getLike()}
+                    {like?
+                        <FavoriteIcon color={likeColor} onClick={() => addLike(props.product)} /> :
+                        <FavoriteIcon color="primary" onClick={() => addLike(props.product)} /> 
+                    }
                 </IconButton>
                 </CardBody >
             </Card>
          </Col>
      );
 }
+function mapStateToProps(state) {
+    return {
+      userMyLike: state.userMyLike
+    }
+  }
 function mapDispatchToProps(dispatch) {
     return {
       removeLikeItem: (userID,itemID) => {
@@ -72,4 +94,4 @@ function mapDispatchToProps(dispatch) {
       } 
     }
   }
-  export default connect(null,mapDispatchToProps)(ProductItem);
+  export default connect(mapStateToProps,mapDispatchToProps)(ProductItem);

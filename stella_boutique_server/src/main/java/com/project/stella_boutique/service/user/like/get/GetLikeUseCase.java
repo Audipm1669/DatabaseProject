@@ -29,7 +29,7 @@ public class GetLikeUseCase {
                     stmt.setString(1, Integer.toString(input.getUserID()));
                 try (ResultSet rs = stmt.executeQuery()) {
                     while(rs.next()) {
-                        int id = Integer.parseInt(rs.getString("id"));
+                        int id = Integer.parseInt(rs.getString("itemID"));
                         
                         itemList.add(id);
                     }

@@ -1,16 +1,8 @@
-import { Nav,Navbar,NavDropdown,Form,FormControl,Button } from 'react-bootstrap';
-import Typography from '@material-ui/core/Typography';
+import { Nav,Navbar } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
-
-import Divider from '@material-ui/core/Divider';
-
 import { connect } from 'react-redux';
 import { BrowserRouter} from 'react-router-dom';
-
-import * as React from 'react';
-import { DataGrid } from '@material-ui/data-grid';
-
-
+import React, { useState } from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -20,7 +12,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { useHistory } from 'react-router-dom';
 
-import { getOrderList} from '../actions';
+import { getOrderList , getLikeItemList} from '../actions';
 
 import '../App.css';
 
@@ -38,8 +30,6 @@ const columns = [
   },
 ];
 
-
-
 const useStyles = makeStyles({
   table: {
     margin:'100px',
@@ -48,19 +38,17 @@ const useStyles = makeStyles({
   },
 });
 
-
-
 function MyOrder(props) {
   const classes = useStyles();
   const history = useHistory();
+  const [userID,setUserID] = useState(localStorage.getItem("userID"));
 
   function GoToMyLikes(){
+    props.getLikeItemList(userID)
     history.push("/MyLike")
   }
   function GoToHistory(){
-    console.log("get order")
-    console.log(localStorage.getItem("userID"))
-    props.getOrderList(localStorage.getItem("userID"))
+    props.getOrderList(userID)
     history.push("/MyOrder")
   }
 
@@ -77,19 +65,7 @@ function MyOrder(props) {
 
   return (
     <React.Fragment>
-        <Navbar bg="dark" variant="dark" className="menu-bar" expand="lg">
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-            <BrowserRouter>
-              <Nav.Link onClick = {GoToMyLikes}>LIKE</Nav.Link>
-              <Nav.Link onClick = {GoToHistory}>ORDER</Nav.Link>
-            </BrowserRouter>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
       <main>
-
       <div style={{ height: 400, width: '90%' , margin: '60px'}}>
       <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -122,14 +98,15 @@ function MyOrder(props) {
 }
 function mapStateToProps(state) {
   return {
-    userOrderList: state.userOrderList
+    userOrderList: state.userOrderList,
+    userMyLikeList: state.userMyLikeList
   }
 }
 function mapDispatchToProps(dispatch) {
   return {
     getOrderList: (userID) => {
       dispatch(getOrderList(userID))
-    },git pu
+    },
     getLikeItemList: (userID) => {
       dispatch(getLikeItemList(userID))
     }

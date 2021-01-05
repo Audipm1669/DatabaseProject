@@ -1,10 +1,10 @@
 import React,{ useState,useEffect } from 'react';
 import { Nav ,Navbar ,Button } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
-import './App.css';
+import '../App.css';
 import {  Modal, ModalHeader, ModalBody, ModalFooter, Table, Alert} from 'reactstrap';
 import { connect } from 'react-redux';
-import { setUser , checkoutOrder , getOrderList , getLikeItemList} from './actions';
+import { setUser , checkoutOrder , getOrderList , getLikeItemList} from '../actions';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
     
-function MyNavbar(props) {
+function SellerNavBar(props) {
     var totalPrice = 0;
     const [userID,setUserID] = useState(localStorage.getItem("userID"));
     const [username,setUername] = useState(localStorage.getItem("username"));
@@ -143,9 +143,13 @@ function MyNavbar(props) {
       //alert to tell user checkout sucess
       console.log('handleCheckout' );
     }
+    function handleLogout() {
+        localStorage.clear();
+        window.location.href = '/';
+      }
     return (
       <React.Fragment>
-        <Navbar className="brand-bar" style={{justifyContent:'space-between'}}>
+        {/* <Navbar className="brand-bar" style={{justifyContent:'space-between'}}>
           <Navbar.Brand href="/">Stella Boutique</Navbar.Brand>
             <div>
               <p>Welome{userID == null?null:", "+username} </p> 
@@ -185,54 +189,20 @@ function MyNavbar(props) {
             }
             
           </Navbar.Collapse>
+        </Navbar> */}
+        <Navbar bg="dark" variant="dark" className="menu-bar" expand="lg">
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link href="/ProductManage">PRODUCT</Nav.Link>
+              <Nav.Link href="/OrderManage">ORDER</Nav.Link>
+              <Nav.Link href="/MemberManage">MEMBER</Nav.Link>
+            </Nav>
+            <Nav className="mr-right">
+              <Nav.Link onClick={handleLogout}>LOGOUT</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
         </Navbar>
-
-        <Modal isOpen={cartOpen} toggle={handleCartOpen}>
-          <ModalHeader toggle={handleCartOpen}>購物車</ModalHeader>
-          <ModalBody>
-            <Table>
-              <thead>
-                <tr>
-                    <th>#</th>
-                    <th>品項</th>
-                    <th>價格</th>
-                    <th>     </th>
-                </tr>
-              </thead>
-              <tbody>
-              {
-                cartItems.map((cartItem,key1)=>{
-                  return(
-                  props.ProductList.map((item,key) => {
-                    if(cartItem.toString() == item.itemID.toString()){
-                      { totalPrice += item.price }
-                      return(
-                        <tr>
-                          <th scope="row">{1}</th>
-                          <td>{item.name}</td>
-                          <td>{item.price}</td>
-                          <td><button onClick={() => removeProduct(item)}>-</button></td>
-                        </tr>
-                        
-                      )
-                    }
-                })
-                )
-              })
-              } 
-              </tbody>
-            </Table>
-            <Alert color="success" className="text-right">
-                總價：
-                {totalPrice}
-                元
-              </Alert>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={handleCheckout}>結帳</Button>
-            <Button color="secondary" onClick={clearCart}>取消</Button>
-          </ModalFooter>
-        </Modal>
       </React.Fragment>
     );
   }
@@ -261,4 +231,4 @@ function MyNavbar(props) {
       }
     }
   }
-  export default connect(mapStateToProps,mapDispatchToProps)(MyNavbar);
+  export default connect(mapStateToProps,mapDispatchToProps)(SellerNavBar);

@@ -109,8 +109,7 @@ const myMiddleware = store => next => action => {
         console.log("middleware add order");
         axios.post(API_HOST + '/user/create/order', body, {headers: headers})
         .then(response => {
-            console.log("middleware " + body.itemList)
-            console.log("middleware " + body.userID)
+            alert(`已從您的信用卡中扣除！`);
         })
         .catch(err => {
             console.log(err)
@@ -125,7 +124,6 @@ const myMiddleware = store => next => action => {
         axios.post(API_HOST + '/user/history', body, {headers: headers})
         .then(response => {
             action.setOrderList(response.data.orderList,store.dispatch);
-            console.log(response.data.orderList);
         })
         .catch(err => {
             console.log(err)
@@ -141,8 +139,6 @@ const myMiddleware = store => next => action => {
         console.log(body);
         axios.post(API_HOST + '/user/add/like', body, {headers: headers})
         .then(response => {
-            console.log("middleware " + body.itemList)
-            console.log("middleware " + body.userID)
             alert(`已加入到您的喜歡商品中！`);
         })
         .catch(err => {
@@ -176,6 +172,7 @@ const myMiddleware = store => next => action => {
         axios.post(API_HOST + '/user/get/like', body, {headers: headers})
         .then(response => {
             action.setLikeItemList(response.data.likeList,store.dispatch);
+            console.log("like list " +response.data.likeList )
         })
         .catch(err => {
             console.log(err)
