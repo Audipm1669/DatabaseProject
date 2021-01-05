@@ -225,6 +225,23 @@ const myMiddleware = store => next => action => {
             console.log(err)
             alert("Changing Status Failed!")
         });
+    }else if(action.type === "EDIT_PRODUCT"){
+        const headers = getHeaders(action.token);
+        const body = {
+            itemID: action.itemID,
+            name: action.name,
+            price: action.price,
+            description: action.description
+        }
+        console.log("update product");
+        axios.post(API_HOST + '/seller/update/product', body, {headers: headers})
+        .then(response => {
+            console.log("product have been update");
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Edit Product Failed!")
+        });
     }else {
         return next(action)
     }

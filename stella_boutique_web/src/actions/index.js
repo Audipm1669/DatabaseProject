@@ -5,7 +5,7 @@ export function loginUser(username, password, userID) {
         password: password,
         userID: userID,
         setUser:(username, userID, dispatch) => dispatch(setUser(username, userID)),
-        setLikeItemList:(userOrderList, dispatch) => dispatch(setLikeItemList(userOrderList)),
+        setLikeItemList:(userMyLike, dispatch) => dispatch(setLikeItemList(userMyLike)),
         setOrderList:(userOrderList, dispatch) => dispatch(setOrderList(userOrderList))
     }
 }
@@ -86,13 +86,13 @@ export function getLikeItemList(userID ){
     return{
         type: "GET_LIKE_ITEM",
         userID: userID,        
-        setLikeItemList:(userOrderList, dispatch) => dispatch(setLikeItemList(userOrderList))
+        setLikeItemList:(userMyLike, dispatch) => dispatch(setLikeItemList(userMyLike))
     }
 }
-export function setLikeItemList(userOrderList){
+export function setLikeItemList(userMyLike){
     return{
         type: "SET_MY_LIKE_LIST",
-        userOrderList: userOrderList
+        userMyLike: userMyLike
     }
 }
 export function enterAdmin(){
@@ -126,5 +126,14 @@ export function updateStatus(orderID , status){
         type: "UPDATE_STATUS",
         orderID: orderID,
         status: status
+    }
+}
+export function editProduct(itemID,name,price,description){
+    return{
+        type: "EDIT_PRODUCT",
+        itemID: itemID,
+        name: name,
+        price: price,
+        description: description
     }
 }
