@@ -137,3 +137,23 @@ export function editProduct(itemID,name,price,description){
         description: description
     }
 }
+export function removeProduct(itemID){
+    return{
+        type: "REMOVE_PRODUCT",
+        itemID: itemID
+    }
+}
+export function addProduct(name,quantity,category,size,price,description,pictureURL){
+    return{
+        type: "ADD_PRODUCT",
+        name: name,
+        quantity: quantity,
+        category: category,
+        size: size,
+        price: price,
+        description: description,
+        pictureURL: pictureURL
+
+
+    }
+}

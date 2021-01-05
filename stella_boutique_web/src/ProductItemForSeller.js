@@ -10,21 +10,26 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+import {editProduct,removeProduct} from './actions';
 
 function ProductItemForSeller(props){
     var cartItems = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
     const onSaveName = (val,payload) => {
         console.log('Edited name -> ', val)
         console.log('product name -> ',payload.name)
+        // props.editProduct(payload.itemID,payload.name,payload.price,payload.description)
+        props.editProduct(payload.itemID,val,payload.price,payload.description)
     }
 
     const onSavePrice = (val,payload) => {
-        console.log('Edited price -> ', val)
+        console.log(val)
+        console.log(payload.price)
+        props.editProduct(payload.itemID,payload.name,val,payload.description)
     }
 
     const onSaveDescription = (val,payload) =>  {
         console.log('Edited description -> ', val)
+        props.editProduct(payload.itemID,payload.name,payload.price,val)
     }
 
     const [open, setOpen] = React.useState(false);
@@ -39,16 +44,8 @@ function ProductItemForSeller(props){
     const [userID,setUserID] = useState(localStorage.getItem("userID"));
     
     const deleteProduct = payload => {
-
-        
-    }
-
-    const editProduct = payload => {
-        console.log('Edited payload.name -> ', payload.name)
-        // payload.name = name;
-        // payload.price = price;
-        // payload.description = description;
-        
+        console.log('delete  -> ', payload.itemID)
+        props.removeProduct(payload.itemID);
     }
     
     return ( 
@@ -57,6 +54,13 @@ function ProductItemForSeller(props){
                 <div className="img">
                     <CardImg className="card-img" src={require(""+props.product.pictureURL)} alt="Card image cap" />
                 </div>
+                {props.product.quantity==0?
+                    <div>
+                        <p>賣完</p>
+                    </div>
+                    :
+                    null
+                }
                 <CardBody >
                     <EdiText
                     type='text'
@@ -128,12 +132,12 @@ function ProductItemForSeller(props){
 }
 function mapDispatchToProps(dispatch) {
     return {
-    //   deleteProduct: (userID,itemID) => {
-    //     dispatch(deleteProduct(userID,itemID))
-    //   },
-    //   editProduct: (userID,itemID) => {
-    //     dispatch(editProduct(userID,itemID))
-    //   } 
+    removeProduct: (itemID) => {
+        dispatch(removeProduct(itemID))
+      },
+    editProduct: (itemID,name,price,description) => {
+        dispatch(editProduct(itemID,name,price,description))
+      } 
     }
   }
   export default connect(null,mapDispatchToProps)(ProductItemForSeller);

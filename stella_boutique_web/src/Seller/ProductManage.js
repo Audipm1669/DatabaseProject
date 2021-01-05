@@ -25,8 +25,6 @@ class ProductManage extends Component {
                 <Row style={{margin:'10px 100px' , display: 'flex',  justifyContent:'flex-end ', alignItems:'center'}}>
                 {
                   this.props.sellerProduct.map((item,key) => {
-                    
-                      console.log(item.itemID)
                       return(
                        <ProductItemForSeller key={item.itemID} product={item}/>
                       )

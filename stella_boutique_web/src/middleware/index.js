@@ -233,6 +233,7 @@ const myMiddleware = store => next => action => {
             price: action.price,
             description: action.description
         }
+        console.log(body);
         console.log("update product");
         axios.post(API_HOST + '/seller/update/product', body, {headers: headers})
         .then(response => {
@@ -242,6 +243,43 @@ const myMiddleware = store => next => action => {
             console.log(err)
             alert("Edit Product Failed!")
         });
+    }else if(action.type === "REMOVE_PRODUCT"){
+        const headers = getHeaders(action.token);
+        const body = {
+            itemID: action.itemID
+        }
+        console.log(body);
+        console.log("remove product");
+        axios.post(API_HOST + '/seller/remove/product', body, {headers: headers})
+        .then(response => {
+            console.log("product have been remove");
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Remove Product Failed!")
+        });
+    }else if(action.type === "ADD_PRODUCT"){
+        const headers = getHeaders(action.token);
+        const body = { 
+            name: action.name,
+            quantity: action.quantity,
+            category: action.category,
+            size: action.size,
+            price: action.price,
+            description: action.description,
+            pictureURL: action.pictureURL
+        }
+        console.log(body);
+        console.log("adding product");
+        axios.post(API_HOST + '/seller/add/product', body, {headers: headers})
+        .then(response => {
+            console.log("product have been add");
+            alert("Add Product Success!")
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Add Product Failed!")
+        });
     }else {
         return next(action)
     }
@@ -250,3 +288,7 @@ const myMiddleware = store => next => action => {
 }
 
 export default myMiddleware
+
+
+
+

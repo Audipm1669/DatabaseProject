@@ -175,8 +175,9 @@ public class SellerRestAdapter {
     //--------------------------------------------------------------------------------------------------------------------------------
     @PostMapping(value = "/add/product")
     public ResponseEntity<AddSellerProductUseCaseOutput> addProduct(@RequestBody AddSellerProductUseCaseInput requestBody) {
-        AddSellerProductUseCaseInput input = new AddSellerProductUseCaseInput();
+        AddSellerProductUseCaseInput input = new AddSellerProductUseCaseInput(requestBody.getName(),requestBody.getQuantity(),requestBody.getCategory(),requestBody.getSize(),requestBody.getPrice(),requestBody.getDescription(),requestBody.getPictureURL());
         AddSellerProductUseCaseOutput output = new AddSellerProductUseCaseOutput();
+        
         //------------------------------Unfinished------------------------------
         //----------------------------------------------------------------------
         try {
@@ -199,9 +200,10 @@ public class SellerRestAdapter {
     }
 
     @PostMapping(value = "/remove/product")
-    public ResponseEntity<RemoveSellerProductUseCaseOutput> removeProduct(@RequestBody RemoveSellerDiscountUseCaseInput requestBody) {
+    public ResponseEntity<RemoveSellerProductUseCaseOutput> removeProduct(@RequestBody RemoveSellerProductUseCaseInput requestBody) {
         RemoveSellerProductUseCaseInput input = new RemoveSellerProductUseCaseInput();
         RemoveSellerProductUseCaseOutput output = new RemoveSellerProductUseCaseOutput();
+        input.setItemID(requestBody.getItemID());
         //------------------------------Unfinished------------------------------
         //----------------------------------------------------------------------
         try {
@@ -216,6 +218,10 @@ public class SellerRestAdapter {
     public ResponseEntity<UpdateSellerProductUseCaseOutput> updateProduct(@RequestBody UpdateSellerProductUseCaseInput requestBody) {
         UpdateSellerProductUseCaseInput input = new UpdateSellerProductUseCaseInput();
         UpdateSellerProductUseCaseOutput output = new UpdateSellerProductUseCaseOutput();
+        input.setItemID(requestBody.getItemID());
+        input.setName(requestBody.getName());
+        input.setDescription(requestBody.getDescription());
+        input.setPrice(requestBody.getPrice());
         //------------------------------Unfinished------------------------------
         //----------------------------------------------------------------------
         try {
