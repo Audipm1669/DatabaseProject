@@ -78,6 +78,13 @@ function OrderManage(props) {
   const processOrder = playload => {
     console.log("update order "+playload.orderID)
     props.updateStatus(playload.orderID,1)
+    window.location.href = "/OrderManage"
+  }
+
+  const canProcess = playload => {
+    console.log("Check Process "+playload.orderID)
+    if(playload.status != 0)
+      return true;
   }
   console.log("----------")
   console.log(sale2020)
@@ -92,57 +99,36 @@ function OrderManage(props) {
     
     <React.Fragment>
       <main>
-      <div style={{ height: 400, width: '90%' , margin: '60px'}}>
-      <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="left">No</TableCell>
-            <TableCell>Date</TableCell>
-            <TableCell align="right">Status</TableCell>
-            <TableCell align="right">Total Price</TableCell>
-            <TableCell align="right"></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {props.sellerOrder.map((order,index) => 
-          (
-            <TableRow align="left" key={index}>
-              <TableCell component="th" scope="row">
-                {index+1}
-              </TableCell>
-              <TableCell>{order.orderDate}</TableCell>
-              <TableCell align="right">{getstatus(order.status)}</TableCell>
-              <TableCell align="right">{getsale(order.orderDate.toString().substring(0,4),order.totalPrice)}</TableCell>
-              <TableCell align="right">
-                <Button onClick={() => processOrder(order)}>Process</Button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      
-
-      <Chart
-          data={data= [
-            { year: '2020', sale: sale2020 },
-            { year: '2021', sale: sale2021 },
-          ]}
-          style={{margin:"100px 500px"}}
-        >
-          <ArgumentAxis />
-          <ValueAxis max={7} />
-
-          <BarSeries
-            valueField="sale"
-            argumentField="year"
-          />
-          <Title text="銷售報表" />
-          <Animation />
-        </Chart>
-    </TableContainer>
-      </div>
-
+        <div style={{ height: 400, width: '90%' , margin: '60px'}}>
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="left">No</TableCell>
+                  <TableCell>Date</TableCell>
+                  <TableCell align="right">Status</TableCell>
+                  <TableCell align="right">Total Price</TableCell>
+                  <TableCell align="right"></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {props.sellerOrder.map((order,index) => (
+                  <TableRow align="left" key={index}>
+                    <TableCell component="th" scope="row">
+                      {index+1}
+                    </TableCell>
+                    <TableCell>{order.orderDate}</TableCell>
+                    <TableCell align="right">{getstatus(order.status)}</TableCell>
+                    <TableCell align="right">{order.totalPrice}</TableCell>
+                    <TableCell align="right">
+                      <Button onClick={() => processOrder(order)} disabled = {canProcess(order)} >Process</Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
       </main>
     </React.Fragment>
   );
