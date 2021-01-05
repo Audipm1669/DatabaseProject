@@ -6,9 +6,6 @@ import { withRouter } from "react-router-dom";
 import { Container, Row, Col, Jumbotron, Card, CardImg, CardBody ,  CardTitle, CardSubtitle, CardText, Badge } from 'reactstrap';
 import { Form,FormControl,Button } from 'react-bootstrap';
 import ProductItemForSeller from '../ProductItemForSeller';
-import { Nav,Navbar,NavDropdown } from 'react-bootstrap';
-import { BrowserRouter} from 'react-router-dom';
-import SellerNavBar from './SellerNavBar';
 
 
 class ProductManage extends Component {
@@ -28,8 +25,6 @@ class ProductManage extends Component {
     render() {
         return (
             <div>
-              
-              <SellerNavBar/>
                 <div style={{margin:'10px' , display: 'flex',  justifyContent:'flex-end ', alignItems:'center'}}>
                     <Form inline>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />

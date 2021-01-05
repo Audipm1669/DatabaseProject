@@ -64,7 +64,6 @@ function OrderManage(props) {
 
   return (
     <React.Fragment>
-        <SellerNavBar/>
       <main>
 
       <div style={{ height: 400, width: '90%' , margin: '60px'}}>
