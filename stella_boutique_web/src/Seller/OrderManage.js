@@ -54,9 +54,7 @@ function OrderManage(props) {
   function getstatus (status) {
     if (status == 0)
     { return "new order"}
-    else if (status == 1)
-    { return "checkout" }
-    else if (status == 2) 
+    else if (status == 1) 
     { return "shipout" }
     else 
     { return "done" }

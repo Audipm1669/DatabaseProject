@@ -197,6 +197,7 @@ function SellerNavBar(props) {
               <Nav.Link href="/ProductManage">PRODUCT</Nav.Link>
               <Nav.Link href="/OrderManage">ORDER</Nav.Link>
               <Nav.Link href="/MemberManage">MEMBER</Nav.Link>
+              <Nav.Link href="/AddProduct">ADD PRODUCT</Nav.Link>
             </Nav>
             <Nav className="mr-right">
               <Nav.Link onClick={handleLogout}>LOGOUT</Nav.Link>
