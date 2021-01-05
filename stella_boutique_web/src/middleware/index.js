@@ -116,9 +116,11 @@ const myMiddleware = store => next => action => {
         const headers = getHeaders(action.token);
         const body = {
             itemList: action.orderList,
-            userID : localStorage.getItem("userID")
+            userID : localStorage.getItem("userID"),
+            disocuntID: action.disocuntID
         }
         console.log("middleware add order");
+        console.log(body)
         axios.post(API_HOST + '/user/create/order', body, {headers: headers})
         .then(response => {
             alert(`已從您的信用卡中扣除！`);

@@ -10,10 +10,18 @@ import java.time.LocalDateTime;
 public class AddOrderUseCaseInput {
     private Date orderDate;
     private int status;
-    private String discountID;
+    private int discountID;
 	private int userID;
 	private List<String> itemList;
 
+
+	public int getDiscountID() {
+		return this.discountID;
+	}
+
+	public void setDiscountID(int discountID) {
+		this.discountID = discountID;
+	}
 
 	public List<String> getItemList() {
 		return this.itemList;
@@ -41,14 +49,6 @@ public class AddOrderUseCaseInput {
 
 	public void setStatus() {
 		this.status = status;
-	}
-
-	public String getDiscountID() {
-		return this.discountID;
-	}
-
-	public void setDiscountID(String discountID) {
-		this.discountID = discountID;
 	}
 
 	public int getUserID() {

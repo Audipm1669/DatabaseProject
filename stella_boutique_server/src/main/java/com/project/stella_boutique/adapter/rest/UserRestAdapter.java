@@ -128,6 +128,13 @@ public class UserRestAdapter {
         System.out.println(input.getItemList());        
         System.out.println(input.getUserID());
         System.out.println("----------server----------");
+        System.out.println(requestBody.getDiscountID());
+        System.out.println(requestBody.getDiscountID()==0);
+        if(requestBody.getDiscountID()!=0){
+            input.setDiscountID(requestBody.getDiscountID());
+        }else{
+            input.setDiscountID(1);
+        }
 
         // //----
         try {

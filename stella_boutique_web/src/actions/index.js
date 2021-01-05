@@ -54,10 +54,11 @@ export function setProductList(productList) {
     }
 }
 
-export function checkoutOrder(orderList){
+export function checkoutOrder(orderList,disocuntID){
     return{
         type: "ADD_ORDER",
-        orderList: orderList
+        orderList: orderList,
+        disocuntID: disocuntID
     }
 }
 

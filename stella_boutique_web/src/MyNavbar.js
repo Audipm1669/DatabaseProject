@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 function MyNavbar(props) {
     var totalPrice = 0;
     const [discount, setDiscount] = useState("");
+    const [discountID,setDiscountID] = useState(0);
     const [userID,setUserID] = useState(localStorage.getItem("userID"));
     const [username,setUername] = useState(localStorage.getItem("username"));
     const classes = useStyles();
@@ -112,7 +113,7 @@ function MyNavbar(props) {
 
     const handleCheckout = () => {
       cartItems = JSON.parse(localStorage.getItem('cart'));
-      props.checkoutOrder(cartItems);
+      props.checkoutOrder(cartItems,discountID);
       clearCart();
       //alert to tell user checkout sucess
       console.log('handleCheckout' );
@@ -128,6 +129,7 @@ function MyNavbar(props) {
         console.log(disc.code == discount)
         if(disc.code == discount){
           value = disc.value
+          setDiscountID(disc.discountID);
           found=true;
         }
       })
@@ -260,8 +262,8 @@ function MyNavbar(props) {
       setUser: (username,userID) => {
         dispatch(setUser(username,userID))
       },
-      checkoutOrder: (orderList) => {
-        dispatch(checkoutOrder(orderList))
+      checkoutOrder: (orderList,disocuntID) => {
+        dispatch(checkoutOrder(orderList,disocuntID))
       },
       getOrderList: (userID) => {
         dispatch(getOrderList(userID))

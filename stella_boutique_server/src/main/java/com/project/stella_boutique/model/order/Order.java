@@ -14,6 +14,7 @@ public class Order {
 	private List<List<Object>> itemList;
 	private List<Integer> Price;
 	private int totalPrice;
+	private double value;
 
 	public Order(int orderID, int status, String orderDate, int discountID, int userID){
 		this.orderID = orderID;
@@ -82,17 +83,36 @@ public class Order {
 		this.itemList.add(order);
 	}
 
-	public int getTotalPrice() {
-		int sum = 0;
-		for(int i = 0; i<this.Price.size();i++){
-			sum+=this.Price.get(i);
+	public double getTotalPrice() {
+		if(this.discountID!=1){
+			double sum = 0;
+			for(int i = 0; i<this.Price.size();i++){
+				sum+=this.Price.get(i);
+			}
+			sum = (double)sum*value;
+			return sum;
+		}else{
+			double sum = 0;
+			for(int i = 0; i<this.Price.size();i++){
+				sum+=this.Price.get(i);
+			}
+			sum = (double)sum;
+			return sum;
 		}
-		this.totalPrice = sum;
-		return sum;
+		
 	}
 
 	public void setPrice(int Price) {
 		this.Price.add(Price);
+	}
+	
+
+	public double getValue() {
+		return this.value;
+	}
+
+	public void setValue(double value) {
+		this.value = value;
 	}
 	
 }

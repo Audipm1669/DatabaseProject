@@ -24,16 +24,19 @@ public class AddOrderUseCase {
 
     public void execute(AddOrderUseCaseInput input,AddOrderUseCaseOutput output) throws AddOrderErrorException {
         System.out.println("create");
+        System.out.println(input.getDiscountID());
+
         try(Connection connection = this.mysqlDriver.getConnection()) {
             try (PreparedStatement stmt = connection.prepareStatement(
                     "INSERT INTO `order`" +
-                    "(`orderDate`,`status`,`orderUserID`)" +
-                    "VALUES(?, ?, ?)"
+                    "(`orderDate`,`status`,`discountID`,`orderUserID`)" +
+                    "VALUES(?, ?, ?, ?)"
                 )) {
                     stmt.setString(1, input.getOrderDateString());
-                    stmt.setString(2, String.valueOf(input.getStatus()));
-                    stmt.setString(3, String.valueOf(input.getUserID()));
-
+                    stmt.setString(2, String.valueOf(input.getStatus()));                    stmt.setString(2, String.valueOf(input.getStatus()));
+                    stmt.setString(3, String.valueOf(input.getDiscountID()));
+                    stmt.setString(4, String.valueOf(input.getUserID()));
+                    System.out.println(input.getDiscountID());
                     System.out.println("-------service---------");
                     stmt.executeUpdate();
                     System.out.println("-------get order id---------");
@@ -164,6 +167,7 @@ public class AddOrderUseCase {
         }
         return itemAmount;
     }
+    
 
 
 }
