@@ -5,6 +5,12 @@ import com.project.stella_boutique.service.exception.GetLikeErrorException;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class GetLikeUseCase {
@@ -16,6 +22,23 @@ public class GetLikeUseCase {
     }
 
     public void execute(GetLikeUseCaseInput input, GetLikeUseCaseOutput output) throws GetLikeErrorException {
-        //code
+        List<Integer> itemList = new ArrayList<>();    
+        try(Connection connection = this.mysqlDriver.getConnection()){
+            try (PreparedStatement stmt = connection.prepareStatement(
+                "SELECT * FROM `like` WHERE `userID` = ?")) {
+                    stmt.setString(1, Integer.toString(input.getUserID()));
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while(rs.next()) {
+                        int id = Integer.parseInt(rs.getString("id"));
+                        
+                        itemList.add(id);
+                    }
+                }
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        output.setLikeList(itemList);
     }
+
 }

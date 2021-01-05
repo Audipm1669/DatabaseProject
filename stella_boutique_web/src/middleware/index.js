@@ -169,18 +169,17 @@ const myMiddleware = store => next => action => {
     }else if(action.type === "GET_LIKE_ITEM"){
         const headers = getHeaders(action.token);
         const body = {
-            itemList: action.orderList,
-            userID : localStorage.getItem("userID")
+            userID : localStorage.getItem("userID"),
         }
-        console.log("middleware add order");
-        axios.post(API_HOST + '/user/create/order', body, {headers: headers})
+        console.log("middleware get like");
+        console.log("middleware " + body.userID)
+        axios.post(API_HOST + '/user/get/like', body, {headers: headers})
         .then(response => {
-            console.log("middleware " + body.itemList)
-            console.log("middleware " + body.userID)
+            action.setLikeItemList(response.data.likeList,store.dispatch);
         })
         .catch(err => {
             console.log(err)
-            alert("Creating Order Failed!")
+            alert("Get Like List Failed!")
         });
     }else {
         return next(action)

@@ -94,6 +94,7 @@ public class UserRestAdapter {
     public ResponseEntity<GetLikeUseCaseOutput> GetLike(@RequestBody GetLikeUseCaseInput requestBody) {
         GetLikeUseCaseInput input = new GetLikeUseCaseInput();
         GetLikeUseCaseOutput output = new GetLikeUseCaseOutput();
+        input.setUserID(requestBody.getUserID());
         //----
         try {
             this.getLikeUseCase.execute(input, output);

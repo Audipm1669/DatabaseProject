@@ -78,7 +78,10 @@ function mapDispatchToProps(dispatch) {
     },
     removeLikeItem: (userID,itemID) => {
       dispatch(removeLikeItem(userID,itemID))
-    } 
+    },
+    getLikeItemList: (userID) => {
+      dispatch(getLikeItemList(userID))
+    }
   }
 }
 export default connect(null,mapDispatchToProps)(MyLike);

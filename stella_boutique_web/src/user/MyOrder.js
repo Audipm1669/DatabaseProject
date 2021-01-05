@@ -140,6 +140,9 @@ function mapDispatchToProps(dispatch) {
   return {
     getOrderList: (userID) => {
       dispatch(getOrderList(userID))
+    },,
+    getLikeItemList: (userID) => {
+      dispatch(getLikeItemList(userID))
     }
   }
 }
