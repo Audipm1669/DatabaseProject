@@ -81,8 +81,10 @@ public class UserRestAdapter {
         AddLikeUseCaseInput input = new AddLikeUseCaseInput();
         AddLikeUseCaseOutput output = new AddLikeUseCaseOutput();
         //----
+        input.setUserID(requestBody.getUserID());
+        input.setItemID(requestBody.getItemID());
         try {
-            this.addLikeUseCase.execute(input, output);
+            this.addLikeUseCase.execute(input,output);
         } catch (AddLikeErrorException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }
@@ -105,8 +107,10 @@ public class UserRestAdapter {
         RemoveLikeUseCaseInput input = new RemoveLikeUseCaseInput();
         RemoveLikeUseCaseOutput output = new RemoveLikeUseCaseOutput();
         //----
+        input.setUserID(requestBody.getUserID());
+        input.setItemID(requestBody.getItemID());
         try {
-            this.removeLikeUseCase.execute(input, output);
+            this.removeLikeUseCase.execute(input,output);
         } catch (RemoveLikeErrorException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }

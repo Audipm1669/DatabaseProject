@@ -139,15 +139,16 @@ const myMiddleware = store => next => action => {
         }
         console.log("middleware add like");
         console.log(body);
-        // axios.post(API_HOST + '/user/create/order', body, {headers: headers})
-        // .then(response => {
-        //     console.log("middleware " + body.itemList)
-        //     console.log("middleware " + body.userID)
-        // })
-        // .catch(err => {
-        //     console.log(err)
-        //     alert("Creating Order Failed!")
-        // });
+        axios.post(API_HOST + '/user/add/like', body, {headers: headers})
+        .then(response => {
+            console.log("middleware " + body.itemList)
+            console.log("middleware " + body.userID)
+            alert(`已加入到您的喜歡商品中！`);
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Like Failed!")
+        });
     }else if(action.type === "REMOVE_LIKE_ITEM"){
         const headers = getHeaders(action.token);
         const body = {
@@ -156,15 +157,15 @@ const myMiddleware = store => next => action => {
         }
         console.log("middleware remove like");
         console.log(body);
-        // axios.post(API_HOST + '/user/create/order', body, {headers: headers})
-        // .then(response => {
-        //     console.log("middleware " + body.itemList)
-        //     console.log("middleware " + body.userID)
-        // })
-        // .catch(err => {
-        //     console.log(err)
-        //     alert("Creating Order Failed!")
-        // });
+        axios.post(API_HOST + '/user/remove/like', body, {headers: headers})
+        .then(response => {
+            console.log("middleware " + body.itemList)
+            console.log("middleware " + body.userID)
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Unlike Failed!")
+        });
     }else if(action.type === "GET_LIKE_ITEM"){
         const headers = getHeaders(action.token);
         const body = {

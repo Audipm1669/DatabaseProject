@@ -37,7 +37,6 @@ function ProductItem(props){
         } 
         console.log(like);
         console.log(likeColor);
-        alert(`已加入到您的喜歡商品中！`);
     }
     
     return ( 
