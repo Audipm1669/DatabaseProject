@@ -17,7 +17,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { useHistory } from 'react-router-dom';
 
-import { getOrderList} from '../actions';
+import { getOrderList , updateStatus} from '../actions';
 
 import '../App.css';
 
@@ -45,8 +45,6 @@ const useStyles = makeStyles({
   },
 });
 
-
-
 function OrderManage(props) {
   const classes = useStyles();
   const history = useHistory();
@@ -60,10 +58,14 @@ function OrderManage(props) {
     { return "done" }
   }
 
+  const processOrder = playload => {
+    console.log("update order "+playload.orderID)
+    props.updateStatus(playload.orderID,1)
+  }
+
   return (
     <React.Fragment>
       <main>
-
       <div style={{ height: 400, width: '90%' , margin: '60px'}}>
       <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -73,10 +75,11 @@ function OrderManage(props) {
             <TableCell>Date</TableCell>
             <TableCell align="right">Status</TableCell>
             <TableCell align="right">Total Price</TableCell>
+            <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.userOrderList.map((order,index) => (
+          {props.sellerOrder.map((order,index) => (
             <TableRow align="left" key={index}>
               <TableCell component="th" scope="row">
                 {index+1}
@@ -84,6 +87,9 @@ function OrderManage(props) {
               <TableCell>{order.orderDate}</TableCell>
               <TableCell align="right">{getstatus(order.status)}</TableCell>
               <TableCell align="right">{order.totalPrice}</TableCell>
+              <TableCell align="right">
+                <Button onCLick={() => processOrder(order)}>Process</Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -96,13 +102,16 @@ function OrderManage(props) {
 }
 function mapStateToProps(state) {
   return {
-    userOrderList: state.userOrderList
+    sellerOrder: state.sellerOrder
   }
 }
 function mapDispatchToProps(dispatch) {
   return {
     getOrderList: (userID) => {
       dispatch(getOrderList(userID))
+    },
+    updateStatus: (orderID, status) => {
+      dispatch(updateStatus(orderID, status))
     }
   }
 }

@@ -11,20 +11,11 @@ import ProductItemForSeller from '../ProductItemForSeller';
 class ProductManage extends Component {
   constructor(props){
     super(props)
-    this.state = {
-      itemID:0,
-      shoppingCart:{},
-    }
-    this.addToCart = this.addToCart.bind(this)
   }
   
-  addToCart(){
-    console.log(this.state.itemID)
-    localStorage.setItem("shoppingCart", JSON.stringify(this.shoppingCart));
-  }
     render() {
         return (
-            <div>
+            <div>              
                 <div style={{margin:'10px' , display: 'flex',  justifyContent:'flex-end ', alignItems:'center'}}>
                     <Form inline>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
@@ -33,7 +24,7 @@ class ProductManage extends Component {
                 </div>
                 <Row style={{margin:'10px 100px' , display: 'flex',  justifyContent:'flex-end ', alignItems:'center'}}>
                 {
-                  this.props.ProductList.map((item,key) => {
+                  this.props.sellerProduct.map((item,key) => {
                     
                       console.log(item.itemID)
                       return(
@@ -46,12 +37,11 @@ class ProductManage extends Component {
             </div>
         );
     }
-
 }
 
 function mapStateToProps(state) {
     return {
-      ProductList: state.ProductList
+      sellerProduct: state.sellerProduct
     }
   }
   

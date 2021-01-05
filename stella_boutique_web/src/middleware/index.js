@@ -178,6 +178,53 @@ const myMiddleware = store => next => action => {
             console.log(err)
             alert("Get Like List Failed!")
         });
+    }else if(action.type === "ENTER_ADMIN"){
+        const headers = getHeaders(action.token);
+        const body = {
+        }
+        console.log("prepare admin");
+        axios.get(API_HOST + '/seller/get/order', body, {headers: headers})
+        .then(response => {
+            action.setSellerOrderList(response.data.orderList,store.dispatch);
+            // console.log("middleware order" + response.data.orderList)
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Entering Web Failed!")
+        });
+        axios.get(API_HOST + '/seller/get/user', body, {headers: headers})
+        .then(response => {
+            action.setSellerUserList(response.data.userList,store.dispatch);
+            // console.log(response.data.userList)
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Entering Web Failed!")
+        });
+        axios.get(API_HOST + '/seller/get/product', body, {headers: headers})
+        .then(response => {
+            action.setSellerProductList(response.data.productList,store.dispatch);
+            // console.log("middleware product " + response.data.productList)
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Entering Web Failed!")
+        });
+    }else if(action.type === "UPDATE_STATUS"){
+        const headers = getHeaders(action.token);
+        const body = {
+            orderID : action.orderID,
+            status : action.status
+        }
+        console.log("update order status");
+        axios.post(API_HOST + '/seller/update/order', body, {headers: headers})
+        .then(response => {
+            console.log("have been update");
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Changing Status Failed!")
+        });
     }else {
         return next(action)
     }

@@ -73,49 +73,18 @@ function SellerNavBar(props) {
 
     const history = useHistory();
 
-    const goToNewArrival = () => {
+    const goToProduct = () => {
       setProfileClose(false)
-      history.push("/Newarrivals")
+      history.push("/ProductManage")
     };
-    const goToOnSale = () => {
+    const goToOrder = () => {
       setProfileClose(false)
-      history.push("/Onsale")
+      history.push("/OrderManage")
     };
-    const goToTops = () => {
+    const goToMember = () => {
       setProfileClose(false)
-      history.push("/Tops")
+      history.push("/MemberManage")
     };
-    const goToBottoms = () => {      
-      setProfileClose(false)
-      history.push("/Bottom")
-    };
-    const goToOutwear = () => {
-      setProfileClose(false)
-      history.push("/Jacket")
-    };
-    const goToDresses = () => {
-      setProfileClose(false)
-      history.push("/Dresses")
-    };
-    const goToProfile = () => {
-      setProfileClose(!profileOpen)
-      if(profileOpen){
-        history.push("/")
-      }else{
-        console.log("getting order");
-        props.getOrderList(userID);
-        props.getLikeItemList(userID);
-        history.push("/MyOrder")
-      }
-    };
-    const GoToMyLikes = () => {
-      console.log("item like"+ props.userMyLike)
-      console.log("product list "+ props.ProductList)
-      history.push("/MyLike")
-    }
-    const GoToHistory = () => {
-      history.push("/MyOrder")
-    }
 
     const [cartOpen, setcartOpenOpen] = useState(false);
     const handleCartOpen = () => {
@@ -149,47 +118,6 @@ function SellerNavBar(props) {
       }
     return (
       <React.Fragment>
-        {/* <Navbar className="brand-bar" style={{justifyContent:'space-between'}}>
-          <Navbar.Brand href="/">Stella Boutique</Navbar.Brand>
-            <div>
-              <p>Welome{userID == null?null:", "+username} </p> 
-            </div>
-            {userID == null? 
-            <div>
-              <Button href="/Login" className={classes.navButtons} variant="contained" color="primary">login</Button>
-              <Button href="/Register" className={classes.navButtons} variant="contained" color="primary">register</Button>
-            </div> :
-            <div>
-              <Button color="secondary" onClick={handleCartOpen}>購物車</Button>
-              <Button className={classes.navButtons} variant="contained" color="primary" onClick={goToProfile}>Profile</Button>
-              <Button href="/Login" className={classes.navButtons} variant="contained" color="primary" onClick={handleLogout}>logout</Button>              
-            </div>
-            }
-        </Navbar>
-        <Navbar bg="dark" variant="dark" className="menu-bar" expand="lg">
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              <Nav.Link onClick={goToNewArrival}>NEW ARRIVALS</Nav.Link>
-              <Nav.Link onClick={goToOnSale}>ON SALE</Nav.Link>
-              <Nav.Link onClick={goToTops}>TOPS</Nav.Link>
-              <Nav.Link onClick={goToBottoms}>BOTTOMS</Nav.Link>
-              <Nav.Link onClick={goToOutwear}>OUTERWEAR</Nav.Link>
-              <Nav.Link onClick={goToDresses}>DRESSES & JUMPSUITS</Nav.Link>
-            </Nav>
-            
-            {
-              profileOpen?
-              <Nav className="mr-right">
-                <Nav.Link onClick = {GoToMyLikes}>LIKE</Nav.Link>
-                <Nav.Link onClick={GoToHistory}>ORDER</Nav.Link>
-              </Nav>
-              :
-              null
-            }
-            
-          </Navbar.Collapse>
-        </Navbar> */}
         <Navbar bg="dark" variant="dark" className="menu-bar" expand="lg">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

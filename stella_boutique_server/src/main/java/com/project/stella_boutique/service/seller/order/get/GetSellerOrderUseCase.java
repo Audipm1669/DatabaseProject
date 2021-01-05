@@ -35,16 +35,15 @@ public class GetSellerOrderUseCase {
                         int status = Integer.parseInt(rs.getString("status"));
                         String orderDate = rs.getString("orderDate");
                         int discountID = Integer.parseInt(rs.getString("discountID"));
-                        int userID = Integer.parseInt(rs.getString("userID"));
-
+                        int userID = Integer.parseInt(rs.getString("orderUserID"));
                         Order order = new Order(id, status, orderDate, discountID, userID);
                         getItemList(order,connection);
                         orderList.add(order);
+
                     }
                 }
             }
         }catch (SQLException e) {
-            System.out.println("Unable to Get Order from MySQL~~");
             e.printStackTrace();
         }
         output.setOrderList(orderList);
@@ -75,9 +74,12 @@ public class GetSellerOrderUseCase {
                     boughtItem.setSize(size);
                     boughtItem.setPrice(price);
                     boughtItem.setDescription(description);
-                    boughtItem.setPictureURL(pictureURL);            
-
+                    boughtItem.setPictureURL(pictureURL);    
+                    
                     order.addItemToList(boughtItem,amount);
+                    int priceMulAmount = Math.round(boughtItem.getPrice()) * amount;
+                    order.setPrice(priceMulAmount);
+
                 }
             }
         }catch (SQLException e) {

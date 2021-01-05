@@ -89,10 +89,42 @@ export function getLikeItemList(userID ){
         setLikeItemList:(userOrderList, dispatch) => dispatch(setLikeItemList(userOrderList))
     }
 }
-export function setLikeItemList(userMyLikeList){
+export function setLikeItemList(userOrderList){
     return{
         type: "SET_MY_LIKE_LIST",
-        userMyLikeList: userMyLikeList
+        userOrderList: userOrderList
     }
 }
-
+export function enterAdmin(){
+    return{
+        type: "ENTER_ADMIN",    
+        setSellerUserList:(sellerUser, dispatch) => dispatch(setSellerUserList(sellerUser)),
+        setSellerProductList:(sellerProduct, dispatch) => dispatch(setSellerProductList(sellerProduct)),
+        setSellerOrderList:(sellerOrder, dispatch) => dispatch(setSellerOrderList(sellerOrder))
+    }
+}
+export function setSellerUserList(sellerUser){
+    return{
+        type: "SET_SELLER_USER",
+        sellerUser: sellerUser
+    }
+}
+export function setSellerProductList(sellerProduct){
+    return{
+        type: "SET_SELLER_PRODUCT",
+        sellerProduct: sellerProduct
+    }
+}
+export function setSellerOrderList(sellerOrder){
+    return{
+        type: "SET_SELLER_ORDER",
+        sellerOrder: sellerOrder
+    }
+}
+export function updateStatus(orderID , status){
+    return{
+        type: "UPDATE_STATUS",
+        orderID: orderID,
+        status: status
+    }
+}
