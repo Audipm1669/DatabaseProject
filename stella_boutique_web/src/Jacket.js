@@ -13,31 +13,58 @@ class Jacket extends Component {
     this.state = {
       itemID:0,
       shoppingCart:{},
+      temp:"",
+      searchname:"",
     }
     this.addToCart = this.addToCart.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.gosearch = this.gosearch.bind(this)
   }
 
   addToCart(){
     console.log(this.state.itemID)
     localStorage.setItem("shoppingCart", JSON.stringify(this.shoppingCart));
   }
+  
+  handleChange = e => {
+    this.setState({ temp: e.target.value})
+    console.log(this.state.temp)
+  };
+
+  gosearch() {
+    this.setState({ searchname: this.state.temp})
+    console.log(this.state.searchname)
+  }
+
     render() {
         return (
-            <div>
+            <div style={{backgroundColor:"rgb(255, 239, 236)",margin:"-6px 0"}}>
                 <div style={{margin:'10px' , display: 'flex',  justifyContent:'flex-end ', alignItems:'center'}}>
                     <Form inline>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button variant="outline-dark">Search</Button>
+                    <FormControl type="text" placeholder="Search" onChange={this.handleChange} className="mr-sm-2" />
+                        <Button variant="outline-dark" onClick={this.gosearch} >Search</Button>
                     </Form>
                 </div>
                 <Row style={{margin:'10px 100px' , display: 'flex',  justifyContent:'flex-end ', alignItems:'center'}}>
                 {
                   this.props.ProductList.map((item,key) => {
                     if(item.category == "Jacket"){
-                      console.log(item.itemID)
-                      return(
-                       <ProductItem key={item.itemID} product={item}/>
-                      )
+                      if(this.state.searchname == "")
+                      {
+                        console.log(item.itemID)
+                        return(
+                        <ProductItem key={item.itemID} product={item}/>
+                        )
+                      }
+                      else if (item.name.includes(this.state.searchname))
+                      {
+                          console.log(item.itemID)
+                          return(
+                          <ProductItem key={item.itemID} product={item}/>
+                          )
+                      
+                      }
+                      
                     }  
                   })
                 }

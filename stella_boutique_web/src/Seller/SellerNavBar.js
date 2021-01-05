@@ -126,6 +126,7 @@ function SellerNavBar(props) {
               <Nav.Link href="/OrderManage">ORDER</Nav.Link>
               <Nav.Link href="/MemberManage">MEMBER</Nav.Link>
               <Nav.Link href="/AddProduct">ADD PRODUCT</Nav.Link>
+              <Nav.Link href="/AddDiscount">ADD DISCOUNT</Nav.Link>
             </Nav>
             <Nav className="mr-right">
               <Nav.Link onClick={handleLogout}>LOGOUT</Nav.Link>
@@ -149,15 +150,6 @@ function SellerNavBar(props) {
       setUser: (username,userID) => {
         dispatch(setUser(username,userID))
       },
-      checkoutOrder: (orderList) => {
-        dispatch(checkoutOrder(orderList))
-      },
-      getOrderList: (userID) => {
-        dispatch(getOrderList(userID))
-      },
-      getLikeItemList: (userID) => {
-        dispatch(getLikeItemList(userID))
-      }
     }
   }
   export default connect(mapStateToProps,mapDispatchToProps)(SellerNavBar);
