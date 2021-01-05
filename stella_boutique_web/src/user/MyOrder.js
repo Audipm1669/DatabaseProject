@@ -129,7 +129,7 @@ function mapDispatchToProps(dispatch) {
   return {
     getOrderList: (userID) => {
       dispatch(getOrderList(userID))
-    },,
+    },git pu
     getLikeItemList: (userID) => {
       dispatch(getLikeItemList(userID))
     }
