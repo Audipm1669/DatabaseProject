@@ -39,16 +39,11 @@ const useStyles = makeStyles({
 
 
 
-
-
-
 function OrderManage(props) {
   var sale2020 = 0;
   var sale2021 = 0;
-  const data = [
-    { year: '2020', population: sale2020 },
-    { year: '2021', population: sale2021 },
-  ];
+  var y = 0;
+  
   const classes = useStyles();
   const history = useHistory();
 
@@ -62,21 +57,33 @@ function OrderManage(props) {
   }
 
   function getsale (year,sale) {
-    console.log(year.toString().substring(0,4))
+    console.log(year)
+    y = parseInt(year) - 2000
+    console.log(y)
     console.log(sale)
-    if (year.toString().substring(0,4) == '2020')
+    if (y == 20)
     { sale2020 += sale }
-    else if (year.includes("2021")) 
+    else if (y == 21) 
     { sale2021 += sale }
     else 
-    { sale2020 += 0 }
+    { }
+   console.log(sale2020)
+   console.log(sale2021)
+
     return sale
+
+   
   }
 
   const processOrder = playload => {
     console.log("update order "+playload.orderID)
     props.updateStatus(playload.orderID,1)
   }
+  console.log("----------")
+  console.log(sale2020)
+  var data = [
+    
+  ];
 
 
 
@@ -106,7 +113,7 @@ function OrderManage(props) {
               </TableCell>
               <TableCell>{order.orderDate}</TableCell>
               <TableCell align="right">{getstatus(order.status)}</TableCell>
-              <TableCell align="right">{getsale(order.orderDate,order.totalPrice)}</TableCell>
+              <TableCell align="right">{getsale(order.orderDate.toString().substring(0,4),order.totalPrice)}</TableCell>
               <TableCell align="right">
                 <Button onClick={() => processOrder(order)}>Process</Button>
               </TableCell>
@@ -114,19 +121,23 @@ function OrderManage(props) {
           ))}
         </TableBody>
       </Table>
+      
 
       <Chart
-          data={data}
+          data={data= [
+            { year: '2020', sale: sale2020 },
+            { year: '2021', sale: sale2021 },
+          ]}
           style={{margin:"100px 500px"}}
         >
           <ArgumentAxis />
           <ValueAxis max={7} />
 
           <BarSeries
-            valueField="population"
+            valueField="sale"
             argumentField="year"
           />
-          <Title text="World population" />
+          <Title text="銷售報表" />
           <Animation />
         </Chart>
     </TableContainer>
