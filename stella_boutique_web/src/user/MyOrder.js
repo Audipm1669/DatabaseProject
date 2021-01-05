@@ -36,25 +36,8 @@ const columns = [
     type: 'number',
     width: 90,
   },
-  // {
-  //   field: 'fullName',
-  //   headerName: 'Full name',
-  //   description: 'This column has a value getter and is not sortable.',
-  //   sortable: false,
-  //   width: 160,
-  //   valueGetter: (params) =>
-  //     `${params.getValue('firstName') || ''} ${params.getValue('lastName') || ''}`,
-  // },
 ];
 
-const rows = [
-  { id: 1, Date: '2020-11-07', State: 'Delivered', Cost: 1100 },
-  { id: 2, Date: '2020-12-07', State: 'Delivered', Cost: 800 },
-  { id: 3, Date: '2020-11-22', State: 'Ordered', Cost: 760 },
-  { id: 4, Date: '2020-11-29', State: 'Ordered', Cost: 600 },
-  { id: 5, Date: '2020-11-19', State: 'Ordered', Cost:  2000},
-  { id: 6, Date: '2020-12-03', State: 'Ordered', Cost: 2200 },
-];
 
 
 const useStyles = makeStyles({
@@ -79,6 +62,17 @@ function MyOrder(props) {
     console.log(localStorage.getItem("userID"))
     props.getOrderList(localStorage.getItem("userID"))
     history.push("/MyOrder")
+  }
+
+  function getstatus (status) {
+    if (status == 0)
+    { return "new order"}
+    else if (status == 1)
+    { return "checkout" }
+    else if (status == 2) 
+    { return "shipout" }
+    else 
+    { return "done" }
   }
 
   return (
@@ -114,19 +108,14 @@ function MyOrder(props) {
                 {index+1}
               </TableCell>
               <TableCell>{order.orderDate}</TableCell>
-              <TableCell align="right">{order.status}</TableCell>
+              <TableCell align="right">{getstatus(order.status)}</TableCell>
               <TableCell align="right">{order.totalPrice}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-        {/* <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection /> */}
       </div>
-
-      <Button style={{ margin: '0 60px'}} color="secondary">Cancel Order</Button>
-        
-    
       </main>
     </React.Fragment>
   );

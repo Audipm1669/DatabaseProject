@@ -6,6 +6,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { connect } from 'react-redux';
 import { addLikeItem,removeLikeItem} from './actions';
+import './ProductItem.css';
 
 
 function ProductItem(props){
@@ -42,7 +43,9 @@ function ProductItem(props){
     return ( 
         <Col sm={6} md={4} className="mb-3" >
             <Card style={{margin:'0px 50px'}}>
-                <CardImg src={require(""+props.product.pictureURL)} alt="Card image cap" />
+                <div className="img">
+                    <CardImg className="card-img" src={require(""+props.product.pictureURL)} alt="Card image cap" />
+                </div>
                 <CardBody >
                 <CardTitle>{props.product.name}</CardTitle>
                 <CardSubtitle> 
