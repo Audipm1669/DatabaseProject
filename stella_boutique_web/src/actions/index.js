@@ -86,13 +86,13 @@ export function getLikeItemList(userID ){
     return{
         type: "GET_LIKE_ITEM",
         userID: userID,        
-        setLikeItemList:(userMyLikeList, dispatch) => dispatch(setLikeItemList(userMyLikeList))
+        setLikeItemList:(userMyLike, dispatch) => dispatch(setLikeItemList(userMyLike))
     }
 }
-export function setLikeItemList(userMyLikeList){
+export function setLikeItemList(userMyLike){
     return{
         type: "SET_MY_LIKE_LIST",
-        userMyLikeList: userMyLikeList
+        userMyLike: userMyLike
     }
 }
 export function enterAdmin(){

@@ -18,7 +18,7 @@ function MyLike(props){
 
   function GoToMyLikes(){
     props.getLikeItemList(userID)
-    console.log("item like"+ props.userMyLikeList)
+    console.log("item like"+ props.userMyLike)
     console.log("product list "+ props.ProductList)
     history.push("/MyLike")
   }
@@ -36,11 +36,11 @@ function MyLike(props){
             </div>
             <Row style={{margin:'10px 100px' , display: 'flex',  justifyContent:'flex-end ', alignItems:'center'}}>
             {console.log(props.ProductList)}
-            {console.log(props.userMyLikeList)}
+            {console.log(props.userMyLike)}
             {
               props.ProductList.map((item,key) => {
                 return(
-                  props.userMyLikeList.map((likeItem,key1) => {
+                  props.userMyLike.map((likeItem,key1) => {
                     if(item.itemID == likeItem){
                       return(
                         <ProductItem key={item.itemID} product={item}/>
@@ -56,7 +56,7 @@ function MyLike(props){
 }
 function mapStateToProps(state) {
   return {
-    userMyLikeList: state.userMyLikeList,    
+    userMyLike: state.userMyLike,    
     ProductList: state.ProductList
   }
 }

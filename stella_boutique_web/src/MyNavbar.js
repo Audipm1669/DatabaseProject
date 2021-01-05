@@ -82,7 +82,7 @@ function MyNavbar(props) {
       }
     };
     const GoToMyLikes = () => {
-      console.log("item like"+ props.userMyLikeList)
+      console.log("item like"+ props.userMyLike)
       console.log("product list "+ props.ProductList)
       history.push("/MyLike")
     }
@@ -119,7 +119,7 @@ function MyNavbar(props) {
 
     const getDiscount = () => {
       console.log(discount)
-      //Hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee to send discount-code and to get the discount value
+      //Hereeeeeeeeeeeeeeeeeeeeeeeee
       
 
     }
@@ -234,7 +234,7 @@ function MyNavbar(props) {
     return {
       ProductList: state.ProductList,
       LoginUser: state.LoginUser,    
-      userMyLikeList: state.userMyLikeList
+      userMyLike: state.userMyLike
     }
   }
   
