@@ -159,6 +159,8 @@ public class SellerRestAdapter {
     public ResponseEntity<UpdateSellerOrderUseCaseOutput> updateOrder(@RequestBody UpdateSellerOrderUseCaseInput requestBody) {
         UpdateSellerOrderUseCaseInput input = new UpdateSellerOrderUseCaseInput();
         UpdateSellerOrderUseCaseOutput output = new UpdateSellerOrderUseCaseOutput();
+        input.setOrderID(requestBody.getOrderID());
+        input.setStatus(requestBody.getStatus());
         //------------------------------Unfinished------------------------------
         //----------------------------------------------------------------------
         try {

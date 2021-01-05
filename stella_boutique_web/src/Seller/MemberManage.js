@@ -60,7 +60,7 @@ function MemberManage(props) {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            {}
+            {console.log(props.sellerUser)}
             <TableCell align="left">ID</TableCell>
             <TableCell>Full Name</TableCell>
             <TableCell>User Name</TableCell>

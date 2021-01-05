@@ -194,8 +194,8 @@ const myMiddleware = store => next => action => {
         });
         axios.get(API_HOST + '/seller/get/user', body, {headers: headers})
         .then(response => {
-            action.setSellerOrderList(response.data.userList,store.dispatch);
-            console.log(response.data.userList)
+            action.setSellerUserList(response.data.userList,store.dispatch);
+            // console.log(response.data.userList)
         })
         .catch(err => {
             console.log(err)
@@ -209,6 +209,21 @@ const myMiddleware = store => next => action => {
         .catch(err => {
             console.log(err)
             alert("Entering Web Failed!")
+        });
+    }else if(action.type === "UPDATE_STATUS"){
+        const headers = getHeaders(action.token);
+        const body = {
+            orderID : action.orderID,
+            status : action.status
+        }
+        console.log("update order status");
+        axios.post(API_HOST + '/seller/update/order', body, {headers: headers})
+        .then(response => {
+            console.log("have been update");
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Changing Status Failed!")
         });
     }else {
         return next(action)

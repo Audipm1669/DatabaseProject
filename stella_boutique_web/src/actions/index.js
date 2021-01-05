@@ -121,3 +121,10 @@ export function setSellerOrderList(sellerOrder){
         sellerOrder: sellerOrder
     }
 }
+export function updateStatus(orderID , status){
+    return{
+        type: "UPDATE_STATUS",
+        orderID: orderID,
+        status: status
+    }
+}
