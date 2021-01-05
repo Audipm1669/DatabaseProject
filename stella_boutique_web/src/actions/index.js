@@ -128,3 +128,9 @@ export function updateStatus(orderID , status){
         status: status
     }
 }
+export function loadOrderList(){
+    return{
+        type: "LOAD_ORDER_LIST",
+        setSellerOrderList:(sellerUser, dispatch) => dispatch(setSellerUserList(sellerUser))
+    }
+}

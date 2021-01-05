@@ -155,7 +155,7 @@ const myMiddleware = store => next => action => {
         console.log(body);
         axios.post(API_HOST + '/user/remove/like', body, {headers: headers})
         .then(response => {
-            console.log("middleware " + body.itemList)
+            console.log("middleware " + body.itemID)
             console.log("middleware " + body.userID)
         })
         .catch(err => {
@@ -224,6 +224,18 @@ const myMiddleware = store => next => action => {
         .catch(err => {
             console.log(err)
             alert("Changing Status Failed!")
+        });
+    }else if(action.type === "LOAD_ORDER_LIST"){
+        const headers = getHeaders(action.token);
+        const body = {
+        }
+        axios.get(API_HOST + '/seller/get/order', body, {headers: headers})
+        .then(response => {
+            action.setSellerOrderList(response.data.orderList,store.dispatch);
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Entering Web Failed!")
         });
     }else {
         return next(action)
