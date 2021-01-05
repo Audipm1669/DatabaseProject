@@ -22,7 +22,8 @@ public class Order {
 		this.discountID = discountID;
 		this.userID = userID;
 		this.itemList = new ArrayList<List<Object>>();
-		this.totalPrice = new ArrayList<Integer>();
+		this.Price = new ArrayList<Integer>();
+		this.totalPrice = 0;
 	}
 
 	public int getOrderID() {
