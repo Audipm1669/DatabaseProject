@@ -6,6 +6,14 @@ import "../Login.css";
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { addDiscount } from '../actions';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import { Opacity } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
     navButtons: {
@@ -13,7 +21,13 @@ const useStyles = makeStyles((theme) => ({
       '&:hover': {
         color:'#c26d5c'
      },
-    }
+    },
+    table: {
+      margin:'100px',
+      minWidth: 650,
+      width:'80%',
+      opacity:'80%',
+    },
   })); 
 
 
@@ -24,6 +38,9 @@ function AddDiscount(props) {
   const [name, setName] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+
+  
+  const classes = useStyles();
  
   function handleSubmit(event) {
     console.log(value);
@@ -91,6 +108,33 @@ function AddDiscount(props) {
           ADD DISCOUNT
         </Button>
       </Form>
+
+
+
+      <TableContainer component={Paper}>
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="left">Discount Code</TableCell>
+              <TableCell align="left">Discount Percentage</TableCell>
+              <TableCell align="left">Event Name</TableCell>
+              <TableCell align="right">Start Date</TableCell>
+              <TableCell align="right">End Date</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {/* {props.sellerOrder.map((discount,index) => (
+              <TableRow align="left" key={index}>
+                <TableCell align="left">{discount.code}</TableCell>
+                <TableCell align="left">{discount.value}</TableCell>
+                <TableCell align="left">{discount.name}</TableCell>
+                <TableCell align="right">{discount.startDate}</TableCell>
+                <TableCell align="right">{discount.endDate}</TableCell>
+              </TableRow>
+            ))} */}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
     </div>
   );
