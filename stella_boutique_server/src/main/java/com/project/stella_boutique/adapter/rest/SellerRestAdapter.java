@@ -90,10 +90,15 @@ public class SellerRestAdapter {
     //--------------------------------------------------------------------------------------------------------------------------------
     @PostMapping(value = "/add/discount")
     public ResponseEntity<AddSellerDiscountUseCaseOutput> addDiscount(@RequestBody AddSellerDiscountUseCaseInput requestBody) {
+        System.out.println("~~~~disc");
+        System.out.println(requestBody.getStartDateString());
+        System.out.println(requestBody.getEndDateString());
+        
         AddSellerDiscountUseCaseInput input = new AddSellerDiscountUseCaseInput(requestBody.getValue(),requestBody.getCode(),requestBody.getName(),requestBody.getStartDateString(),requestBody.getEndDateString());
         AddSellerDiscountUseCaseOutput output = new AddSellerDiscountUseCaseOutput();
         //------------------------------Unfinished------------------------------
         //----------------------------------------------------------------------
+
         try {
             this.addSellerDiscountUseCase.execute(input, output);
         } catch (AddDiscountErrorException e) {

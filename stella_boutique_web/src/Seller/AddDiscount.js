@@ -48,6 +48,7 @@ function AddDiscount(props) {
     
     props.addDiscount(value,code,name,startDate,endDate);
     event.preventDefault();
+    // window.location.reload();
 
   }
 
@@ -123,21 +124,29 @@ function AddDiscount(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* {props.sellerOrder.map((discount,index) => (
+            {console.log(props.sellerDiscountList)}
+            {props.sellerDiscountList.map((discount,index) => (
               <TableRow align="left" key={index}>
                 <TableCell align="left">{discount.code}</TableCell>
                 <TableCell align="left">{discount.value}</TableCell>
-                <TableCell align="left">{discount.name}</TableCell>
-                <TableCell align="right">{discount.startDate}</TableCell>
-                <TableCell align="right">{discount.endDate}</TableCell>
+                <TableCell align="left">{discount.discountName}</TableCell>
+                <TableCell align="right">{discount.startDateString}</TableCell>
+                <TableCell align="right">{discount.endDateString}</TableCell>
               </TableRow>
-            ))} */}
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
 
     </div>
   );
+}
+
+
+function mapStateToProps(state) {
+  return {
+    sellerDiscountList: state.sellerDiscountList
+  }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -148,4 +157,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(null,mapDispatchToProps)(AddDiscount);
+export default connect(mapStateToProps,mapDispatchToProps)(AddDiscount);

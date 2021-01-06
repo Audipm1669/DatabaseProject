@@ -105,7 +105,7 @@ const myMiddleware = store => next => action => {
         axios.get(API_HOST + '/guest/discount', body, {headers: headers})
         .then(response => {
             action.setUserDiscountList(response.data.discountList,store.dispatch);
-            console.log("discount list " +response.data.discountList )
+            console.log(response.data.discountList)
         })
         .catch(err => {
             console.log(err)
@@ -234,7 +234,8 @@ const myMiddleware = store => next => action => {
         axios.get(API_HOST + '/guest/seller/discount', body, {headers: headers})
         .then(response => {
             action.setSellerDiscountList(response.data.discountList,store.dispatch);
-            console.log("discount list " +response.data.discountList )
+            console.log("discount list ")
+            console.log(response.data.discountList )
         })
         .catch(err => {
             console.log(err)

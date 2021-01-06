@@ -28,7 +28,7 @@ public class AddSellerDiscountUseCase {
                     stmt.setString(1, Float.toString(input.getValue()));
                     stmt.setString(2, input.getCode());
                     stmt.setString(3, input.getName());
-                    stmt.setString(4, input.getEndDateString());
+                    stmt.setString(4, input.getStartDateString());
                     stmt.setString(5, input.getEndDateString());
 
                     stmt.executeUpdate();

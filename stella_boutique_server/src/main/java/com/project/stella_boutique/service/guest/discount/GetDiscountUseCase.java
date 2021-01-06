@@ -69,7 +69,12 @@ public class GetDiscountUseCase {
                         Discount disc = new Discount(id, value, discountName, startDate, endDate, code);
                         if(id!=1){
                             discountList.add(disc);
-                            System.out.println(discountName);
+                            
+                            System.out.println(disc.getStartDate());                            
+                            System.out.println(disc.getStartDateString());
+                            System.out.println(disc.getEndDate());      
+                            System.out.println(disc.getEndDateString());
+                            System.out.println(disc.getDiscountName());
                         }
                     }
                 }

@@ -95,5 +95,18 @@ public class Discount {
 	public void setCode(String code) {
 		this.code = code;
 	}
+	
+	public String getStartDateString() {
+		return ToString(this.startDate);
+	}
+
+
+	public String getEndDateString() {
+		return ToString(this.endDate);
+	}
+
+	public String ToString(Date date) {
+        return (new SimpleDateFormat(this.DATE_FORMAT)).format(date);
+	}
 
 }

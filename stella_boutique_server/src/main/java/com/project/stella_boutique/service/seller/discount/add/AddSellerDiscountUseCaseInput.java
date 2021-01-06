@@ -60,6 +60,15 @@ public class AddSellerDiscountUseCaseInput {
 		return ToString(this.startDate);
 	}
 
+
+	public String getEndDateString() {
+		return ToString(this.endDate);
+	}
+
+
+	public String ToString(Date date) {
+        return (new SimpleDateFormat(this.DATE_FORMAT)).format(date);
+	}
 	public void setStartDate(String startDate) {
 		final SimpleDateFormat dateFormat = new SimpleDateFormat(this.DATE_FORMAT);
 		try {
@@ -72,11 +81,6 @@ public class AddSellerDiscountUseCaseInput {
 	public Date getEndDate() {
 		return this.endDate;
 	}
-
-	public String getEndDateString() {
-		return ToString(this.endDate);
-	}
-
 	public void setEndDate(String endDate) {
 		final SimpleDateFormat dateFormat = new SimpleDateFormat(this.DATE_FORMAT);
 		try {
@@ -92,10 +96,6 @@ public class AddSellerDiscountUseCaseInput {
 
 	public void setCode(String code) {
 		this.code = code;
-	}
-
-	public String ToString(Date date) {
-        return (new SimpleDateFormat(this.DATE_FORMAT)).format(date);
 	}
 	
 	public void setStartDate(Date startDate) {
