@@ -28,7 +28,7 @@ public class GetSellerOrderUseCase {
         List<Order> orderList = new ArrayList<>();   
         try(Connection connection = this.mysqlDriver.getConnection()){
             try (PreparedStatement stmt = connection.prepareStatement(
-                "SELECT * FROM `order`")) {
+                "SELECT * FROM `order` ORDER BY `status` ASC")) {
                 try (ResultSet rs = stmt.executeQuery()) { 
                     while(rs.next()) {
                         int id = Integer.parseInt(rs.getString("id"));
@@ -38,6 +38,7 @@ public class GetSellerOrderUseCase {
                         int userID = Integer.parseInt(rs.getString("orderUserID"));
                         Order order = new Order(id, status, orderDate, discountID, userID);
                         getItemList(order,connection);
+                        getDiscountValue(connection,discountID,order);
                         orderList.add(order);
 
                     }
@@ -86,4 +87,22 @@ public class GetSellerOrderUseCase {
             e.printStackTrace();
         }
     }   
+    public void getDiscountValue(Connection connection,int discountID,Order order){
+        System.out.println("---------get discount value--------");
+        try (PreparedStatement stmt = connection.prepareStatement(
+            "SELECT `value` FROM `discount` WHERE `id`= ?")) {
+                stmt.setString(1, String.valueOf(discountID));
+            try (ResultSet rs = stmt.executeQuery()) {
+                while(rs.next()) {
+                    double value = rs.getDouble("value");
+
+                    System.out.println("disocunt");
+                    System.out.println(value);
+                    order.setValue(value);
+                }
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

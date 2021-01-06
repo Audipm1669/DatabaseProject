@@ -56,7 +56,8 @@ function OrderManage(props) {
     { return "done" }
   }
 
-  function getsale (year,sale) {
+  function getsale (year,sale,order) {
+    console.log(order)
     console.log(year)
     y = parseInt(year) - 2000
     console.log(y)
@@ -69,6 +70,7 @@ function OrderManage(props) {
     { }
    console.log(sale2020)
    console.log(sale2021)
+   console.log("sale " + sale)
 
     return sale
 
@@ -91,9 +93,6 @@ function OrderManage(props) {
   var data = [
     
   ];
-
-
-
   return (
     
     
@@ -119,7 +118,7 @@ function OrderManage(props) {
                     </TableCell>
                     <TableCell>{order.orderDate}</TableCell>
                     <TableCell align="right">{getstatus(order.status)}</TableCell>
-                    <TableCell align="right">{getsale(order.orderDate.toString().substring(0,4),order.totalPrice)}</TableCell>
+                    <TableCell align="right">{getsale(order.orderDate.toString().substring(0,4),order.totalPrice,order)}</TableCell>
                     <TableCell align="right">
                       <Button onClick={() => processOrder(order)} disabled = {canProcess(order)} >Process</Button>
                     </TableCell>

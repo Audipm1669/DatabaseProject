@@ -29,7 +29,7 @@ public class HistoryOrderUseCase {
         List<Order> orderList = new ArrayList<>();    
         try(Connection connection=this.mysqlDriver.getConnection()){
             try (PreparedStatement stmt = connection.prepareStatement(
-                "SELECT * FROM `order` WHERE `orderUserID`= ? ")) {
+                "SELECT * FROM `order` WHERE `orderUserID`= ? ORDER BY `status` ASC ")) {
                     stmt.setString(1, Integer.toString(input.getUserID()));
                 try (ResultSet rs = stmt.executeQuery()) {
                     while(rs.next()) {

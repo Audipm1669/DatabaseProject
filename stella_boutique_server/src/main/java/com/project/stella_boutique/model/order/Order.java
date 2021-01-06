@@ -84,6 +84,7 @@ public class Order {
 	}
 
 	public double getTotalPrice() {
+		System.out.println("total price");
 		if(this.discountID!=1){
 			double sum = 0;
 			for(int i = 0; i<this.Price.size();i++){
@@ -101,6 +102,7 @@ public class Order {
 			for(int i = 0; i<this.Price.size();i++){
 				sum+=this.Price.get(i);
 			}
+			System.out.println(sum);
 			sum = (double)sum;
 			return sum;
 		}
