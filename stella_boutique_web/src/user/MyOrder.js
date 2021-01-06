@@ -94,11 +94,11 @@ function MyOrder(props) {
               <TableCell component="th" scope="row">
                 {index+1}
               </TableCell>
-              <TableCell>{order.orderDate}</TableCell>
+              <TableCell>{order.orderDate.toString().substring(0,10)}</TableCell>
               <TableCell align="right">{getstatus(order.status)}</TableCell>
               <TableCell align="right">{order.totalPrice}</TableCell>
               <TableCell align="right">
-                <Button onClick={() => processOrder(order)} disabled={canProcess(order)}>Process</Button>
+                <Button onClick={() => processOrder(order)} disabled={canProcess(order)}>取件</Button>
               </TableCell>
             </TableRow>
           ))}

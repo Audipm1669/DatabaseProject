@@ -20,6 +20,7 @@ function ProductItem(props){
         cartItems.push(payload.itemID);
         localStorage.setItem("cart", JSON.stringify(cartItems));
         console.log('addProduct' +payload.itemID );
+        alert(payload.name+"已加到購物車~")
     }
 
     const getLike = () => {

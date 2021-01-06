@@ -116,11 +116,11 @@ function OrderManage(props) {
                     <TableCell component="th" scope="row">
                       {index+1}
                     </TableCell>
-                    <TableCell>{order.orderDate}</TableCell>
+                    <TableCell>{order.orderDate.toString().substring(0,10)}</TableCell>
                     <TableCell align="right">{getstatus(order.status)}</TableCell>
                     <TableCell align="right">{getsale(order.orderDate.toString().substring(0,4),order.totalPrice,order)}</TableCell>
                     <TableCell align="right">
-                      <Button onClick={() => processOrder(order)} disabled = {canProcess(order)} >Process</Button>
+                      <Button onClick={() => processOrder(order)} disabled = {canProcess(order)} >出貨</Button>
                     </TableCell>
                   </TableRow>
                 ))}

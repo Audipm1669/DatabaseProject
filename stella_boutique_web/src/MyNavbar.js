@@ -30,6 +30,8 @@ const useStyles = makeStyles((theme) => ({
     
 function MyNavbar(props) {
     var totalPrice = 0;
+    
+    const [total,setTotal] = useState(0);
     const [discount, setDiscount] = useState("");
     const [discountID,setDiscountID] = useState(0);
     const [userID,setUserID] = useState(localStorage.getItem("userID"));
@@ -134,9 +136,8 @@ function MyNavbar(props) {
         }
       })
       if(found){
-        console.log(totalPrice *= value)
-        totalPrice = totalPrice*value
-        console.log(totalPrice)
+        setTotal(totalPrice*=value)
+        console.log(total)
       }else{
         alert("voucher is unavailable")
       }
@@ -203,7 +204,7 @@ function MyNavbar(props) {
                   return(
                   props.ProductList.map((item,key) => {
                     if(cartItem.toString() == item.itemID.toString()){
-                      { totalPrice += item.price }
+                      { totalPrice += item.price;  }
                       return(
                         <tr>
                           <th scope="row">{1}</th>
@@ -235,7 +236,7 @@ function MyNavbar(props) {
             </div>
             <Alert color="success" className="text-right">
                 總價：
-                {totalPrice}
+                {total == 0? totalPrice:total}
                 元
               </Alert>
           </ModalBody>
