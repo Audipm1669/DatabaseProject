@@ -92,6 +92,20 @@ public class GuestRestAdapter {
         return ResponseEntity.status(HttpStatus.OK).body(output);
     }
 
+    @GetMapping(value= "/seller/discount")
+    public ResponseEntity<GetDiscountUseCaseOutput> getSellerDiscount() {
+        GetDiscountUseCaseInput input = new GetDiscountUseCaseInput();
+        GetDiscountUseCaseOutput output = new GetDiscountUseCaseOutput();
+        //------Request body send current date
+        input.setCurrentDate("2021/01/07");
+        try {
+            this.getDiscountUseCase.sellerExecute(input, output);
+        } catch (GetDiscountErrorException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(output);
+    }
+
     @GetMapping(value= "/rate")
     public ResponseEntity<GetRateUseCaseOutput> getAllRate(@RequestBody GetRateUseCaseInput requestBody){
         GetRateUseCaseInput input = new GetRateUseCaseInput();

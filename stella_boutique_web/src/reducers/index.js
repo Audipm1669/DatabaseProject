@@ -8,6 +8,7 @@ import SellerUserReducer from './SellerUserReducer';
 import SellerOrderReducer from './SellerOrderReducer';
 import SellerProductReducer from './SellerProductReducer';
 import UserDiscountListReducer from './UserDiscountListReducer';
+import SellerDiscountListReducer from './SellerDiscountList'
 
 const rootReducer = combineReducers({
     LoginUser: loginReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     sellerUser: SellerUserReducer,
     sellerOrder: SellerOrderReducer,
     sellerProduct: SellerProductReducer,
-    userDiscountList: UserDiscountListReducer
+    userDiscountList: UserDiscountListReducer,
+    sellerDiscountList:SellerDiscountListReducer
 })
 
 export default rootReducer

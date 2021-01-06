@@ -230,6 +230,16 @@ const myMiddleware = store => next => action => {
             console.log(err)
             alert("Entering Web Failed!")
         });
+
+        axios.get(API_HOST + '/guest/seller/discount', body, {headers: headers})
+        .then(response => {
+            action.setSellerDiscountList(response.data.discountList,store.dispatch);
+            console.log("discount list " +response.data.discountList )
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Get Discount Failed!")
+        });
     }else if(action.type === "UPDATE_STATUS"){
         const headers = getHeaders(action.token);
         const body = {

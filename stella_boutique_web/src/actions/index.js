@@ -103,7 +103,9 @@ export function enterAdmin(){
         type: "ENTER_ADMIN",    
         setSellerUserList:(sellerUser, dispatch) => dispatch(setSellerUserList(sellerUser)),
         setSellerProductList:(sellerProduct, dispatch) => dispatch(setSellerProductList(sellerProduct)),
-        setSellerOrderList:(sellerOrder, dispatch) => dispatch(setSellerOrderList(sellerOrder))
+        setSellerOrderList:(sellerOrder, dispatch) => dispatch(setSellerOrderList(sellerOrder)),
+        setSellerDiscountList:(SellerDiscountList,dispatch)=> dispatch(setSellerDiscountList(SellerDiscountList))
+
     }
 }
 export function setSellerUserList(sellerUser){
@@ -172,5 +174,11 @@ export function setUserDiscountList(userDiscountList){
     return{
         type: "SET_DISCOUNT_LIST",
         userDiscountList: userDiscountList
+    }
+}
+export function setSellerDiscountList(sellerDiscountList){
+    return{
+        type: "SET_SELLER_DISCOUNT_LIST",
+        sellerDiscountList: sellerDiscountList
     }
 }
