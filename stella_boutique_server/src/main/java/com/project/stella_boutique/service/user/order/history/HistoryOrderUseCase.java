@@ -25,8 +25,8 @@ public class HistoryOrderUseCase {
     }
 
     public void execute(HistoryOrderUseCaseInput input, HistoryOrderUseCaseOutput output) throws HistoryOrderErrorException {
-        System.out.println("getting order list");
         List<Order> orderList = new ArrayList<>();    
+        List<Item> itemList = new ArrayList<>();
         try(Connection connection=this.mysqlDriver.getConnection()){
             try (PreparedStatement stmt = connection.prepareStatement(
                 "SELECT * FROM `order` WHERE `orderUserID`= ? ORDER BY `status` ASC ")) {
@@ -40,8 +40,10 @@ public class HistoryOrderUseCase {
                         int discountID = Integer.parseInt(rs.getString("discountID"));
 
                         Order order = new Order(id,status,orderDate,discountID,input.getUserID());
-                        getItemOrder(connection,order);
+                        itemList = getItemByOrder(id,connection);
+                        order.setItemList(itemList);
                         getDiscountValue(connection,discountID,order);
+                        order.getTotalPrice();
                         orderList.add(order);
                     }
                 }   
@@ -51,35 +53,15 @@ public class HistoryOrderUseCase {
         }
         output.setOrderList(orderList);
     }
-    public void getItemOrder(Connection connection, Order order){
+    public List<Item> getItemByOrder(int orderID,Connection connection){
+        List<Item> boughtItem = new ArrayList<>();
         try (PreparedStatement stmt = connection.prepareStatement(
-            "SELECT * FROM `itemlist` WHERE `orderID` =  ?")) {
-                stmt.setString(1, Integer.toString(order.getOrderID()));
+            "SELECT * FROM `itemlist` il JOIN `item` i WHERE il.orderItemId = i.id and il.orderID = ?")) {
+                stmt.setString(1, Integer.toString(orderID));
             try (ResultSet rs = stmt.executeQuery()) {
                 while(rs.next()) {
-                    int id = Integer.parseInt(rs.getString("orderItemID"));
+                    int itemID = Integer.parseInt(rs.getString("orderItemID"));
                     int amount = Integer.parseInt(rs.getString("amount"));
-                    System.out.println("go to get item");
-                    System.out.println(id);
-                    Item item = getItemByID(connection,id);
-                    System.out.println(item.getName());
-                    order.addItemToList(item,amount);
-                    System.out.println(item.getPrice());
-                    int price = Math.round(item.getPrice()) * amount;
-                    order.setPrice(price);
-                }
-            }
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    public Item getItemByID(Connection connection,int itemID){
-        Item item = new Item();
-        try (PreparedStatement stmt = connection.prepareStatement(
-            "SELECT * FROM `item` WHERE `id` = ?")) {
-                stmt.setString(1, Integer.toString(itemID));
-            try (ResultSet rs = stmt.executeQuery()) {
-                while(rs.next()) {
                     int id = Integer.parseInt(rs.getString("id"));
                     String name = rs.getString("name");
                     int quantity = Integer.parseInt(rs.getString("quantity"));
@@ -88,27 +70,27 @@ public class HistoryOrderUseCase {
                     Float price = rs.getFloat("price");
                     String description = rs.getString("description");
                     String pictureURL = rs.getString("pictureURL");
+    
+                    Item item = new Item(id, name, quantity, category, size, price, description, pictureURL);
+                    item.setBuyAmount(amount);
+                    
+                    System.out.println(item.getName());
+                    System.out.println(item.getBuyAmount() + " + " + item.getPrice() );
+                    System.out.println("total");
+                    System.out.println(item.getBuyAmount()*item.getPrice());
+                    
+                    boughtItem.add(item);
+                    // int priceMulAmount = Math.round(boughtItem.getPrice()) * amount;
+                    // order.setPrice(priceMulAmount);
 
-                    System.out.println("get item");
-                    System.out.println(name);
-
-                    item.setItemID(id);
-                    item.setName(name);
-                    item.setQuantity(quantity);
-                    item.setCategory(category);
-                    item.setSize(size);
-                    item.setPrice(price);
-                    item.setDescription(description);
-                    item.setPictureURL(pictureURL);
                 }
             }
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        return item;
-    }
+        return boughtItem;
+    }   
     public void getDiscountValue(Connection connection,int discountID,Order order){
-        System.out.println("---------get discount value--------");
         try (PreparedStatement stmt = connection.prepareStatement(
             "SELECT `value` FROM `discount` WHERE `id`= ?")) {
                 stmt.setString(1, String.valueOf(discountID));
@@ -116,8 +98,6 @@ public class HistoryOrderUseCase {
                 while(rs.next()) {
                     double value = rs.getDouble("value");
 
-                    System.out.println("disocunt");
-                    System.out.println(value);
                     order.setValue(value);
                 }
             }

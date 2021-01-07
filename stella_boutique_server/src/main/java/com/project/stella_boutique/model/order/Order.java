@@ -11,8 +11,7 @@ public class Order {
     private String orderDate;
     private int discountID;
 	private int userID;
-	private List<List<Object>> itemList;
-	private List<Integer> Price;
+	private List<Item> itemList;
 	private int totalPrice;
 	private double value;
 
@@ -22,8 +21,7 @@ public class Order {
 		this.orderDate = orderDate;
 		this.discountID = discountID;
 		this.userID = userID;
-		this.itemList = new ArrayList<List<Object>>();
-		this.Price = new ArrayList<Integer>();
+		this.itemList = new ArrayList<Item>();
 		this.totalPrice = 0;
 	}
 
@@ -68,52 +66,35 @@ public class Order {
 	}
 
      
-	public List<List<Object>> getItemList() {
+	public List<Item> getItemList() {
 		return this.itemList;
 	}
 
-	public void setItemList(List<List<Object>> itemList) {
+	public void setItemList(List<Item> itemList) {
 		this.itemList = itemList;
 	}
 
-	public void addItemToList(Item item,int amount) {
-		List<Object> order = new ArrayList<Object>();
-		order.add(item);
-		order.add(amount);
-		this.itemList.add(order);
+	public void addItemToList(Item item) {
+		// List<Object> order = new ArrayList<Object>();
+		// order.add(item);
+		// order.add(amount);
+		// this.itemList.add(order);
+		System.out.println("add " + item.getName() + " to list");
+		this.itemList.add(item);
 	}
 
 	public double getTotalPrice() {
-		System.out.println("total price");
+		double sum = 0;
+		for(int i=0;i<this.itemList.size();i++){
+			sum += ((double)this.itemList.get(i).getPrice() * this.itemList.get(i).getBuyAmount());
+		}
 		if(this.discountID!=1){
-			double sum = 0;
-			for(int i = 0; i<this.Price.size();i++){
-				sum+=this.Price.get(i);
-			}
-			
-			System.out.println(sum);
-			System.out.println(value);
 			sum = (double)sum*value;
-			
-			System.out.println(sum);
 			return sum;
 		}else{
-			double sum = 0;
-			for(int i = 0; i<this.Price.size();i++){
-				sum+=this.Price.get(i);
-			}
-			System.out.println(sum);
-			sum = (double)sum;
 			return sum;
 		}
 		
-	}
-
-	public void setPrice(int Price) {
-		this.Price.add(Price);
-	}
-	public List<Integer>  getPrice() {
-		return this.Price;
 	}
 
 	public double getValue() {

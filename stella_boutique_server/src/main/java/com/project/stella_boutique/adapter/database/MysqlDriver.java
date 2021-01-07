@@ -14,7 +14,6 @@ public class MysqlDriver {
     }
 
     public Connection getConnection() throws SQLException {
-        System.out.println("MySQL Connecting ~");
         return DriverManager.getConnection(this.mysqlURL,this.user,this.password);
     }
 

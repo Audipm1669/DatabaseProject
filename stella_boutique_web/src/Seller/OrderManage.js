@@ -1,5 +1,6 @@
 import { Nav,Navbar,NavDropdown,Form,FormControl,Button } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
+import Card from 'react-bootstrap/Card';
 import { connect } from 'react-redux';
 import { ArgumentScale, Animation } from '@devexpress/dx-react-chart';
 import { scalePoint } from 'd3-scale';
@@ -22,7 +23,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { useHistory } from 'react-router-dom';
-
 import { getOrderList , updateStatus} from '../actions';
 
 import '../App.css';
@@ -57,20 +57,14 @@ function OrderManage(props) {
   }
 
   function getsale (year,sale,order) {
-    console.log(order)
-    console.log(year)
+    console.log(order.itemList)
     y = parseInt(year) - 2000
-    console.log(y)
-    console.log(sale)
     if (y == 20)
     { sale2020 += sale }
     else if (y == 21) 
     { sale2021 += sale }
     else 
     { }
-   console.log(sale2020)
-   console.log(sale2021)
-   console.log("sale " + sale)
 
     return sale
 
@@ -100,32 +94,54 @@ function OrderManage(props) {
       <main>
         <div style={{ height: 400, width: '90%' , margin: '60px'}}>
           <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell align="left">No</TableCell>
-                  <TableCell>Date</TableCell>
-                  <TableCell align="right">Status</TableCell>
-                  <TableCell align="right">Total Price</TableCell>
-                  <TableCell align="right"></TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {props.sellerOrder.map((order,index) => (
-                  <TableRow align="left" key={index}>
-                    <TableCell component="th" scope="row">
-                      {index+1}
-                    </TableCell>
-                    <TableCell>{order.orderDate.toString().substring(0,10)}</TableCell>
-                    <TableCell align="right">{getstatus(order.status)}</TableCell>
-                    <TableCell align="right">{getsale(order.orderDate.toString().substring(0,4),order.totalPrice,order)}</TableCell>
-                    <TableCell align="right">
-                      <Button onClick={() => processOrder(order)} disabled = {canProcess(order)} >出貨</Button>
-                    </TableCell>
-                  </TableRow>
+            {props.sellerOrder.map((order,index) => (
+              <Card>
+                  <Card.Header className="p-2 col-example text-left" >
+                    <div className="d-flex justify-content-between">
+                      <Card.Text className="p-2 col-example text-left" style={{ textAlign: "right" }}> Order : {order.orderDate.toString().substring(0,10)}</Card.Text>
+                      <Card.Text className="p-2 col-example text-left" style={{ textAlign: "right" }}> Status : {getstatus(order.status)}</Card.Text>
+                    </div>
+                  </Card.Header>
+              {order.itemList.map((item) => (
+                <div>
+                  <Card.Body>
+                    <div className="d-flex justify-content-between">
+                      {/* <Card.Img className="p-2 col-example text-left" variant="top" src={require("."+item.pictureURL)}></Card.Img> */}
+                      <Card.Title className="p-2 col-example text-left">{item.name}</Card.Title>
+                      <Card.Text className="p-2 col-example text-left" style={{ textAlign: "right" }}>
+                      {item.price}NTD x {item.buyAmount}   = {item.buyAmount*item.price}
+                      </Card.Text>
+                    </div>
+                  </Card.Body>
+                </div>
+                 ))}
+                 {
+                  order.discountID == 1? null:
+                  props.sellerDiscountList.map((discount)=>{
+                    if(order.discountID == discount.discountID){
+                      return(
+                      <div className="d-flex justify-content-between">
+                        <Card.Title className="p-2 col-example text-left">{discount.discountName}</Card.Title>
+                        <Card.Text className="p-2 col-example text-left" style={{ textAlign: "right" }}>
+                        - {(100-(discount.value*100))}%OFF
+                        </Card.Text>
+                      </div>
+                      )}
+                  })
+                }
+                 <div className="d-flex justify-content-between">
+                      <Card.Title className="p-2 col-example text-left">Total</Card.Title>
+                      <Card.Text className="p-2 col-example text-left" style={{ textAlign: "right" }}>
+                      {getsale(order.orderDate.toString().substring(0,4),order.totalPrice,order)}
+                      </Card.Text>
+                    </div>
+                
+                 {!canProcess(order)?
+                    <Button onClick={() => processOrder(order)} variant="primary">出貨</Button> :
+                    null
+                  }
+              </Card>
                 ))}
-              </TableBody>
-            </Table>
             <Chart
               data={data= [
                 { year: '2020', sale: sale2020 },
@@ -151,7 +167,9 @@ function OrderManage(props) {
 }
 function mapStateToProps(state) {
   return {
-    sellerOrder: state.sellerOrder
+    sellerOrder: state.sellerOrder,
+    sellerDiscountList: state.sellerDiscountList
+ 
   }
 }
 function mapDispatchToProps(dispatch) {

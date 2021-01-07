@@ -91,8 +91,6 @@ public class SellerRestAdapter {
     @PostMapping(value = "/add/discount")
     public ResponseEntity<AddSellerDiscountUseCaseOutput> addDiscount(@RequestBody AddSellerDiscountUseCaseInput requestBody) {
         System.out.println("~~~~disc");
-        System.out.println(requestBody.getStartDateString());
-        System.out.println(requestBody.getEndDateString());
         
         AddSellerDiscountUseCaseInput input = new AddSellerDiscountUseCaseInput(requestBody.getValue(),requestBody.getCode(),requestBody.getName(),requestBody.getStartDateString(),requestBody.getEndDateString());
         AddSellerDiscountUseCaseOutput output = new AddSellerDiscountUseCaseOutput();
@@ -152,8 +150,14 @@ public class SellerRestAdapter {
     public ResponseEntity<GetSellerOrderUseCaseOutput> getOrder() {
         System.out.println("getting order list");
         GetSellerOrderUseCaseOutput output = new GetSellerOrderUseCaseOutput();
+        System.out.println("orderr");
         try {
             this.getSellerOrderUseCase.execute(output);
+            for(int i=0;i<output.getOrderList().size();i++){
+                for(int j=0;j<output.getOrderList().get(i).getItemList().size();j++){
+                    System.out.println(output.getOrderList().get(i).getItemList().get(j).getName());
+                }
+            }
         } catch (GetOrderErrorException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(output);
         }

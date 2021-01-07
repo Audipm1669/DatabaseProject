@@ -55,8 +55,6 @@ public class GuestRestAdapter {
         LoginUseCaseOutput output = new LoginUseCaseOutput();
         input.setUsername(requestBody.getUsername());
         input.setPassword(requestBody.getPassword());
-        System.out.println(input.getUsername());
-        System.out.println(input.getPassword());
         try {
             this.loginUseCase.execute(input, output);
         } catch (LoginErrorException e) {

@@ -48,7 +48,7 @@ function AddDiscount(props) {
     
     props.addDiscount(value,code,name,startDate,endDate);
     event.preventDefault();
-    // window.location.reload();
+    window.location.reload();
 
   }
 

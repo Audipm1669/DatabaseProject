@@ -139,6 +139,7 @@ const myMiddleware = store => next => action => {
 
         axios.post(API_HOST + '/user/history', body, {headers: headers})
         .then(response => {
+            console.log("return")
             console.log(response.data.orderList)
             action.setOrderList(response.data.orderList,store.dispatch);
         })

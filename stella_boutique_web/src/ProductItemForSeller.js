@@ -46,6 +46,7 @@ function ProductItemForSeller(props){
     const deleteProduct = payload => {
         console.log('delete  -> ', payload.itemID)
         props.removeProduct(payload.itemID);
+        window.location.reload();
     }
     
     return ( 

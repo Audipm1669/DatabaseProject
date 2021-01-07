@@ -123,13 +123,8 @@ public class UserRestAdapter {
         AddOrderUseCaseInput input = new AddOrderUseCaseInput();
         AddOrderUseCaseOutput output = new AddOrderUseCaseOutput();
         input.setItemList(requestBody.getItemList());
-        input.setOrderDate("2021/01/1");
+        input.setOrderDate("2021/01/6");
         input.setUserID(requestBody.getUserID());
-        System.out.println(input.getItemList());        
-        System.out.println(input.getUserID());
-        System.out.println("----------server----------");
-        System.out.println(requestBody.getDiscountID());
-        System.out.println(requestBody.getDiscountID()==0);
         if(requestBody.getDiscountID()!=0){
             input.setDiscountID(requestBody.getDiscountID());
         }else{
@@ -149,7 +144,6 @@ public class UserRestAdapter {
         System.out.println("----------server get history----------");        
         HistoryOrderUseCaseInput input = new HistoryOrderUseCaseInput();
         HistoryOrderUseCaseOutput output = new HistoryOrderUseCaseOutput();
-        System.out.println(requestBody.getUserID());
         input.setUserID(requestBody.getUserID());
         // //----
         try {

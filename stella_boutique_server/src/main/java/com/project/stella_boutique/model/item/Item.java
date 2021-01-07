@@ -13,6 +13,7 @@ public class Item {
     private String pictureURL;
 	private String name;
 	private List<List<String>> ratings;
+	private int buyAmount;
 
 	public Item(int itemID, String name, int quantity, String category, String size ,Float price, String description, String pictureURL){
 		this.itemID = itemID;
@@ -104,5 +105,14 @@ public class Item {
 		rating.add(Integer.toString(rate));
 		this.ratings.add(rating);
 	}
+
+	public int getBuyAmount() {
+		return this.buyAmount;
+	}
+
+	public void setBuyAmount(int buyAmount) {
+		this.buyAmount = buyAmount;
+	}
+	
     
 }

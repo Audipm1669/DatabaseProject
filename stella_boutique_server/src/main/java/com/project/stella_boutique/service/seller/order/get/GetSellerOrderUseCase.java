@@ -26,6 +26,7 @@ public class GetSellerOrderUseCase {
 
     public void execute(GetSellerOrderUseCaseOutput output) throws GetOrderErrorException {
         List<Order> orderList = new ArrayList<>();   
+        List<Item> itemList = new ArrayList<>();
         try(Connection connection = this.mysqlDriver.getConnection()){
             try (PreparedStatement stmt = connection.prepareStatement(
                 "SELECT * FROM `order` ORDER BY `status` ASC")) {
@@ -36,9 +37,18 @@ public class GetSellerOrderUseCase {
                         String orderDate = rs.getString("orderDate");
                         int discountID = Integer.parseInt(rs.getString("discountID"));
                         int userID = Integer.parseInt(rs.getString("orderUserID"));
+                        
                         Order order = new Order(id, status, orderDate, discountID, userID);
-                        getItemList(order,connection);
+                        System.out.println("this order");
+                        itemList = getItemByOrder(id,connection);
+                        order.setItemList(itemList);
+                        System.out.println("each order");
+                        for(int i=0;i<order.getItemList().size();i++){
+                            System.out.println(order.getItemList().get(i).getName());
+                        }
+
                         getDiscountValue(connection,discountID,order);
+                        order.getTotalPrice();
                         orderList.add(order);
 
                     }
@@ -50,11 +60,11 @@ public class GetSellerOrderUseCase {
         output.setOrderList(orderList);
     }
 
-    public void getItemList(Order order,Connection connection){
-        Item boughtItem = new Item();
+    public List<Item> getItemByOrder(int orderID,Connection connection){
+        List<Item> boughtItem = new ArrayList<>();
         try (PreparedStatement stmt = connection.prepareStatement(
-            "select * from itemlist il join item i where il.orderItemId = i.id and il.orderID = ?")) {
-                stmt.setString(1, Integer.toString(order.getOrderID()));
+            "SELECT * FROM `itemlist` il JOIN `item` i WHERE il.orderItemId = i.id and il.orderID = ?")) {
+                stmt.setString(1, Integer.toString(orderID));
             try (ResultSet rs = stmt.executeQuery()) {
                 while(rs.next()) {
                     int itemID = Integer.parseInt(rs.getString("orderItemID"));
@@ -68,24 +78,24 @@ public class GetSellerOrderUseCase {
                     String description = rs.getString("description");
                     String pictureURL = rs.getString("pictureURL");
     
-                    boughtItem.setItemID(id);
-                    boughtItem.setName(name);
-                    boughtItem.setQuantity(quantity);
-                    boughtItem.setCategory(category);
-                    boughtItem.setSize(size);
-                    boughtItem.setPrice(price);
-                    boughtItem.setDescription(description);
-                    boughtItem.setPictureURL(pictureURL);    
+                    Item item = new Item(id, name, quantity, category, size, price, description, pictureURL);
+                    item.setBuyAmount(amount);
                     
-                    order.addItemToList(boughtItem,amount);
-                    int priceMulAmount = Math.round(boughtItem.getPrice()) * amount;
-                    order.setPrice(priceMulAmount);
+                    System.out.println(item.getName());
+                    System.out.println(item.getBuyAmount() + " + " + item.getPrice() );
+                    System.out.println("total");
+                    System.out.println(item.getBuyAmount()*item.getPrice());
+                    
+                    boughtItem.add(item);
+                    // int priceMulAmount = Math.round(boughtItem.getPrice()) * amount;
+                    // order.setPrice(priceMulAmount);
 
                 }
             }
         }catch (SQLException e) {
             e.printStackTrace();
         }
+        return boughtItem;
     }   
     public void getDiscountValue(Connection connection,int discountID,Order order){
         System.out.println("---------get discount value--------");

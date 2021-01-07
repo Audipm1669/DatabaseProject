@@ -24,8 +24,6 @@ public class AddSellerProductUseCase {
     }
 
     public void execute(AddSellerProductUseCaseInput input, AddSellerProductUseCaseOutput output) throws AddProductErrorException {
-        System.out.println("add item");
-        System.out.println(input.getName());
 
         try(Connection connection = this.mysqlDriver.getConnection()) {
             try (PreparedStatement stmt = connection.prepareStatement(
