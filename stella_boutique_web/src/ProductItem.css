@@ -19,3 +19,8 @@
 .cancel-botton {
     background-color: rgb(255, 209, 217);
 }
+
+.orderImg{
+    max-height: 300px;
+    max-width: 300px;
+}

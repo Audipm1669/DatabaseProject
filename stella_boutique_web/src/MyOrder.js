@@ -12,11 +12,12 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { useHistory } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
+import './ProductItem.css';
 
 
-import { getOrderList , getLikeItemList, updateStatus} from '../actions';
+import { getOrderList , getLikeItemList, updateStatus} from './actions';
 
-import '../App.css';
+import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -102,11 +103,17 @@ function MyOrder(props) {
             <div>
               <Card.Body>
                 <div className="d-flex justify-content-between">
-                  {/* <Card.Img className="p-2 col-example text-left" variant="top" src={require("."+item.pictureURL)}></Card.Img> */}
-                  <Card.Title className="p-2 col-example text-left">{item.name}</Card.Title>
-                  <Card.Text className="p-2 col-example text-left" style={{ textAlign: "right" }}>
-                  {item.price}NTD x {item.buyAmount}   = {item.buyAmount*item.price}
-                  </Card.Text>
+                  <div className="p-2 col-example text-left">
+                    <div className="img">
+                    <Card.Img className="orderImg" variant="top" src={require(""+item.pictureURL)}></Card.Img>
+                    </div>
+                  </div>
+                  <div className="p-2 col-example text-left">
+                    <Card.Title >{item.name}</Card.Title>
+                    <Card.Text style={{ textAlign: "left" }}>
+                    {item.price}NTD x {item.buyAmount}   = {item.buyAmount*item.price}
+                    </Card.Text>
+                  </div>
                 </div>
               </Card.Body>
             </div>

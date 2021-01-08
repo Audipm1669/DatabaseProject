@@ -11,10 +11,10 @@ import Tops from './Tops';
 import Login from './Login';
 import Register from './Register';
 import ProductManage from './Seller/ProductManage';
-import OrderManage from './Seller/OrderManage';
+import OrderManage from './OrderManage';
 import MemberManage from './Seller/MemberManage';
 import MyLike from './user/MyLike';
-import MyOrder from './user/MyOrder';
+import MyOrder from './MyOrder';
 import AddProduct from './Seller/AddProduct';
 import AddDiscount from './Seller/AddDiscount';
 

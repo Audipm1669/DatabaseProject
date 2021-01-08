@@ -11,6 +11,7 @@ import {
   ArgumentAxis,
   ValueAxis,
 } from '@devexpress/dx-react-chart-material-ui';
+import './ProductItem.css';
 
 
 import * as React from 'react';
@@ -23,9 +24,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { useHistory } from 'react-router-dom';
-import { getOrderList , updateStatus} from '../actions';
+import { getOrderList , updateStatus} from './actions';
 
-import '../App.css';
+import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -106,11 +107,17 @@ function OrderManage(props) {
                 <div>
                   <Card.Body>
                     <div className="d-flex justify-content-between">
-                      {/* <Card.Img className="p-2 col-example text-left" variant="top" src={require("."+item.pictureURL)}></Card.Img> */}
-                      <Card.Title className="p-2 col-example text-left">{item.name}</Card.Title>
-                      <Card.Text className="p-2 col-example text-left" style={{ textAlign: "right" }}>
-                      {item.price}NTD x {item.buyAmount}   = {item.buyAmount*item.price}
-                      </Card.Text>
+                      <div className="p-2 col-example text-left">
+                        <div className="img">
+                        <Card.Img className="orderImg" variant="top" src={require(""+item.pictureURL)}></Card.Img>
+                        </div>
+                      </div>
+                      <div className="p-2 col-example text-left">
+                        <Card.Title >{item.name}</Card.Title>
+                        <Card.Text style={{ textAlign: "left" }}>
+                        {item.price}NTD x {item.buyAmount}   = {item.buyAmount*item.price}
+                        </Card.Text>
+                      </div>
                     </div>
                   </Card.Body>
                 </div>
