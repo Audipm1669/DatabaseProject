@@ -5,7 +5,7 @@ An online shopping platform that was created using this framework:
 - Spring-boot
 - MySQL
 
-Before running the website remember to create MySQL table on your MySQL server. \n
+Before running the website remember to create MySQL table on your MySQL server.\
 We provide MySQL table code in stella_boutique_server/src/query .
 
 To run the frontend:
